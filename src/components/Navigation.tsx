@@ -1,9 +1,11 @@
+
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Menu, X, ChevronDown } from 'lucide-react';
+import { Menu, X, ChevronDown, Sparkles } from 'lucide-react';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import missionLogo from '@/assets/mission-digital-logo.png';
+import { Badge } from '@/components/ui/badge';
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
@@ -68,7 +70,11 @@ const Navigation = () => {
             <Link to="/resources" className={`transition-smooth hover:text-accent ${isActive('/resources') ? 'text-accent font-medium' : 'text-foreground'}`}>Helpful Resources
           </Link>
             <Link to="/ai-feedback" className={`transition-smooth hover:text-accent ${isActive('/ai-feedback') ? 'text-accent font-medium' : 'text-foreground'}`}>
-              AI Feedback
+              <span className="inline-flex items-center gap-2">
+                <Sparkles className="h-4 w-4 text-primary" />
+                <span>AI Feedback</span>
+                <Badge variant="secondary" className="px-1 py-0 text-[10px]">New</Badge>
+              </span>
             </Link>
           </div>
 
@@ -110,7 +116,11 @@ const Navigation = () => {
                 Helpful Resources
               </Link>
               <Link to="/ai-feedback" className="block px-3 py-2 text-foreground hover:text-accent transition-smooth" onClick={() => setIsOpen(false)}>
-                AI Feedback
+                <span className="inline-flex items-center gap-2">
+                  <Sparkles className="h-4 w-4 text-primary" />
+                  <span>AI Feedback</span>
+                  <span className="ml-1 text-[10px] text-primary">New</span>
+                </span>
               </Link>
               <div className="pt-2 space-y-2">
                 <Button asChild variant="outline" className="w-full" aria-label="Get Started">

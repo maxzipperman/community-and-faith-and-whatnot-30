@@ -1,16 +1,20 @@
+
 import Layout from '@/components/Layout';
 import { Helmet } from 'react-helmet-async';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { CrawlForm } from '@/components/ai/CrawlForm';
 import AIReport from '@/components/ai/AIReport';
 import { DatabaseSetup } from '@/components/ai/DatabaseSetup';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { Sparkles, Zap, Shield } from 'lucide-react';
+import { useLocation } from 'react-router-dom';
+import { industryPrompts } from '@/utils/industryPrompts';
+import ApiKeys from '@/components/ai/ApiKeys';
 
 const DEFAULT_GOALS = `
 - Improve conversion clarity and reduce friction.
@@ -29,6 +33,23 @@ const AIFeedback = () => {
   const [pages, setPages] = useState<any[]>([]);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [remainingRequests, setRemainingRequests] = useState<number | string>('unknown');
+  const location = useLocation();
+  const [industryLabel, setIndustryLabel] = useState<string | undefined>(undefined);
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const industry = params.get('industry') || undefined;
+    if (industry && industryPrompts[industry]) {
+      const preset = industryPrompts[industry];
+      setGoals(`${DEFAULT_GOALS.trim()}
+
+Industry-specific focus for ${preset.label}:
+${preset.goals}`.trim());
+      setIndustryLabel(preset.label);
+    } else {
+      setIndustryLabel(undefined);
+    }
+  }, [location.search]);
 
   const handleCrawlComplete = (data: any) => {
     // Normalize pages from Firecrawl response
@@ -151,11 +172,17 @@ const AIFeedback = () => {
                     : '3 free requests per day'
                 }
               </Badge>
+              {industryLabel && (
+                <Badge variant="default">
+                  Prefilled for {industryLabel}
+                </Badge>
+              )}
             </div>
           </div>
 
           <DatabaseSetup />
 
+          {/* Quick access to set BYO API keys if desired */}
           <Card className="border-primary/20 bg-gradient-to-br from-background to-primary/5">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
@@ -183,6 +210,9 @@ const AIFeedback = () => {
               </div>
             </CardContent>
           </Card>
+
+          {/* Allow users to add Firecrawl/Perplexity keys if they want to use their own */}
+          <ApiKeys />
 
           <Card className="border-primary/20">
             <CardHeader>

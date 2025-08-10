@@ -1,3 +1,4 @@
+
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
 
@@ -31,6 +32,8 @@ serve(async (req) => {
     
     // Whitelist IP
     const whitelistedIP = '2600:1700:46b0:96c0:48f0:b4ff:64d7:61db'
+    let remainingRequests: number | string = 'unlimited'
+    let currentCount = 0
     
     if (clientIP !== whitelistedIP) {
       // Check rate limit for non-whitelisted IPs
@@ -47,7 +50,7 @@ serve(async (req) => {
         throw error
       }
 
-      const currentCount = usage?.requests_count || 0
+      currentCount = usage?.requests_count || 0
       if (currentCount >= 3) {
         return new Response(
           JSON.stringify({ 
@@ -67,13 +70,16 @@ serve(async (req) => {
           date: today,
           requests_count: currentCount + 1
         })
+
+      remainingRequests = 3 - (currentCount + 1)
+    } else {
+      remainingRequests = 'unlimited'
     }
 
-    const firecrawlKey = Deno.env.get('FIRECRAWL_API_KEY')
     const perplexityKey = Deno.env.get('PERPLEXITY_API_KEY')
 
-    if (!firecrawlKey || !perplexityKey) {
-      throw new Error('API keys not configured')
+    if (!perplexityKey) {
+      throw new Error('PERPLEXITY_API_KEY not configured')
     }
 
     // Analyze with Perplexity
@@ -98,7 +104,7 @@ Pages to analyze:
 ${pages.map((p: any, i: number) => `
 # Page ${i + 1}: ${p.title || p.url}
 URL: ${p.url}
-Content: ${p.content.slice(0, 4000)}
+Content: ${String(p.content || '').slice(0, 4000)}
 `).join('\n')}
 
 Focus on actionable, prioritized recommendations. Return ONLY valid JSON.`
@@ -149,12 +155,12 @@ Focus on actionable, prioritized recommendations. Return ONLY valid JSON.`
         success: true,
         issues,
         text: analysisText,
-        remainingRequests: clientIP === whitelistedIP ? 'unlimited' : (3 - (currentCount + 1))
+        remainingRequests
       }),
       { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     )
 
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error in ai-feedback function:', error)
     return new Response(
       JSON.stringify({ 
