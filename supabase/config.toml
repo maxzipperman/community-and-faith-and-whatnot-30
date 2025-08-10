@@ -1,1 +1,7 @@
 project_id = "drhqhjfbcatnifqrnyrd"
+
+[functions.ai-feedback]
+verify_jwt = false
+
+[functions.upload-signer]
+verify_jwt = false
