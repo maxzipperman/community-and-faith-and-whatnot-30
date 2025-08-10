@@ -1,3 +1,4 @@
+
 import Layout from '@/components/Layout';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -7,6 +8,8 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
 import { Mail, Phone, MapPin, Clock, CheckCircle } from 'lucide-react';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import CalendlyBooking from '@/components/booking/CalendlyBooking';
 
 const Contact = () => {
   const contactInfo = [
@@ -69,108 +72,25 @@ const Contact = () => {
       <section className="py-16 lg:py-24">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
-            {/* Contact Form */}
+            {/* Contact Form (Replaced with Calendly + Payment flow) */}
             <Card className="shadow-medium">
               <CardHeader>
-                <CardTitle className="text-2xl">Request Your Free Website Audit</CardTitle>
+                <CardTitle className="text-2xl">Book Your 2-Hour Consultation</CardTitle>
                 <CardDescription>
-                  Tell us about your project and we'll provide a comprehensive audit 
-                  with specific recommendations to improve your site's performance.
+                  Pick a time below. After booking, you'll be redirected to secure checkout to complete your $499 consultation.
                 </CardDescription>
               </CardHeader>
               
               <CardContent className="space-y-6">
-                <form className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="firstName">First Name *</Label>
-                      <Input id="firstName" placeholder="John" required />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="lastName">Last Name *</Label>
-                      <Input id="lastName" placeholder="Smith" required />
-                    </div>
-                  </div>
+                <Alert>
+                  <AlertTitle>Paid Consultation</AlertTitle>
+                  <AlertDescription>
+                    This is a paid 2-hour consultation priced at <span className="font-semibold">$499</span>. 
+                    After you select a time, you’ll be redirected to Stripe to pay and confirm.
+                  </AlertDescription>
+                </Alert>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="email">Email Address *</Label>
-                    <Input id="email" type="email" placeholder="john@example.com" required />
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="company">Company/Organization</Label>
-                    <Input id="company" placeholder="Your Company Name" />
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="website">Current Website (if any)</Label>
-                    <Input id="website" placeholder="https://yourwebsite.com" />
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="industry">Industry</Label>
-                    <Select>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select your industry" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {industries.map((industry) => (
-                          <SelectItem key={industry} value={industry.toLowerCase().replace(/\s+/g, '-')}>
-                            {industry}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="service">Service Interest</Label>
-                    <Select>
-                      <SelectTrigger>
-                        <SelectValue placeholder="What service interests you most?" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {services.map((service) => (
-                          <SelectItem key={service} value={service.toLowerCase().replace(/\s+/g, '-')}>
-                            {service}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="budget">Project Budget</Label>
-                    <Select>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select your budget range" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="under-2500">Under $2,500</SelectItem>
-                        <SelectItem value="2500-5000">$2,500 - $5,000</SelectItem>
-                        <SelectItem value="5000-10000">$5,000 - $10,000</SelectItem>
-                        <SelectItem value="10000-plus">$10,000+</SelectItem>
-                        <SelectItem value="not-sure">Not sure yet</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="message">Project Details</Label>
-                    <Textarea 
-                      id="message" 
-                      placeholder="Tell us about your project goals, challenges, and timeline..."
-                      rows={4}
-                    />
-                  </div>
-
-                  <Button 
-                    type="submit" 
-                    className="w-full gradient-accent text-accent-foreground font-semibold hover-lift"
-                  >
-                    Request Free Audit
-                  </Button>
-                </form>
+                <CalendlyBooking calendlyUrl="https://calendly.com/your-calendly-username/2-hour-consultation" />
               </CardContent>
             </Card>
 
