@@ -14,6 +14,7 @@ interface NotifyPayload {
   resourceId?: string;
   resourceTitle?: string;
   notes?: string;
+  analysis?: string; // AI output text
 }
 
 const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
@@ -22,6 +23,15 @@ function buildSubject(payload: NotifyPayload) {
   const base = payload.event === "download" ? "Resource Download" : "AI Analysis Run";
   const site = payload.site ? ` — ${payload.site}` : "";
   return `[Mission Digital] ${base}${site}`;
+}
+
+function escapeHtml(str: string) {
+  return str
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
 }
 
 function buildHtml(payload: NotifyPayload) {
@@ -33,6 +43,9 @@ function buildHtml(payload: NotifyPayload) {
     payload.resourceTitle ? `<p><strong>Resource:</strong> ${payload.resourceTitle}</p>` : "",
     payload.resourceId ? `<p><strong>Resource ID:</strong> ${payload.resourceId}</p>` : "",
     payload.notes ? `<p><strong>Notes:</strong> ${payload.notes}</p>` : "",
+    payload.analysis
+      ? `<div style="margin-top:12px;"><strong>Analysis Output:</strong><pre style="white-space:pre-wrap;font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;background:#f8f8f8;padding:12px;border-radius:8px;">${escapeHtml(payload.analysis)}</pre></div>`
+      : "",
   ].filter(Boolean).join("\n");
   return `
     <div style="font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, \"Helvetica Neue\", \"Segoe UI\", Arial; line-height:1.6;">

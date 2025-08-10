@@ -65,6 +65,7 @@ export default function ServerAIFeedbackForm() {
           website_url: websiteUrl,
           focus_area: focusArea || undefined,
           industry: industry || undefined,
+          email: email,
         }),
       });
 
@@ -89,7 +90,7 @@ export default function ServerAIFeedbackForm() {
         try {
           const { supabase } = await import("@/integrations/supabase/client");
           await supabase.functions.invoke("operator-notify", {
-            body: { event: "ai-analysis", email: email || undefined, site: websiteUrl, industry },
+            body: { event: "ai-analysis", email, site: websiteUrl, industry, notes: focusArea || undefined, analysis: (data as any)?.analysis || (data as any)?.text },
           });
         } catch (e) {
           console.warn("operator-notify failed", e);
@@ -150,12 +151,13 @@ export default function ServerAIFeedbackForm() {
             </div>
 
             <div>
-              <label className="text-sm font-medium block mb-1">Your Email (optional)</label>
+              <label className="text-sm font-medium block mb-1">Your Email (required)</label>
               <Input
                 type="email"
                 placeholder="you@business.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                required
               />
             </div>
 
