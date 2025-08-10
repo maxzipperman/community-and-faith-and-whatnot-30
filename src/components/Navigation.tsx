@@ -92,6 +92,9 @@ const Navigation = () => {
 
           {/* CTA Button */}
           <div className="hidden md:flex items-center gap-3">
+            <Button asChild size="sm" variant="secondary" className="font-medium" aria-label="Payments">
+              <Link to="/payments">Payments</Link>
+            </Button>
             <Button asChild size="sm" variant="outline" className="font-medium" aria-label="Get Started">
               <Link to="/contact">Get Started</Link>
             </Button>
@@ -136,6 +139,9 @@ const Navigation = () => {
                   <span>AI Feedback</span>
                   <span className="ml-1 text-[10px] text-primary">New</span>
                 </span>
+              </Link>
+              <Link to="/payments" className="block px-3 py-2 text-foreground hover:text-accent transition-smooth" onClick={() => setIsOpen(false)}>
+                Payments
               </Link>
               <div className="pt-2 space-y-2">
                 <Button asChild variant="outline" className="w-full" aria-label="Get Started">

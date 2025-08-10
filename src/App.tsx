@@ -28,6 +28,7 @@ import CommunityNonprofits from "./pages/serve/CommunityNonprofits";
 import ArtsCultureServe from "./pages/serve/ArtsCulture";
 import ParksRecServe from "./pages/serve/ParksRec";
 import CampsServe from "./pages/serve/Camps";
+import Payments from "./pages/Payments";
 
 const queryClient = new QueryClient();
 
@@ -63,6 +64,7 @@ const App = () => (
             <Route path="/serve/arts-culture" element={<ArtsCultureServe />} />
             <Route path="/serve/parks-rec" element={<ParksRecServe />} />
             <Route path="/serve/camps" element={<CampsServe />} />
+            <Route path="/payments" element={<Payments />} />
             
             {/* Niche Landing Pages */}
             <Route path="/lawyers" element={<Lawyers />} />
