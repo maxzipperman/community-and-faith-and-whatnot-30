@@ -76,9 +76,30 @@ export default function Resources() {
               {filtered.length === 0 ? (
                 <div className="text-sm text-muted-foreground">No resources match your filters. Try clearing filters or searching.</div>
               ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  {filtered.map((r) => (
-                    <ResourceCard key={r.id} resource={r} />
+                <div className="space-y-10">
+                  {Object.entries(
+                    filtered.reduce((acc, r) => {
+                      (acc[r.category] = acc[r.category] || []).push(r);
+                      return acc;
+                    }, {} as Record<string, Resource[]>)
+                  ).map(([cat, items]) => (
+                    <section
+                      key={cat}
+                      aria-labelledby={`resources-${cat.replace(/[^a-z0-9]+/gi, "-").toLowerCase()}`}
+                      className="space-y-4"
+                    >
+                      <h2
+                        id={`resources-${cat.replace(/[^a-z0-9]+/gi, "-").toLowerCase()}`}
+                        className="text-xl font-semibold tracking-tight"
+                      >
+                        {cat}
+                      </h2>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        {items.map((r) => (
+                          <ResourceCard key={r.id} resource={r} />
+                        ))}
+                      </div>
+                    </section>
                   ))}
                 </div>
               )}
