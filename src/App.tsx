@@ -25,6 +25,12 @@ import YouthSports from "./pages/YouthSports";
 import Community from "./pages/Community";
 import ArtsCulture from "./pages/ArtsCulture";
 import ParksRec from "./pages/ParksRec";
+import FaithReligious from "./pages/serve/FaithReligious";
+import K12PTAs from "./pages/serve/K12PTAs";
+import YouthSportsServe from "./pages/serve/YouthSports";
+import CommunityNonprofits from "./pages/serve/CommunityNonprofits";
+import ArtsCultureServe from "./pages/serve/ArtsCulture";
+import ParksRecServe from "./pages/serve/ParksRec";
 
 const queryClient = new QueryClient();
 
@@ -57,10 +63,26 @@ const App = () => (
             <Route path="/arts-culture" element={<ArtsCulture />} />
             <Route path="/parks-rec" element={<ParksRec />} />
             
+            {/* New Serve Routes */}
+            <Route path="/serve/faith-religious" element={<FaithReligious />} />
+            <Route path="/serve/k12-ptas" element={<K12PTAs />} />
+            <Route path="/serve/youth-sports" element={<YouthSportsServe />} />
+            <Route path="/serve/community-nonprofits" element={<CommunityNonprofits />} />
+            <Route path="/serve/arts-culture" element={<ArtsCultureServe />} />
+            <Route path="/serve/parks-rec" element={<ParksRecServe />} />
+            
             {/* Niche Landing Pages */}
             <Route path="/lawyers" element={<Lawyers />} />
             <Route path="/accountants" element={<Accountants />} />
             <Route path="/consultants" element={<Consultants />} />
+            
+            {/* Legacy Redirects to New Serve Routes */}
+            <Route path="/faith" element={<Navigate to="/serve/faith-religious" replace />} />
+            <Route path="/schools" element={<Navigate to="/serve/k12-ptas" replace />} />
+            <Route path="/youth-sports" element={<Navigate to="/serve/youth-sports" replace />} />
+            <Route path="/community" element={<Navigate to="/serve/community-nonprofits" replace />} />
+            <Route path="/arts-culture" element={<Navigate to="/serve/arts-culture" replace />} />
+            <Route path="/parks-rec" element={<Navigate to="/serve/parks-rec" replace />} />
             
             {/* Vanity URL Redirects */}
             <Route path="/law-firms" element={<Navigate to="/lawyers" replace />} />

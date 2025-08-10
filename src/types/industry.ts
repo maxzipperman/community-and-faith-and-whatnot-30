@@ -22,6 +22,10 @@ export interface IndustryData {
     primaryCtaText: string;
     secondaryCtaText: string;
   };
+  opening?: string;
+  problemsOutcomes?: { problem: string; outcome: string }[];
+  process?: { step: string; duration?: string }[];
+  pricingRange?: string;
   whyMatters: string[];
   proof: string[];
   servicesFocus: string[];

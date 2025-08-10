@@ -9,30 +9,30 @@ const Navigation = () => {
   const location = useLocation();
   const industries = [{
     name: 'Faith & Religious',
-    href: '/faith'
+    href: '/serve/faith-religious'
   }, {
     name: 'K-12 Schools & PTAs',
-    href: '/schools'
+    href: '/serve/k12-ptas'
   }, {
     name: 'Youth Sports',
-    href: '/youth-sports'
+    href: '/serve/youth-sports'
   }, {
     name: 'Community Centers & Nonprofits',
-    href: '/community'
+    href: '/serve/community-nonprofits'
   }, {
     name: 'Arts & Culture',
-    href: '/arts-culture'
+    href: '/serve/arts-culture'
   }, {
     name: 'Parks & Recreation',
-    href: '/parks-rec'
+    href: '/serve/parks-rec'
   }];
   const isActive = (path: string) => location.pathname === path;
   return <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          <Link to="/" className="flex items-center space-x-3 group" aria-label="Position Digital home">
-            <img src={logo} alt="Position Digital logo" className="h-8 w-8" loading="eager" />
-            <span className="text-xl font-bold text-foreground group-hover:text-accent transition-smooth">Position Digital</span>
+          <Link to="/" className="flex items-center space-x-3 group" aria-label="Mission Digital home">
+            <img src="/lovable-uploads/3529009a-94aa-43e5-ba48-ccc1015be75a.png" alt="Mission Digital logo" className="h-8 w-8" loading="eager" />
+            <span className="text-xl font-bold text-foreground group-hover:text-accent transition-smooth">Mission Digital</span>
           </Link>
 
           {/* Desktop Navigation */}

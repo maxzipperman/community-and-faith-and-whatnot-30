@@ -5,10 +5,12 @@ import logo from '@/assets/logo.svg';
 
 const Footer = () => {
   const industries = [
-    { name: 'Local Businesses', href: '/local-businesses' },
-    { name: 'Nonprofits & Religious', href: '/nonprofits' },
-    { name: 'Independent Creatives', href: '/creatives' },
-    { name: 'Professional Services', href: '/professional-services' },
+    { name: 'Faith & Religious', href: '/serve/faith-religious' },
+    { name: 'K-12 Schools & PTAs', href: '/serve/k12-ptas' },
+    { name: 'Youth Sports', href: '/serve/youth-sports' },
+    { name: 'Community Centers & Nonprofits', href: '/serve/community-nonprofits' },
+    { name: 'Arts & Culture', href: '/serve/arts-culture' },
+    { name: 'Parks & Recreation', href: '/serve/parks-rec' },
   ];
 
   return (
@@ -18,16 +20,16 @@ const Footer = () => {
           {/* Company Info */}
           <div className="lg:col-span-1">
             <div className="flex items-center space-x-3 mb-4">
-              <img src={logo} alt="Position Digital logo" className="h-8 w-8" loading="lazy" />
-              <h3 className="text-xl font-bold">Position Digital</h3>
+              <img src="/lovable-uploads/3529009a-94aa-43e5-ba48-ccc1015be75a.png" alt="Mission Digital logo" className="h-8 w-8" loading="lazy" />
+              <h3 className="text-xl font-bold">Mission Digital</h3>
             </div>
             <p className="text-primary-foreground/80 mb-6 leading-relaxed">
-              Boutique consultancy creating high-performance, custom websites with strategic messaging that converts.
+              Strategic web partner for mission-driven organizations. Beyond websites — we build growth assets that differentiate and convert.
             </p>
             <div className="space-y-2">
               <div className="flex items-center space-x-2 text-primary-foreground/80">
                 <Mail className="h-4 w-4" />
-                <span className="text-sm">hello@positiondigital.com</span>
+                <span className="text-sm">hello@missiondigital.com</span>
               </div>
               <div className="flex items-center space-x-2 text-primary-foreground/80">
                 <Phone className="h-4 w-4" />
@@ -111,7 +113,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="border-t border-primary-foreground/20 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-primary-foreground/60 text-sm">
-            © 2024 Position Digital. All rights reserved.
+            © 2024 Mission Digital. All rights reserved.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <Link 
