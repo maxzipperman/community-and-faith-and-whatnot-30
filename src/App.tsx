@@ -29,6 +29,8 @@ import ArtsCultureServe from "./pages/serve/ArtsCulture";
 import ParksRecServe from "./pages/serve/ParksRec";
 import CampsServe from "./pages/serve/Camps";
 import Payments from "./pages/Payments";
+import LocalBusinessesServe from "./pages/serve/LocalBusinesses";
+import IndependentCreativesServe from "./pages/serve/IndependentCreatives";
 
 const queryClient = new QueryClient();
 
@@ -64,6 +66,8 @@ const App = () => (
             <Route path="/serve/arts-culture" element={<ArtsCultureServe />} />
             <Route path="/serve/parks-rec" element={<ParksRecServe />} />
             <Route path="/serve/camps" element={<CampsServe />} />
+            <Route path="/serve/local-businesses" element={<LocalBusinessesServe />} />
+            <Route path="/serve/independent-creatives" element={<IndependentCreativesServe />} />
             <Route path="/payments" element={<Payments />} />
             
             {/* Niche Landing Pages */}
