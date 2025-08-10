@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Mail, Phone, MapPin } from 'lucide-react';
-import logo from '@/assets/logo.svg';
+import missionLogo from '@/assets/mission-digital-logo.png';
 
 const Footer = () => {
   const industries = [
@@ -20,7 +20,7 @@ const Footer = () => {
           {/* Company Info */}
           <div className="lg:col-span-1">
             <div className="flex items-center space-x-3 mb-4">
-              <img src="/lovable-uploads/3529009a-94aa-43e5-ba48-ccc1015be75a.png" alt="Mission Digital logo" className="h-8 w-8" loading="lazy" />
+              <img src={missionLogo} alt="Mission Digital logo" className="h-8 w-8" loading="lazy" />
               <h3 className="text-xl font-bold">Mission Digital</h3>
             </div>
             <p className="text-primary-foreground/80 mb-6 leading-relaxed">

@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import logo from '@/assets/logo.svg';
+import missionLogo from '@/assets/mission-digital-logo.png';
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
@@ -31,7 +31,7 @@ const Navigation = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="flex items-center space-x-3 group" aria-label="Mission Digital home">
-            <img src="/lovable-uploads/3529009a-94aa-43e5-ba48-ccc1015be75a.png" alt="Mission Digital logo" className="h-8 w-8" loading="eager" />
+            <img src={missionLogo} alt="Mission Digital logo" className="h-8 w-8" loading="eager" />
             <span className="text-xl font-bold text-foreground group-hover:text-accent transition-smooth">Mission Digital</span>
           </Link>
 
