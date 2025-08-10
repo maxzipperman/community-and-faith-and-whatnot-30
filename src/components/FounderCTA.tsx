@@ -3,7 +3,7 @@ import { Card, CardContent } from './ui/card';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Calendar, Shield } from 'lucide-react';
 import founderPhoto from '@/assets/founder-photo.jpg';
-
+import { FOUNDER_PHOTO_ALT, getFounderPhotoUrl } from '@/config/media';
 interface FounderCTAProps {
   ctaText: string;
   variant?: 'primary' | 'secondary' | 'value-first';
@@ -49,9 +49,13 @@ export const FounderCTA = ({ ctaText, variant = 'primary' }: FounderCTAProps) =>
           <div className="flex-shrink-0">
             <div className="relative">
               <img 
-                src={founderPhoto} 
-                alt="Founder"
+                src={getFounderPhotoUrl()} 
+                alt={FOUNDER_PHOTO_ALT}
                 className="w-24 h-24 rounded-full object-cover shadow-accent"
+                onError={(e) => {
+                  const img = e.currentTarget as HTMLImageElement;
+                  if (img.src !== founderPhoto) img.src = founderPhoto;
+                }}
               />
               <div className="absolute -bottom-2 -right-2 bg-primary text-primary-foreground rounded-full p-2">
                 <Icon className="h-4 w-4" />

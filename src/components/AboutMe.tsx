@@ -2,6 +2,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import founderPhoto from "@/assets/founder-photo.jpg";
+import { FOUNDER_PHOTO_ALT, getFounderPhotoUrl } from "@/config/media";
 export default function AboutMe() {
   return (
     <section id="about" className="py-16 lg:py-24 scroll-mt-24" aria-labelledby="about-me-heading">
@@ -9,8 +10,8 @@ export default function AboutMe() {
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-[280px,1fr] gap-8 items-center">
           <figure className="mx-auto">
             <img
-              src="/lovable-uploads/399a3fcc-cdb9-4f9b-91da-1d395fe61893.png"
-              alt="Founder in Los Angeles with golden retriever Chuck"
+              src={getFounderPhotoUrl()}
+              alt={FOUNDER_PHOTO_ALT}
               className="w-64 h-64 md:w-72 md:h-72 rounded-xl object-cover shadow-soft mx-auto"
               loading="lazy"
               onError={(e) => {
