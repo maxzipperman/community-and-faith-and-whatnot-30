@@ -68,7 +68,7 @@ const Contact = () => {
                   </AlertDescription>
                 </Alert>
 
-                <CalendlyBooking calendlyUrl="https://calendly.com/your-calendly-username/2-hour-consultation" />
+                <CalendlyBooking calendlyUrl="https://calendly.com/maxzipperman" />
               </CardContent>
             </Card>
 
