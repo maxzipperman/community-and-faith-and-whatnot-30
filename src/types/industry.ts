@@ -24,7 +24,7 @@ export interface IndustryData {
   };
   opening?: string;
   problemsOutcomes?: { problem: string; outcome: string }[];
-  process?: { step: string; duration?: string }[];
+  process?: { step: string; duration?: string; details?: string }[];
   pricingRange?: string;
   whyMatters: string[];
   proof: string[];

@@ -16,7 +16,7 @@ import { iconResolver } from '@/utils/iconResolver';
 import performanceMetrics from '@/assets/performance-metrics.jpg';
 import { ComparisonTable } from './ComparisonTable';
 import ROICalculator from './ROICalculator';
-
+import { GanttProcess } from './GanttProcess';
 interface IndustryPageProps {
   data: IndustryData;
 }
@@ -116,15 +116,8 @@ export const IndustryPage = ({ data }: IndustryPageProps) => {
             <div className="container mx-auto px-4">
               <div className="max-w-5xl mx-auto">
                 <h2 className="text-2xl font-semibold text-center mb-6">Our Process</h2>
-                <div className="flex flex-wrap items-center justify-center gap-4">
-                  {data.process.map((step, i) => (
-                    <div key={i} className="flex items-center gap-2">
-                      <div className="w-2 h-2 rounded-full bg-primary" />
-                      <span className="text-sm font-medium">{step.step}</span>
-                      {step.duration && <Badge variant="secondary">{step.duration}</Badge>}
-                      {i < data.process.length - 1 && <ArrowRight className="h-4 w-4 text-muted-foreground" />}
-                    </div>
-                  ))}
+                <div className="bg-muted/30 rounded-lg p-4">
+                  <GanttProcess steps={data.process} />
                 </div>
               </div>
             </div>
