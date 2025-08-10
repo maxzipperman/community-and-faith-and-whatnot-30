@@ -1,17 +1,10 @@
 import { useEffect, useState } from 'react';
-import { createClient } from '@supabase/supabase-js';
+import { supabase } from '@/integrations/supabase/client';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
-import { Database, CheckCircle, AlertCircle } from 'lucide-react';
+import { Database, CheckCircle } from 'lucide-react';
 
-// Check if Supabase is properly configured
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
-
-const supabase = supabaseUrl && supabaseAnonKey 
-  ? createClient(supabaseUrl, supabaseAnonKey)
-  : null;
 
 export const DatabaseSetup = () => {
   const { toast } = useToast();
@@ -19,18 +12,8 @@ export const DatabaseSetup = () => {
   const [isChecking, setIsChecking] = useState(true);
 
   const checkTableExists = async () => {
-    if (!supabase) {
-      setIsSetup(false);
-      setIsChecking(false);
-      return;
-    }
-
     try {
-      const { error } = await supabase
-        .from('ai_feedback_usage')
-        .select('id')
-        .limit(1);
-      
+      const { error } = await (supabase as any).rpc('create_ai_feedback_table');
       setIsSetup(!error);
     } catch (e) {
       setIsSetup(false);
@@ -40,10 +23,10 @@ export const DatabaseSetup = () => {
   };
 
   const createTable = async () => {
-    if (!supabase) return;
+    
 
     try {
-      const { error } = await supabase.rpc('create_ai_feedback_table');
+      const { error } = await (supabase as any).rpc('create_ai_feedback_table');
       if (error) throw error;
       
       setIsSetup(true);
@@ -65,29 +48,6 @@ export const DatabaseSetup = () => {
     checkTableExists();
   }, []);
 
-  // If Supabase is not configured, show configuration message
-  if (!supabase) {
-    return (
-      <Card className="border-red-200 bg-red-50 dark:bg-red-950 dark:border-red-800">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <AlertCircle className="h-5 w-5 text-red-600" />
-            Supabase Configuration Required
-          </CardTitle>
-          <CardDescription>
-            The AI feedback system requires Supabase to be properly connected. 
-            Please ensure your project is connected to Supabase and the environment variables are configured.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <p className="text-sm text-muted-foreground">
-            If you've already connected Supabase, try refreshing the page. 
-            The environment variables may need a moment to propagate.
-          </p>
-        </CardContent>
-      </Card>
-    );
-  }
 
   if (isChecking) {
     return (
