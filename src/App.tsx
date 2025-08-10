@@ -31,6 +31,8 @@ import CampsServe from "./pages/serve/Camps";
 import Payments from "./pages/Payments";
 import LocalBusinessesServe from "./pages/serve/LocalBusinesses";
 import IndependentCreativesServe from "./pages/serve/IndependentCreatives";
+import Privacy from "./pages/Privacy";
+import Terms from "./pages/Terms";
 
 const queryClient = new QueryClient();
 
@@ -52,6 +54,8 @@ const App = () => (
             <Route path="/ai-feedback" element={<AIFeedback />} />
             <Route path="/faq" element={<FAQ />} />
             
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/terms" element={<Terms />} />
             {/* Industry Pages */}
             <Route path="/professional-services" element={<ProfessionalServices />} />
             <Route path="/local-businesses" element={<LocalBusinesses />} />
