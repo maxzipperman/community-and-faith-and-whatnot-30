@@ -31,7 +31,7 @@ const Navigation = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="flex items-center space-x-3 group" aria-label="Mission Digital home">
-            <img src={missionLogo} alt="Mission Digital logo" className="h-8 w-8" loading="eager" />
+            <img src={missionLogo} alt="Mission Digital logo" className="h-16 w-16" loading="eager" />
             <span className="text-xl font-bold text-foreground group-hover:text-accent transition-smooth">Mission Digital</span>
           </Link>
 
