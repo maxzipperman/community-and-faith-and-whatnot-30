@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import founderPhoto from "@/assets/founder-photo.jpg";
 export default function AboutMe() {
   return (
-    <section className="py-16 lg:py-24" aria-labelledby="about-me-heading">
+    <section id="about" className="py-16 lg:py-24 scroll-mt-24" aria-labelledby="about-me-heading">
       <div className="container mx-auto px-4">
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-[280px,1fr] gap-8 items-center">
           <figure className="mx-auto">

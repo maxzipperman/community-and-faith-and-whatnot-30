@@ -40,6 +40,9 @@ const Navigation = () => {
             <Link to="/" className={`transition-smooth hover:text-accent ${isActive('/') ? 'text-accent font-medium' : 'text-foreground'}`}>
               Home
             </Link>
+            <Link to="/#about" className="transition-smooth hover:text-accent text-foreground">
+              About
+            </Link>
             <Link to="/services" className={`transition-smooth hover:text-accent ${isActive('/services') ? 'text-accent font-medium' : 'text-foreground'}`}>
               Services
             </Link>
@@ -84,6 +87,9 @@ const Navigation = () => {
             <div className="px-2 pt-2 pb-3 space-y-1">
               <Link to="/" className="block px-3 py-2 text-foreground hover:text-accent transition-smooth" onClick={() => setIsOpen(false)}>
                 Home
+              </Link>
+              <Link to="/#about" className="block px-3 py-2 text-foreground hover:text-accent transition-smooth" onClick={() => setIsOpen(false)}>
+                About
               </Link>
               <Link to="/services" className="block px-3 py-2 text-foreground hover:text-accent transition-smooth" onClick={() => setIsOpen(false)}>
                 Services
