@@ -36,6 +36,7 @@ export const CATEGORIES = [
   "Community Centers & Nonprofits",
   "Arts & Culture",
   "Parks & Recreation",
+  "Camps",
 ];
 
 export const TAGS = [
@@ -46,6 +47,13 @@ export const TAGS = [
   "SEO",
   "Volunteers",
   "Onboarding",
+  "Marketing",
+  "Registration",
+  "Compliance",
+  "Safety",
+  "Grants",
+  "Email",
+  "Social",
 ];
 
 export const resources: Resource[] = [
@@ -137,5 +145,159 @@ export const resources: Resource[] = [
     tags: ["Volunteers", "Content", "Onboarding"],
     type: "link",
     href: "https://www.notion.so/", // placeholder link
+  },
+  // New resources (2 per group served)
+  // Faith & Religious
+  {
+    id: "online-giving-optimization",
+    title: "Online Giving Optimization Checklist",
+    excerpt: "Proven steps to increase donations by 10–30% from your site.",
+    category: "Faith & Religious",
+    tags: ["Fundraising", "SEO", "Content"],
+    type: "checklist",
+    payload: {
+      items: [
+        "Place Give button in header and sticky mobile nav",
+        "Use a simple, distraction-free donation form",
+        "Offer recurring giving with monthly as default",
+        "Add giving impact examples (what $50 funds)",
+        "Ensure one-page checkout with wallet support",
+        "Create a 90‑second giving explainer video",
+        "Add trust badges and financial transparency",
+        "Send thank-you email with next-step invitation",
+      ],
+    },
+  },
+  // K-12 Schools & PTAs
+  {
+    id: "pta-fundraiser-promotion-kit",
+    title: "PTA Fundraiser Promotion Kit",
+    excerpt: "A simple launch checklist to hit participation and revenue goals.",
+    category: "K-12 Schools & PTAs",
+    tags: ["Fundraising", "Events", "Marketing"],
+    type: "checklist",
+    payload: {
+      items: [
+        "Publish fundraiser page with goal and deadline",
+        "Send launch email to families and staff",
+        "Post to social with student-safe images",
+        "Add QR codes to flyers and posters",
+        "Enable classroom/team leaderboards",
+        "Share mid-campaign progress update",
+        "Thank supporters and report results",
+      ],
+    },
+  },
+  // Youth Sports
+  {
+    id: "youth-sports-registration-readiness",
+    title: "Season Registration Readiness",
+    excerpt: "Checklist to open registration smoothly and reduce support tickets.",
+    category: "Youth Sports",
+    tags: ["Registration", "Events", "Onboarding"],
+    type: "checklist",
+    payload: {
+      items: [
+        "Publish dates, divisions, and eligibility",
+        "Confirm team/league fees and payment plans",
+        "Enable waivers and medical forms",
+        "Set up family accounts and sibling discounts",
+        "Add photo upload and jersey sizing",
+        "Automate confirmation and next steps email",
+      ],
+    },
+  },
+  {
+    id: "team-communications-playbook",
+    title: "Team Communications Playbook",
+    excerpt: "Templates for game reminders, cancellations, and updates.",
+    category: "Youth Sports",
+    tags: ["Content", "Email", "Social"],
+    type: "link",
+    href: "https://www.notion.so/", // placeholder link
+  },
+  // Arts & Culture
+  {
+    id: "arts-promo-checklist",
+    title: "Exhibit & Performance Promotion Checklist",
+    excerpt: "Drive attendance with timing, channels, and message templates.",
+    category: "Arts & Culture",
+    tags: ["Events", "Marketing", "SEO"],
+    type: "checklist",
+    payload: {
+      items: [
+        "Publish event with artist bios and high‑res images",
+        "Announce to email list with member pre‑sale",
+        "Schedule socials with alt text and captions",
+        "Pitch local media and calendar listings",
+        "Add structured data for events (rich results)",
+        "Post day‑of reminders and wayfinding info",
+      ],
+    },
+  },
+  {
+    id: "grant-readiness-checklist",
+    title: "Grant Readiness Checklist",
+    excerpt: "Prepare assets and data to submit stronger grant applications.",
+    category: "Arts & Culture",
+    tags: ["Grants", "Content", "Compliance"],
+    type: "checklist",
+    payload: {
+      items: [
+        "Maintain updated mission and program outcomes",
+        "Collect testimonials and impact photos (w/ releases)",
+        "Track attendance and demographics",
+        "Document budget, 990s, and audit letters",
+        "Assemble board list and governance policies",
+        "Create one‑pager and elevator pitch",
+      ],
+    },
+  },
+  // Parks & Recreation
+  {
+    id: "parks-program-participation-booster",
+    title: "Program Participation Booster Guide",
+    excerpt: "Tactics to fill classes and leagues without extra staff time.",
+    category: "Parks & Recreation",
+    tags: ["Events", "Marketing", "Content"],
+    type: "link",
+    href: "https://www.notion.so/", // placeholder link
+  },
+  // Camps
+  {
+    id: "camp-session-prep-checklist",
+    title: "Camp Session Prep Checklist",
+    excerpt: "Everything to publish before opening registration.",
+    category: "Camps",
+    tags: ["Onboarding", "Registration", "Safety"],
+    type: "checklist",
+    payload: {
+      items: [
+        "Session dates, ages, and capacity published",
+        "Packing lists and drop‑off/pick‑up details",
+        "Scholarship info and payment plans",
+        "Health forms and allergy collection",
+        "Cabin requests and buddy system",
+        "Automated confirmations with what to expect",
+      ],
+    },
+  },
+  {
+    id: "camp-safety-compliance-essentials",
+    title: "Safety & Compliance Essentials",
+    excerpt: "Critical policies and training before campers arrive.",
+    category: "Camps",
+    tags: ["Safety", "Compliance"],
+    type: "checklist",
+    payload: {
+      items: [
+        "Background checks and mandatory reporter training",
+        "Emergency action plan posted and drilled",
+        "Medical protocols and medication handling",
+        "Incident reporting and parent notifications",
+        "Photo permissions and privacy standards",
+        "ADA accommodations process documented",
+      ],
+    },
   },
 ];
