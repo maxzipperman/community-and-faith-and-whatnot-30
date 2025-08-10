@@ -6,6 +6,8 @@ import AboutMe from '@/components/AboutMe';
 import { Link } from 'react-router-dom';
 import { HeartHandshake, Users, HandCoins, ArrowRight } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
+import impactImage from '@/assets/performance-metrics.jpg';
+import fallbackLogo from '@/assets/mission-digital-logo.png';
 
 const Index = () => {
 
@@ -130,7 +132,16 @@ const Index = () => {
               </div>
             </div>
             <div className="order-1 md:order-2">
-              <img src="/placeholder.svg" alt="Volunteer handing a meal to a smiling community member" className="w-full rounded-lg shadow-soft" loading="lazy" />
+              <img
+                src={impactImage}
+                alt="Volunteer handing a meal to a smiling community member"
+                className="w-full rounded-lg shadow-soft"
+                loading="lazy"
+                onError={(e) => {
+                  const img = e.currentTarget as HTMLImageElement;
+                  if (img.src !== fallbackLogo) img.src = fallbackLogo;
+                }}
+              />
             </div>
           </div>
         </div>
