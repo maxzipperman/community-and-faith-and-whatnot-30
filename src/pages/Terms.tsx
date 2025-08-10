@@ -1,11 +1,11 @@
-import Layout from '@/components/Layout';
+import LegalLayout from '@/components/LegalLayout';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 
 const Terms = () => {
   const canonical = typeof window !== 'undefined' ? `${window.location.origin}/legal/terms` : undefined;
   return (
-    <Layout>
+    <LegalLayout>
       <Helmet>
         <title>Terms of Service | Mission Digital</title>
         <meta name="description" content="Read the Terms of Service for using Mission Digital’s website and services, including payments, acceptable use, and limitations." />
@@ -87,7 +87,7 @@ const Terms = () => {
           <p className="text-sm text-muted-foreground mt-8">Last updated: {new Date().toLocaleDateString()}</p>
         </article>
       </main>
-    </Layout>
+    </LegalLayout>
   );
 };
 
