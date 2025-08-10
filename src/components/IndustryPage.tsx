@@ -13,7 +13,7 @@ import { AnimatedStats } from './AnimatedStats';
 import { IndustryHero } from './IndustryHero';
 import { IndustryIcon } from './IndustryIcon';
 import { iconResolver } from '@/utils/iconResolver';
-import performanceMetrics from '@/assets/performance-metrics.jpg';
+
 import { ComparisonTable } from './ComparisonTable';
 import ROICalculator from './ROICalculator';
 import { GanttProcess } from './GanttProcess';
@@ -187,19 +187,6 @@ export const IndustryPage = ({ data }: IndustryPageProps) => {
                 <p className="text-lg text-muted-foreground">Real performance improvements for businesses like yours</p>
               </div>
               <AnimatedStats stats={statsData} />
-              {!isServe && (
-                <div className="mt-8 max-w-4xl mx-auto">
-                  <Card className="overflow-hidden shadow-large border-0">
-                    <CardContent className="p-0">
-                      <img 
-                        src={performanceMetrics} 
-                        alt="Website performance improvements"
-                        className="w-full h-auto"
-                      />
-                    </CardContent>
-                  </Card>
-                </div>
-              )}
             </div>
           </div>
         </section>

@@ -3,10 +3,10 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Link } from 'react-router-dom';
-import { Code, MessageSquare, TrendingUp, ArrowRight, CheckCircle, Search, CalendarDays, Users, HandCoins } from 'lucide-react';
+import { ArrowRight, CheckCircle, Search, CalendarDays, Users, HandCoins } from 'lucide-react';
 import ROICalculator from '@/components/ROICalculator';
 import { Helmet } from 'react-helmet-async';
-
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 const Services = () => {
   const packages = [
     {
@@ -20,6 +20,12 @@ const Services = () => {
         "Core Web Vitals performance pass",
         "1 round of revisions",
         "2-week timeline"
+      ],
+      details: [
+        "Homepage storytelling with hero, mission, and calls-to-action",
+        "One integration (Stripe/Donorbox or simple Registration form)",
+        "Basic analytics & SEO setup (titles, descriptions, sitemap)",
+        "Up to 10 images and 1 downloadable (e.g., PDF)"
       ],
       price: "$1,900",
       popular: false
@@ -36,6 +42,12 @@ const Services = () => {
         "2 rounds of revisions",
         "3–4 weeks timeline"
       ],
+      details: [
+        "Choose any two modules (Events, News/Sermons, Volunteer, Newsletter)",
+        "Donation UX best practices (suggested amounts, recurring prompts)",
+        "Light copy polish for Home + one key page",
+        "Up to 3 forms (contact, volunteer, subscribe)"
+      ],
       price: "$3,300",
       popular: true
     },
@@ -50,6 +62,12 @@ const Services = () => {
         "Copy polish for key pages",
         "60 days of launch support",
         "4–6 weeks timeline"
+      ],
+      details: [
+        "Information architecture workshop and sitemap",
+        "Advanced SEO setup (schema basics, redirects if needed)",
+        "Deeper content migration and media handling",
+        "Up to 5 custom content types (e.g., Staff, Groups, Sermons)"
       ],
       price: "$4,900",
       popular: false
@@ -79,14 +97,11 @@ const Services = () => {
         <meta name="description" content="Standardized, lower-cost website packages for faith groups, schools, sports, and community orgs." />
         <link rel="canonical" href="/services" />
       </Helmet>
-      {/* Hero Section */}
-      <section className="pt-24 pb-16 gradient-subtle">
+      <section className="pt-24 pb-12 gradient-subtle">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <Badge variant="secondary" className="mb-4">Our Services</Badge>
-            <h1 className="mb-6">
-              Community Website Packages
-            </h1>
+            <h1 className="mb-6">Community Website Packages</h1>
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
               Standardized, lower-cost builds focused on donations, registrations, and community engagement.
             </p>
@@ -94,16 +109,15 @@ const Services = () => {
         </div>
       </section>
 
-      {/* Fixed-Price Packages + Add-ons + Audit */}
-      <section className="py-16 lg:py-24">
+      <section className="py-12 lg:py-16">
         <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center mb-16">
-            <h2 className="mb-6">Simple, Community-First Packages</h2>
+          <div className="max-w-3xl mx-auto text-center mb-12">
+            <h2 className="mb-4">Simple, Community-First Packages</h2>
             <p className="text-lg text-muted-foreground">
               Clear scope. Lower cost. Built for donations, registrations, and engagement.
             </p>
           </div>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
             {packages.map((pkg, index) => (
               <Card key={index} className={`hover-lift shadow-medium h-full ${pkg.popular ? 'border-2 border-accent/50 shadow-accent' : ''} relative`}>
                 {pkg.popular && (
@@ -111,17 +125,17 @@ const Services = () => {
                     Most Popular
                   </Badge>
                 )}
-                <CardHeader className="text-center pb-4">
-                  <div className="w-16 h-16 bg-accent/10 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <CardHeader className="text-center pb-3">
+                  <div className="w-14 h-14 bg-accent/10 rounded-lg flex items-center justify-center mx-auto mb-3">
                     {pkg.icon}
                   </div>
-                  <CardTitle className="text-xl mb-2">{pkg.title}</CardTitle>
-                  <CardDescription className="text-base">
+                  <CardTitle className="text-lg mb-1">{pkg.title}</CardTitle>
+                  <CardDescription className="text-sm">
                     {pkg.description}
                   </CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-6">
-                  <ul className="space-y-3">
+                <CardContent className="space-y-5">
+                  <ul className="space-y-2.5">
                     {pkg.features.map((feature, featureIndex) => (
                       <li key={featureIndex} className="flex items-start space-x-3">
                         <CheckCircle className="h-5 w-5 text-success mt-0.5 flex-shrink-0" />
@@ -129,8 +143,22 @@ const Services = () => {
                       </li>
                     ))}
                   </ul>
-                  <div className="pt-4 border-t border-border">
-                    <div className="text-2xl font-bold text-accent mb-4">
+
+                  <Accordion type="single" collapsible>
+                    <AccordionItem value="details">
+                      <AccordionTrigger className="text-sm">More info: what it can include</AccordionTrigger>
+                      <AccordionContent>
+                        <ul className="list-disc pl-5 space-y-2 text-sm text-muted-foreground">
+                          {pkg.details.map((d: string, i: number) => (
+                            <li key={i}>{d}</li>
+                          ))}
+                        </ul>
+                      </AccordionContent>
+                    </AccordionItem>
+                  </Accordion>
+
+                  <div className="pt-3 border-t border-border">
+                    <div className="text-xl font-bold text-accent mb-3">
                       {pkg.price}
                     </div>
                     <Button asChild className={`w-full ${pkg.popular ? 'gradient-accent text-accent-foreground' : ''}`}>
@@ -142,10 +170,9 @@ const Services = () => {
             ))}
           </div>
 
-          {/* Add-ons */}
-          <div className="max-w-4xl mx-auto mb-16">
-            <h3 className="text-xl font-semibold mb-4 text-center">Popular Add-ons</h3>
-            <div className="grid sm:grid-cols-2 gap-4">
+          <div className="max-w-4xl mx-auto mb-12">
+            <h3 className="text-xl font-semibold mb-3 text-center">Popular Add-ons</h3>
+            <div className="grid sm:grid-cols-2 gap-3">
               {[
                 { name: 'Events Calendar module', price: '$300' },
                 { name: 'Sermons/News archive', price: '$400' },
@@ -168,22 +195,22 @@ const Services = () => {
 
           {/* Audit Product */}
           <div className="max-w-2xl mx-auto">
-            <div className="text-center mb-8">
+            <div className="text-center mb-6">
               <h3 className="text-xl font-semibold mb-2">Not Sure Which Package is Right?</h3>
               <p className="text-muted-foreground">Start with our quick audit to get personalized recommendations.</p>
             </div>
             <Card className="shadow-large border-2 border-accent/20">
-              <CardHeader className="text-center pb-4">
-                <div className="w-16 h-16 bg-accent/10 rounded-lg flex items-center justify-center mx-auto mb-4">
+              <CardHeader className="text-center pb-3">
+                <div className="w-14 h-14 bg-accent/10 rounded-lg flex items-center justify-center mx-auto mb-3">
                   {auditProduct.icon}
                 </div>
-                <CardTitle className="text-xl mb-2">{auditProduct.title}</CardTitle>
+                <CardTitle className="text-xl mb-1">{auditProduct.title}</CardTitle>
                 <CardDescription className="text-base">
                   {auditProduct.description}
                 </CardDescription>
               </CardHeader>
-              <CardContent className="space-y-6">
-                <ul className="space-y-3">
+              <CardContent className="space-y-5">
+                <ul className="space-y-2.5">
                   {auditProduct.features.map((feature, featureIndex) => (
                     <li key={featureIndex} className="flex items-start space-x-3">
                       <CheckCircle className="h-5 w-5 text-success mt-0.5 flex-shrink-0" />
@@ -191,9 +218,9 @@ const Services = () => {
                     </li>
                   ))}
                 </ul>
-                <div className="pt-4 border-t border-border space-y-4">
+                <div className="pt-3 border-t border-border space-y-3">
                   <div className="flex items-center justify-between">
-                    <span className="text-2xl font-bold text-accent">{auditProduct.price}</span>
+                    <span className="text-xl font-bold text-accent">{auditProduct.price}</span>
                     <Badge variant="secondary">{auditProduct.note}</Badge>
                   </div>
                   <Button asChild className="w-full gradient-accent text-accent-foreground">
@@ -212,8 +239,7 @@ const Services = () => {
       {/* ROI Calculator */}
       <ROICalculator />
 
-      {/* Process Section */}
-      <section className="py-16 lg:py-24 gradient-subtle">
+      <section className="py-12 lg:py-16 gradient-subtle">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center mb-16">
             <h2 className="mb-6">Our Proven Process</h2>
@@ -260,15 +286,14 @@ const Services = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-16 lg:py-24">
+      <section className="py-12 lg:py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="mb-6">Ready to Get Started?</h2>
-            <p className="text-lg text-muted-foreground mb-8">
+            <h2 className="mb-5">Ready to Get Started?</h2>
+            <p className="text-lg text-muted-foreground mb-6">
               Let's discuss your project and create a custom solution that drives real results for your business.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Button 
                 asChild 
                 size="lg" 

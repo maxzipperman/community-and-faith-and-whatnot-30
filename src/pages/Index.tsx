@@ -1,13 +1,11 @@
 import Layout from '@/components/Layout';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import AboutMe from '@/components/AboutMe';
+
 
 import { Link } from 'react-router-dom';
 import { HeartHandshake, Users, HandCoins, ArrowRight } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
-import impactImage from '@/assets/performance-metrics.jpg';
-import fallbackLogo from '@/assets/mission-digital-logo.png';
 
 const Index = () => {
 
@@ -87,7 +85,7 @@ const Index = () => {
         </div>
       </section>
 
-      <AboutMe />
+      
 
       {/* Industries We Serve */}
       <section className="py-8 lg:py-12">
@@ -98,12 +96,12 @@ const Index = () => {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
             {[
-              { name: 'Faith & Religious', href: '/faith' },
-              { name: 'K-12 Schools & PTAs', href: '/schools' },
-              { name: 'Youth Sports', href: '/youth-sports' },
-              { name: 'Community Centers & Nonprofits', href: '/community' },
-              { name: 'Arts & Culture', href: '/arts-culture' },
-              { name: 'Parks & Recreation', href: '/parks-rec' },
+              { name: 'Faith & Religious', href: '/serve/faith-religious' },
+              { name: 'K-12 Schools & PTAs', href: '/serve/k12-ptas' },
+              { name: 'Youth Sports', href: '/serve/youth-sports' },
+              { name: 'Community Centers & Nonprofits', href: '/serve/community-nonprofits' },
+              { name: 'Arts & Culture', href: '/serve/arts-culture' },
+              { name: 'Parks & Recreation', href: '/serve/parks-rec' },
             ].map((s, i) => (
               <Card key={i} className="hover-lift">
                 <CardHeader>
@@ -118,34 +116,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Section 3: Impact Stories */}
-      <section className="py-16 lg:py-24 gradient-subtle">
-        <div className="container mx-auto px-4">
-          <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-            <div className="order-2 md:order-1">
-              <h2 className="mb-3">See the Difference We Help Create</h2>
-              <div className="bg-card p-6 rounded-lg shadow-soft">
-                <h3 className="text-xl font-semibold mb-2">250 Hot Meals Served Weekly</h3>
-                <p className="text-muted-foreground">
-                  With their new, easy-to-update website, the Community Food Initiative increased volunteer sign-ups by 40%, helping them meet the growing needs of our neighbors.
-                </p>
-              </div>
-            </div>
-            <div className="order-1 md:order-2">
-              <img
-                src={impactImage}
-                alt="Volunteer handing a meal to a smiling community member"
-                className="w-full rounded-lg shadow-soft"
-                loading="lazy"
-                onError={(e) => {
-                  const img = e.currentTarget as HTMLImageElement;
-                  if (img.src !== fallbackLogo) img.src = fallbackLogo;
-                }}
-              />
-            </div>
-          </div>
-        </div>
-      </section>
 
 
       {/* Section 5: Testimonial */}

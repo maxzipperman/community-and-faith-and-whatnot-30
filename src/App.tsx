@@ -17,7 +17,7 @@ import Accountants from "./pages/accountants";
 import Consultants from "./pages/consultants";
 import Portfolio from "./pages/Portfolio";
 import Donate from "./pages/Donate";
-
+import About from "./pages/About";
 import Resources from "./pages/Resources";
 import Faith from "./pages/Faith";
 import Schools from "./pages/Schools";
@@ -47,7 +47,7 @@ const App = () => (
             <Route path="/contact" element={<Contact />} />
             <Route path="/portfolio" element={<Portfolio />} />
             <Route path="/donate" element={<Donate />} />
-            
+            <Route path="/about" element={<About />} />
             <Route path="/resources" element={<Resources />} />
             
             {/* Industry Pages */}
