@@ -12,7 +12,7 @@ const Index = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Websites for Community Organizations | Position Digital</title>
+        <title>Mission Digital Solutions - Bringing Communities Together with Modern, Trusted Websites</title>
         <meta name="description" content="We build warm, accessible websites that amplify your mission, engage your community, and increase donations and registrations." />
         <link rel="canonical" href="/" />
       </Helmet>
