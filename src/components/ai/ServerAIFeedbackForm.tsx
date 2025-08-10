@@ -161,7 +161,7 @@ export default function ServerAIFeedbackForm() {
                 disabled={loading}
                 className="w-full bg-primary hover:bg-primary-glow text-primary-foreground"
               >
-                {loading ? "Analyzing..." : "Run Analysis"}
+                {loading ? "Analyzing..." : "Run an Instant Best Practices Audit"}
               </Button>
             </div>
 

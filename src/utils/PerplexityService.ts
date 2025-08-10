@@ -62,7 +62,7 @@ Output strict JSON with this shape: { issues: [{ severity: 'high'|'medium'|'low'
 
       const messages = [
         { role: 'system', content: promptHeader },
-        { role: 'user', content: `Goals:\n${goals}\n\nSite Content:\n${contentBundle}\n\nReturn only JSON.` },
+        { role: 'user', content: `Goals (industry best practices):\n${goals}\n\nChecklist requirements:\n- Output STRICT JSON only with { \"issues\": [ ... ] }\n- 8–18 concise checks\n- Prefix finding with [PASS] or [FAIL]\n- Use high/medium/low severity (PASS can be low)\n\nSite Content:\n${contentBundle}` },
       ];
 
       const res = await fetch('https://api.perplexity.ai/chat/completions', {
