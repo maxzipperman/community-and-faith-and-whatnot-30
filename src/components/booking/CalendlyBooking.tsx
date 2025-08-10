@@ -31,65 +31,88 @@ const CalendlyBooking = ({ calendlyUrl, height = 780 }: CalendlyBookingProps) =>
 
     const loadCalendlyResources = async () => {
       try {
+        // Clear any existing widget first
+        if (widgetRef.current) {
+          widgetRef.current.innerHTML = '';
+        }
+
         // Check if CSS is already loaded
-        if (!document.querySelector('link[data-calendly-styles]')) {
+        if (!document.querySelector('link[href*="calendly.com"]')) {
           const link = document.createElement("link");
           link.setAttribute("rel", "stylesheet");
           link.setAttribute("href", "https://assets.calendly.com/assets/external/widget.css");
-          link.setAttribute("data-calendly-styles", "true");
           document.head.appendChild(link);
           console.log("[Calendly] CSS loaded");
         }
 
         // Check if script is already loaded
-        if (!document.querySelector('script[data-calendly-script]')) {
+        if (!window.Calendly) {
           const script = document.createElement("script");
           script.src = "https://assets.calendly.com/assets/external/widget.js";
           script.async = true;
-          script.setAttribute("data-calendly-script", "true");
           
           // Wait for script to load
           await new Promise((resolve, reject) => {
-            script.onload = resolve;
-            script.onerror = reject;
+            script.onload = () => {
+              console.log("[Calendly] Script loaded successfully");
+              resolve(void 0);
+            };
+            script.onerror = (err) => {
+              console.error("[Calendly] Script failed to load:", err);
+              reject(err);
+            };
             document.body.appendChild(script);
           });
-          console.log("[Calendly] Script loaded");
         }
 
-        // Initialize widget after resources are loaded
+        // Wait a bit more for Calendly to be fully available
+        await new Promise(resolve => setTimeout(resolve, 100));
+
+        // Initialize widget
         if (window.Calendly && widgetRef.current) {
-          // Try the original URL first, then with /30min if it fails
-          let urlToTry = calendlyUrl;
-          if (!calendlyUrl.split('/')[4]) {
-            urlToTry = `${calendlyUrl}/30min`;
+          // Try different URL variations
+          const urlVariations = [
+            calendlyUrl,
+            `${calendlyUrl}/30min`,
+            `${calendlyUrl}/consultation`,
+            `${calendlyUrl}/meeting`
+          ];
+
+          let success = false;
+          for (const url of urlVariations) {
+            try {
+              console.log(`[Calendly] Trying URL: ${url}`);
+              
+              // Clear previous attempts
+              widgetRef.current.innerHTML = '';
+              
+              window.Calendly.initInlineWidget({
+                url: url,
+                parentElement: widgetRef.current,
+                prefill: {},
+                utm: {}
+              });
+              
+              console.log(`[Calendly] Successfully initialized with: ${url}`);
+              success = true;
+              break;
+            } catch (err) {
+              console.warn(`[Calendly] Failed with URL ${url}:`, err);
+              continue;
+            }
           }
-          
-          try {
-            window.Calendly.initInlineWidget({
-              url: urlToTry,
-              parentElement: widgetRef.current,
-              prefill: {},
-              utm: {}
-            });
-            console.log("[Calendly] Widget initialized with URL:", urlToTry);
-          } catch (initError) {
-            console.error("[Calendly] Widget initialization failed:", initError);
-            setError('Failed to initialize Calendly widget. Please check the event URL.');
-            setIsLoading(false);
-            return;
+
+          if (!success) {
+            throw new Error('All URL variations failed');
           }
         } else {
-          console.error("[Calendly] Missing Calendly object or widget ref");
-          setError('Calendly failed to load properly');
-          setIsLoading(false);
-          return;
+          throw new Error('Calendly object not available or widget ref missing');
         }
 
         setIsLoading(false);
       } catch (err) {
         console.error("[Calendly] Error loading resources:", err);
-        setError('Failed to load Calendly widget');
+        setError(`Failed to load Calendly widget: ${err.message}`);
         setIsLoading(false);
       }
     };
