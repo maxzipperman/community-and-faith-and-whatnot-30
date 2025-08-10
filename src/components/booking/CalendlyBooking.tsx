@@ -23,6 +23,12 @@ const CalendlyBooking = ({ calendlyUrl, height = 780 }: CalendlyBookingProps) =>
       return;
     }
 
+    // Check if URL has an event type - if not, try to append a common one
+    const hasEventType = calendlyUrl.split('/').length > 4;
+    if (!hasEventType) {
+      console.warn("[Calendly] URL might be missing event type. Trying to append /30min");
+    }
+
     const loadCalendlyResources = async () => {
       try {
         // Check if CSS is already loaded
@@ -53,13 +59,31 @@ const CalendlyBooking = ({ calendlyUrl, height = 780 }: CalendlyBookingProps) =>
 
         // Initialize widget after resources are loaded
         if (window.Calendly && widgetRef.current) {
-          window.Calendly.initInlineWidget({
-            url: calendlyUrl,
-            parentElement: widgetRef.current,
-            prefill: {},
-            utm: {}
-          });
-          console.log("[Calendly] Widget initialized");
+          // Try the original URL first, then with /30min if it fails
+          let urlToTry = calendlyUrl;
+          if (!calendlyUrl.split('/')[4]) {
+            urlToTry = `${calendlyUrl}/30min`;
+          }
+          
+          try {
+            window.Calendly.initInlineWidget({
+              url: urlToTry,
+              parentElement: widgetRef.current,
+              prefill: {},
+              utm: {}
+            });
+            console.log("[Calendly] Widget initialized with URL:", urlToTry);
+          } catch (initError) {
+            console.error("[Calendly] Widget initialization failed:", initError);
+            setError('Failed to initialize Calendly widget. Please check the event URL.');
+            setIsLoading(false);
+            return;
+          }
+        } else {
+          console.error("[Calendly] Missing Calendly object or widget ref");
+          setError('Calendly failed to load properly');
+          setIsLoading(false);
+          return;
         }
 
         setIsLoading(false);
