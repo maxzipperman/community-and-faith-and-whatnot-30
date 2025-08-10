@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './ui/accordion';
 import { BeforeAfterSlider } from './ui/before-after-slider';
 import { Badge } from './ui/badge';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { ArrowRight, Star } from 'lucide-react';
 import { IndustryData } from '@/types/industry';
 import { FounderCTA } from './FounderCTA';
@@ -22,6 +22,8 @@ interface IndustryPageProps {
 }
 
 export const IndustryPage = ({ data }: IndustryPageProps) => {
+  const location = useLocation();
+  const isServe = location.pathname.startsWith('/serve/');
   // Convert proof points to animated stats format
   const statsData = data.proof.map((point, index) => {
     const match = point.match(/(\d+%|\d+×|\d+s)/);
@@ -50,11 +52,11 @@ export const IndustryPage = ({ data }: IndustryPageProps) => {
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "Organization",
-            "name": "Position Digital",
+            "@type": "ProfessionalService",
+            "name": "Mission Digital",
+            "serviceType": `Website Design for ${data.industry}`,
             "description": data.seo.description,
-            "url": `${window.location.origin}${data.slug}`,
-            "sameAs": ["https://twitter.com/positiondigital"]
+            "url": `${window.location.origin}${data.slug}`
           })}
         </script>
       </Helmet>
@@ -68,36 +70,111 @@ export const IndustryPage = ({ data }: IndustryPageProps) => {
           primaryCtaText={data.hero.primaryCtaText}
           secondaryCtaText={data.hero.secondaryCtaText}
           iconName={data.icon}
+          microProof={data.proof?.[0]}
         />
 
-        {/* Why This Matters */}
-        <section className="py-20 bg-muted/30">
-          <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto">
-              <h2 className="text-3xl font-bold text-center mb-12">Why This Matters</h2>
-              <div className="grid md:grid-cols-3 gap-6">
-                {data.whyMatters.map((point, index) => (
-                  <Card key={index} className="border-0 shadow-sm">
-                    <CardContent className="p-6">
-                      <IndustryIcon name={iconResolver(point, data.industry)} className="h-8 w-8 text-primary mb-4" />
-                      <p className="text-muted-foreground">{point}</p>
-                    </CardContent>
-                  </Card>
-                ))}
+        {/* Outcome-first sections for community/serve pages */}
+        {data.opening && (
+          <section className="py-6">
+            <div className="container mx-auto px-4">
+              <p className="max-w-3xl mx-auto text-center text-muted-foreground leading-relaxed">{data.opening}</p>
+            </div>
+          </section>
+        )}
+
+        {data.problemsOutcomes?.length ? (
+          <section className="py-8 bg-muted/30">
+            <div className="container mx-auto px-4">
+              <div className="max-w-5xl mx-auto">
+                <h2 className="text-2xl font-semibold text-center mb-6">From Problems to Outcomes</h2>
+                <div className="grid sm:grid-cols-2 gap-4 md:gap-6">
+                  {data.problemsOutcomes.map((po, i) => (
+                    <Card key={i} className="border-0 shadow-sm">
+                      <CardContent className="p-4 md:p-5">
+                        <div className="flex items-center justify-between gap-3">
+                          <div className="text-sm">
+                            <div className="text-muted-foreground">From</div>
+                            <div className="font-medium">{po.problem}</div>
+                          </div>
+                          <ArrowRight className="h-4 w-4 text-muted-foreground hidden sm:block" />
+                          <div className="text-sm text-right">
+                            <div className="text-muted-foreground">To</div>
+                            <div className="font-medium text-primary">{po.outcome}</div>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
+        ) : null}
+
+        {data.process?.length ? (
+          <section className="py-8">
+            <div className="container mx-auto px-4">
+              <div className="max-w-5xl mx-auto">
+                <h2 className="text-2xl font-semibold text-center mb-6">Our Process</h2>
+                <div className="flex flex-wrap items-center justify-center gap-4">
+                  {data.process.map((step, i) => (
+                    <div key={i} className="flex items-center gap-2">
+                      <div className="w-2 h-2 rounded-full bg-primary" />
+                      <span className="text-sm font-medium">{step.step}</span>
+                      {step.duration && <Badge variant="secondary">{step.duration}</Badge>}
+                      {i < data.process.length - 1 && <ArrowRight className="h-4 w-4 text-muted-foreground" />}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </section>
+        ) : null}
+
+        {data.pricingRange ? (
+          <section className="py-6">
+            <div className="container mx-auto px-4">
+              <Card className="max-w-3xl mx-auto border-0 shadow-sm">
+                <CardContent className="p-4 md:p-5 text-center">
+                  <p className="text-sm text-muted-foreground">
+                    Typical project range: <span className="font-semibold text-foreground">{data.pricingRange}</span> — fixed scope, no retainers
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+          </section>
+        ) : null}
+
+        {/* Why This Matters */}
+        {data.whyMatters?.length ? (
+          <section className="py-12 md:py-16 bg-muted/30">
+            <div className="container mx-auto px-4">
+              <div className="max-w-4xl mx-auto">
+                <h2 className="text-3xl font-bold text-center mb-8">Why This Matters</h2>
+                <div className="grid md:grid-cols-3 gap-4 md:gap-6">
+                  {data.whyMatters.map((point, index) => (
+                    <Card key={index} className="border-0 shadow-sm">
+                      <CardContent className="p-4 md:p-5">
+                        <IndustryIcon name={iconResolver(point, data.industry)} className="h-8 w-8 text-primary mb-3" />
+                        <p className="text-muted-foreground">{point}</p>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </section>
+        ) : null}
 
         {/* Client-Centric Value */}
-        <section className="py-20">
+        <section className="py-12 md:py-16">
           <div className="container mx-auto px-4">
             <div className="max-w-5xl mx-auto">
-              <h2 className="text-3xl font-bold text-center mb-12">Client-Centric Value for {data.industry}</h2>
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <h2 className="text-3xl font-bold text-center mb-8">Client-Centric Value for {data.industry}</h2>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
                 {(data.valueProps ?? data.servicesFocus).map((val, idx) => (
                   <Card key={idx} className="border-0 shadow-sm">
-                    <CardContent className="p-6">
+                    <CardContent className="p-4 md:p-5">
                       <IndustryIcon name={iconResolver(val, data.industry)} className="h-6 w-6 text-primary mb-3" />
                       <p className="text-sm">{val}</p>
                     </CardContent>
@@ -109,36 +186,36 @@ export const IndustryPage = ({ data }: IndustryPageProps) => {
         </section>
 
         {/* Animated Proof Points */}
-        <section className="py-20">
+        <section className="py-12 md:py-16">
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
-              <div className="text-center mb-12">
-                <h2 className="text-3xl font-bold mb-4">Proven Results</h2>
+              <div className="text-center mb-8">
+                <h2 className="text-3xl font-bold mb-3">Proven Results</h2>
                 <p className="text-lg text-muted-foreground">Real performance improvements for businesses like yours</p>
               </div>
               <AnimatedStats stats={statsData} />
-              
-              {/* Performance Metrics Visual */}
-              <div className="mt-16 max-w-4xl mx-auto">
-                <Card className="overflow-hidden shadow-large border-0">
-                  <CardContent className="p-0">
-                    <img 
-                      src={performanceMetrics} 
-                      alt="Website performance improvements"
-                      className="w-full h-auto"
-                    />
-                  </CardContent>
-                </Card>
-              </div>
+              {!isServe && (
+                <div className="mt-8 max-w-4xl mx-auto">
+                  <Card className="overflow-hidden shadow-large border-0">
+                    <CardContent className="p-0">
+                      <img 
+                        src={performanceMetrics} 
+                        alt="Website performance improvements"
+                        className="w-full h-auto"
+                      />
+                    </CardContent>
+                  </Card>
+                </div>
+              )}
             </div>
           </div>
         </section>
 
         {/* Services Focus */}
-        <section className="py-20 bg-muted/30">
+        <section className="py-12 md:py-16 bg-muted/30">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
-              <h2 className="text-3xl font-bold text-center mb-12">What We Focus On</h2>
+              <h2 className="text-3xl font-bold text-center mb-8">What We Focus On</h2>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {data.servicesFocus.map((service, index) => (
                   <div key={index} className="flex items-center space-x-3 p-4 bg-background rounded-lg">
@@ -153,11 +230,11 @@ export const IndustryPage = ({ data }: IndustryPageProps) => {
 
         {/* Offer Architecture */}
         {data.offers?.length ? (
-          <section className="py-20">
+          <section className="py-12 md:py-16">
             <div className="container mx-auto px-4">
               <div className="max-w-5xl mx-auto">
-                <h2 className="text-3xl font-bold text-center mb-12">Offer Architecture</h2>
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <h2 className="text-3xl font-bold text-center mb-8">Offer Architecture</h2>
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
                   {data.offers.map((offer, idx) => (
                     <Card key={idx} className="border-0 shadow-sm">
                       <CardHeader>
@@ -181,7 +258,7 @@ export const IndustryPage = ({ data }: IndustryPageProps) => {
 
         {/* Go-To-Market Quick Hits */}
         {data.gtm ? (
-          <section className="py-20 bg-muted/30">
+          <section className="py-12 md:py-16 bg-muted/30">
             <div className="container mx-auto px-4">
               <div className="max-w-4xl mx-auto">
                 <div className="text-center mb-6">
@@ -200,14 +277,14 @@ export const IndustryPage = ({ data }: IndustryPageProps) => {
 
         {/* Who We Serve */}
         {data.subProfessions?.length ? (
-          <section className="py-20">
+          <section className="py-12 md:py-16">
             <div className="container mx-auto px-4">
               <div className="max-w-6xl mx-auto">
-                <h2 className="text-3xl font-bold text-center mb-12">Who We Serve</h2>
+                <h2 className="text-3xl font-bold text-center mb-8">Who We Serve</h2>
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                   {data.subProfessions!.map((sp, idx) => (
-                    <Card key={idx} className="p-8 text-center border-0 shadow-sm hover-lift transition-smooth">
-                      <IndustryIcon name={sp.icon || data.icon} className="h-10 w-10 text-primary mx-auto mb-4" />
+                    <Card key={idx} className="p-5 text-center border-0 shadow-sm hover-lift transition-smooth">
+                      <IndustryIcon name={sp.icon || data.icon} className="h-10 w-10 text-primary mx-auto mb-3" />
                       <div className="text-2xl md:text-3xl font-bold">{sp.name}</div>
                     </Card>
                   ))}
@@ -218,24 +295,26 @@ export const IndustryPage = ({ data }: IndustryPageProps) => {
         ) : null}
 
         {/* Before/After Showcase */}
-        <section id="case-studies" className="py-20">
-          <div className="container mx-auto px-4">
-            <div className="max-w-6xl mx-auto">
-              <h2 className="text-3xl font-bold text-center mb-12">Before & After</h2>
-              <div className="grid lg:grid-cols-2 gap-8">
-                {data.beforeAfter.map((comparison, index) => (
-                  <BeforeAfterSlider
-                    key={index}
-                    beforeImage={comparison.beforeImage}
-                    afterImage={comparison.afterImage}
-                    caption={comparison.caption}
-                    className="w-full"
-                  />
-                ))}
+        {data.beforeAfter?.length ? (
+          <section id="case-studies" className="py-12 md:py-16">
+            <div className="container mx-auto px-4">
+              <div className="max-w-6xl mx-auto">
+                <h2 className="text-3xl font-bold text-center mb-8">Before & After</h2>
+                <div className="grid lg:grid-cols-2 gap-4 md:gap-6">
+                  {data.beforeAfter.map((comparison, index) => (
+                    <BeforeAfterSlider
+                      key={index}
+                      beforeImage={comparison.beforeImage}
+                      afterImage={comparison.afterImage}
+                      caption={comparison.caption}
+                      className="w-full"
+                    />
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
+        ) : null}
 
         {/* Us vs Competitors */}
         {data.industry === 'Local Businesses' && (
@@ -261,44 +340,46 @@ export const IndustryPage = ({ data }: IndustryPageProps) => {
         )}
 
         {/* Case Studies */}
-        <section className="py-20 bg-muted/30">
-          <div className="container mx-auto px-4">
-            <div className="max-w-6xl mx-auto">
-              <h2 className="text-3xl font-bold text-center mb-12">Case Studies</h2>
-              <div className="grid lg:grid-cols-2 gap-8">
-                {data.caseStudies.map((study, index) => (
-                  <Card key={index} className="overflow-hidden">
-                    <CardHeader>
-                      <CardTitle className="text-xl">{study.title}</CardTitle>
-                      <p className="text-primary font-medium">{study.client}</p>
-                    </CardHeader>
-                    <CardContent className="space-y-4">
-                      <div>
-                        <h4 className="font-semibold text-sm text-muted-foreground mb-2">Challenge</h4>
-                        <p className="text-sm">{study.challenge}</p>
-                      </div>
-                      <div>
-                        <h4 className="font-semibold text-sm text-muted-foreground mb-2">Solution</h4>
-                        <p className="text-sm">{study.solution}</p>
-                      </div>
-                      <div>
-                        <h4 className="font-semibold text-sm text-muted-foreground mb-2">Outcome</h4>
-                        <p className="text-sm font-medium text-primary">{study.outcome}</p>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
+        {data.caseStudies?.length ? (
+          <section className="py-12 md:py-16 bg-muted/30">
+            <div className="container mx-auto px-4">
+              <div className="max-w-6xl mx-auto">
+                <h2 className="text-3xl font-bold text-center mb-8">Case Studies</h2>
+                <div className="grid lg:grid-cols-2 gap-4 md:gap-6">
+                  {data.caseStudies.map((study, index) => (
+                    <Card key={index} className="overflow-hidden">
+                      <CardHeader>
+                        <CardTitle className="text-xl">{study.title}</CardTitle>
+                        <p className="text-primary font-medium">{study.client}</p>
+                      </CardHeader>
+                      <CardContent className="space-y-4">
+                        <div>
+                          <h4 className="font-semibold text-sm text-muted-foreground mb-2">Challenge</h4>
+                          <p className="text-sm">{study.challenge}</p>
+                        </div>
+                        <div>
+                          <h4 className="font-semibold text-sm text-muted-foreground mb-2">Solution</h4>
+                          <p className="text-sm">{study.solution}</p>
+                        </div>
+                        <div>
+                          <h4 className="font-semibold text-sm text-muted-foreground mb-2">Outcome</h4>
+                          <p className="text-sm font-medium text-primary">{study.outcome}</p>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
+        ) : null}
 
         {/* Enhanced Testimonial */}
-        <section className="py-20">
+        <section className="py-12 md:py-16">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
-                  <Card className="text-center shadow-accent border-0 bg-gradient-subtle">
-                <CardContent className="p-12">
+              <Card className="text-center shadow-accent border-0 bg-gradient-subtle">
+                <CardContent className="p-8">
                   <div className="flex justify-center mb-6">
                     {[...Array(5)].map((_, i) => (
                       <Star key={i} className="h-6 w-6 text-yellow-400 fill-current" />
@@ -318,7 +399,7 @@ export const IndustryPage = ({ data }: IndustryPageProps) => {
         </section>
 
         {/* Founder CTA Section */}
-        <section className="py-20 bg-muted/30">
+        <section className="py-12 md:py-16 bg-muted/30">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
               <FounderCTA 
@@ -330,10 +411,10 @@ export const IndustryPage = ({ data }: IndustryPageProps) => {
         </section>
 
         {/* FAQs */}
-        <section className="py-20 bg-muted/30">
+        <section className="py-12 md:py-16 bg-muted/30">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
-              <h2 className="text-3xl font-bold text-center mb-12">Frequently Asked Questions</h2>
+              <h2 className="text-3xl font-bold text-center mb-8">Frequently Asked Questions</h2>
               <Accordion type="single" collapsible className="space-y-4">
                 {data.faqs.map((faq, index) => (
                   <AccordionItem key={index} value={`item-${index}`} className="bg-background rounded-lg px-6">
@@ -347,13 +428,13 @@ export const IndustryPage = ({ data }: IndustryPageProps) => {
         </section>
 
         {/* End CTA */}
-        <section className="py-20 bg-primary text-primary-foreground">
+        <section className="py-12 md:py-16 bg-primary text-primary-foreground">
           <div className="container mx-auto px-4 text-center">
             <div className="max-w-4xl mx-auto">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">
                 {data.endCta.heading}
               </h2>
-              <p className="text-xl mb-8 opacity-90">
+              <p className="text-xl mb-6 opacity-90">
                 {data.endCta.subheading}
               </p>
               <Button asChild size="lg" variant="secondary" className="bg-background text-foreground hover:bg-background/90">
@@ -365,6 +446,18 @@ export const IndustryPage = ({ data }: IndustryPageProps) => {
             </div>
           </div>
         </section>
+
+        {/* Sticky mobile CTA for /serve/* pages */}
+        {isServe && (
+          <div className="fixed bottom-4 left-4 right-4 sm:hidden z-40">
+            <Button asChild size="lg" className="w-full shadow-large">
+              <Link to="/contact" className="inline-flex items-center justify-center gap-2">
+                Start Your Project
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </Button>
+          </div>
+        )}
       </Layout>
     </>
   );
