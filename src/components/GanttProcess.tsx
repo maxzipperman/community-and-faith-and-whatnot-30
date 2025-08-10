@@ -78,7 +78,7 @@ export const GanttProcess: React.FC<GanttProcessProps> = ({ steps }) => {
       <ChartContainer config={config} className="w-full">
         <BarChart data={data} barCategoryGap={0} stackOffset="expand">
           <CartesianGrid strokeDasharray="3 3" vertical={false} />
-          <XAxis type="number" hide domain={[0, 'dataMax']} />
+          <XAxis type="number" hide domain={[0, 1]} />
           <YAxis type="category" dataKey="name" hide />
           {keys.map((k, i) => (
             <Bar
