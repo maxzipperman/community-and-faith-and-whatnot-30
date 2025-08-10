@@ -6,8 +6,37 @@ import { CheckCircle, ShieldCheck, CreditCard, Settings } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
+import { useEffect, useState } from 'react';
 const Payments = () => {
+  const [hasSession, setHasSession] = useState(false);
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data }) => setHasSession(!!data.session));
+    const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => setHasSession(!!session));
+    return () => {
+      authListener.subscription?.unsubscribe();
+    };
+  }, []);
+
+  const handleStartAudit = async () => {
+    try {
+      const { data, error } = await supabase.functions.invoke('create-payment');
+      if (error) throw error;
+      if (data?.url) {
+        window.open(data.url, '_blank');
+      } else {
+        toast.error('Could not start Stripe Checkout.');
+      }
+    } catch (err) {
+      console.error('[Payments] create-payment error:', err);
+      toast.error('Failed to start checkout. Please try again.');
+    }
+  };
   const handleManageBilling = async () => {
+    if (!hasSession) {
+      toast.info('Please sign in to access the billing portal.');
+      return;
+    }
     try {
       const { data, error } = await supabase.functions.invoke('customer-portal');
       if (error) throw error;
@@ -24,7 +53,7 @@ const Payments = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Payments & Billing | Position Digital</title>
+        <title>Payments & Billing | Mission Digital</title>
         <meta name="description" content="Pay the initial $499 audit and learn how billing works. Secure Stripe checkout and clear next steps." />
         <link rel="canonical" href="/payments" />
       </Helmet>
@@ -103,12 +132,8 @@ const Payments = () => {
                     <span className="text-muted-foreground">Audit price</span>
                     <span className="text-xl font-bold text-accent">$499</span>
                   </div>
-                  <Button asChild className="w-full gradient-accent text-accent-foreground">
-                    {/* When Stripe is connected, this can trigger a Checkout session */}
-                    <Link to="/contact" className="flex items-center gap-2">
-                      <CreditCard className="h-4 w-4" />
-                      <span>Pay & Request Audit</span>
-                    </Link>
+                  <Button onClick={handleStartAudit} className="w-full gradient-accent text-accent-foreground">
+                    <span className="flex items-center gap-2"><CreditCard className="h-4 w-4" /> Pay & Request Audit</span>
                   </Button>
                   <p className="text-xs text-muted-foreground">Prefer an invoice? <Link to="/contact" className="text-primary underline">Contact us</Link>.</p>
                 </CardContent>
@@ -120,10 +145,10 @@ const Payments = () => {
                   <CardDescription>Update payment methods, view invoices, or cancel</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <Button onClick={handleManageBilling} className="w-full" variant="outline">
+                  <Button onClick={handleManageBilling} className="w-full" variant="outline" disabled={!hasSession}>
                     Open Stripe Customer Portal
                   </Button>
-                  <p className="text-xs text-muted-foreground mt-2">You may need to be signed in to access your portal.</p>
+                  <p className="text-xs text-muted-foreground mt-2">{hasSession ? 'You are signed in. Click to manage billing.' : 'Sign in to access your portal.'}</p>
                 </CardContent>
               </Card>
             </aside>

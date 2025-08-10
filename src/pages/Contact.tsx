@@ -10,8 +10,11 @@ import { Badge } from '@/components/ui/badge';
 import { Mail, Phone, MapPin, Clock, CheckCircle } from 'lucide-react';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import CalendlyBooking from '@/components/booking/CalendlyBooking';
+import { useSearchParams } from 'react-router-dom';
 
 const Contact = () => {
+  const [searchParams] = useSearchParams();
+  const paymentStatus = searchParams.get('payment');
   const contactInfo = [{
     icon: <Mail className="h-5 w-5" />,
     title: "Email",
@@ -51,6 +54,18 @@ const Contact = () => {
       {/* Contact Section */}
       <section className="py-16 lg:py-24">
         <div className="container mx-auto px-4">
+          {paymentStatus === 'success' && (
+            <Alert className="mb-6">
+              <AlertTitle>Payment successful</AlertTitle>
+              <AlertDescription>Your consultation is confirmed. We’ve emailed your receipt.</AlertDescription>
+            </Alert>
+          )}
+          {paymentStatus === 'canceled' && (
+            <Alert variant="destructive" className="mb-6">
+              <AlertTitle>Payment canceled</AlertTitle>
+              <AlertDescription>You can try again anytime. Your booking isn’t confirmed yet.</AlertDescription>
+            </Alert>
+          )}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
             {/* Contact Form (Replaced with Calendly + Payment flow) */}
             <Card className="shadow-medium">
