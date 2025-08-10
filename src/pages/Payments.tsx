@@ -2,10 +2,25 @@ import Layout from '@/components/Layout';
 import { Helmet } from 'react-helmet-async';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { CheckCircle, ShieldCheck, CreditCard } from 'lucide-react';
+import { CheckCircle, ShieldCheck, CreditCard, Settings } from 'lucide-react';
 import { Link } from 'react-router-dom';
-
+import { supabase } from '@/integrations/supabase/client';
+import { toast } from 'sonner';
 const Payments = () => {
+  const handleManageBilling = async () => {
+    try {
+      const { data, error } = await supabase.functions.invoke('customer-portal');
+      if (error) throw error;
+      if (data?.url) {
+        window.open(data.url, '_blank');
+      } else {
+        toast.error('Could not open Stripe Customer Portal.');
+      }
+    } catch (err) {
+      console.error('[Payments] customer-portal error:', err);
+      toast.error('Failed to open billing portal. Please try again.');
+    }
+  };
   return (
     <Layout>
       <Helmet>
@@ -96,6 +111,19 @@ const Payments = () => {
                     </Link>
                   </Button>
                   <p className="text-xs text-muted-foreground">Prefer an invoice? <Link to="/contact" className="text-primary underline">Contact us</Link>.</p>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-xl flex items-center gap-2"><Settings className="h-4 w-4" /> Manage Billing</CardTitle>
+                  <CardDescription>Update payment methods, view invoices, or cancel</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <Button onClick={handleManageBilling} className="w-full" variant="outline">
+                    Open Stripe Customer Portal
+                  </Button>
+                  <p className="text-xs text-muted-foreground mt-2">You may need to be signed in to access your portal.</p>
                 </CardContent>
               </Card>
             </aside>

@@ -170,6 +170,14 @@ const CalendlyBooking = ({ calendlyUrl, height = 780 }: CalendlyBookingProps) =>
       <div className="w-full p-8 text-center">
         <div className="text-red-600 mb-4">⚠️ Calendly Error</div>
         <p className="text-sm text-muted-foreground">{error}</p>
+        <a
+          href={calendlyUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-4 inline-flex items-center justify-center h-10 px-4 rounded-md border border-input bg-background hover:bg-accent hover:text-accent-foreground transition-colors"
+        >
+          Open Calendly in a new tab
+        </a>
         <p className="text-xs text-muted-foreground mt-2">
           Please contact support if this issue persists.
         </p>
@@ -182,6 +190,14 @@ const CalendlyBooking = ({ calendlyUrl, height = 780 }: CalendlyBookingProps) =>
       <div className="w-full p-8 text-center">
         <div className="text-muted-foreground mb-4">Loading Calendly...</div>
         <div className="animate-spin h-8 w-8 border-4 border-primary border-t-transparent rounded-full mx-auto"></div>
+        <a
+          href={calendlyUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-4 inline-flex items-center justify-center h-10 px-4 rounded-md border border-input bg-background hover:bg-accent hover:text-accent-foreground transition-colors"
+        >
+          Open in a new tab
+        </a>
       </div>
     );
   }

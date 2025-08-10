@@ -17,10 +17,12 @@ export default function AboutMe() {
           </figure>
           <Card className="shadow-soft">
             <CardContent className="p-6">
-              <h2 id="about-me-heading" className="mb-3">About Me</h2>
-              <p className="text-muted-foreground mb-6">About Max</p>
+              <h2 id="about-me-heading" className="mb-3">Hi, I’m Max</h2>
+              <p className="text-muted-foreground mb-6">
+                I help schools, nonprofits, and community groups communicate clearly so people can take action—donate, register, show up. Pragmatic, accessible, and fast.
+              </p>
               <Button asChild>
-                <Link to="/contact">Get in touch</Link>
+                <Link to="/contact">Book a strategy call</Link>
               </Button>
             </CardContent>
           </Card>

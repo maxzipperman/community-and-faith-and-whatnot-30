@@ -6,8 +6,8 @@ const About = () => {
   return (
     <Layout>
       <Helmet>
-        <title>About Mission Digital | Our Approach & Bio</title>
-        <meta name="description" content="Learn about Mission Digital's founder and our practical, results-focused approach to building accessible, community-first websites." />
+        <title>About Mission Digital | Helping Communities Communicate</title>
+        <meta name="description" content="We help schools, nonprofits, and local groups communicate clearly and act quickly with accessible, fast websites." />
         <link rel="canonical" href="/about" />
       </Helmet>
 
