@@ -20,12 +20,6 @@ import Donate from "./pages/Donate";
 import About from "./pages/About";
 import Resources from "./pages/Resources";
 import AIFeedback from "./pages/AIFeedback";
-import Faith from "./pages/Faith";
-import Schools from "./pages/Schools";
-import YouthSports from "./pages/YouthSports";
-import Community from "./pages/Community";
-import ArtsCulture from "./pages/ArtsCulture";
-import ParksRec from "./pages/ParksRec";
 import FaithReligious from "./pages/serve/FaithReligious";
 import K12PTAs from "./pages/serve/K12PTAs";
 import YouthSportsServe from "./pages/serve/YouthSports";
@@ -57,13 +51,6 @@ const App = () => (
             <Route path="/local-businesses" element={<LocalBusinesses />} />
             <Route path="/nonprofits" element={<Nonprofits />} />
             <Route path="/creatives" element={<Creatives />} />
-            {/* Community-Focused Industry Pages */}
-            <Route path="/faith" element={<Faith />} />
-            <Route path="/schools" element={<Schools />} />
-            <Route path="/youth-sports" element={<YouthSports />} />
-            <Route path="/community" element={<Community />} />
-            <Route path="/arts-culture" element={<ArtsCulture />} />
-            <Route path="/parks-rec" element={<ParksRec />} />
             
             {/* New Serve Routes */}
             <Route path="/serve/faith-religious" element={<FaithReligious />} />

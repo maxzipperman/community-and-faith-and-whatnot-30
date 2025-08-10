@@ -111,7 +111,7 @@ export const IndustryPage = ({ data }: IndustryPageProps) => {
           </section>
         ) : null}
 
-        {data.process?.length ? (
+        {!isServe && data.process?.length ? (
           <section className="py-8">
             <div className="container mx-auto px-4">
               <div className="max-w-5xl mx-auto">

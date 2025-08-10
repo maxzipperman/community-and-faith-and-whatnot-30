@@ -36,42 +36,51 @@ serve(async (req) => {
     let currentCount = 0
     
     if (clientIP !== whitelistedIP) {
-      // Check rate limit for non-whitelisted IPs
-      const today = new Date().toISOString().split('T')[0]
-      
-      const { data: usage, error } = await supabaseClient
-        .from('ai_feedback_usage')
-        .select('requests_count')
-        .eq('ip_address', clientIP)
-        .eq('date', today)
-        .single()
+      try {
+        // Check rate limit for non-whitelisted IPs
+        const today = new Date().toISOString().split('T')[0]
 
-      if (error && error.code !== 'PGRST116') {
-        throw error
+        const { data: usage, error } = await supabaseClient
+          .from('ai_feedback_usage')
+          .select('requests_count')
+          .eq('ip_address', clientIP)
+          .eq('date', today)
+          .single()
+
+        if (error && error.code !== 'PGRST116') {
+          // If table/column does not exist, bypass rate limiting gracefully
+          if (error.code === '42P01' || error.code === '42703') {
+            remainingRequests = 'unknown'
+          } else {
+            console.error('Rate limit check error:', error)
+            remainingRequests = 'unknown'
+          }
+        } else {
+          currentCount = usage?.requests_count || 0
+          if (currentCount >= 3) {
+            return new Response(
+              JSON.stringify({
+                success: false,
+                error: 'Daily limit of 3 AI feedback analyses reached. Contact us for unlimited access.',
+                isRateLimit: true
+              }),
+              { status: 429, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+            )
+          }
+
+          // Update usage count (ignore errors)
+          await supabaseClient
+            .from('ai_feedback_usage')
+            .upsert({ ip_address: clientIP, date: today, requests_count: currentCount + 1 })
+            .then(() => {})
+            .catch((e) => console.warn('Usage upsert failed (ignored):', e))
+
+          remainingRequests = 3 - (currentCount + 1)
+        }
+      } catch (e) {
+        console.warn('Bypassing rate limit due to error:', e)
+        remainingRequests = 'unknown'
       }
-
-      currentCount = usage?.requests_count || 0
-      if (currentCount >= 3) {
-        return new Response(
-          JSON.stringify({ 
-            success: false, 
-            error: 'Daily limit of 3 AI feedback analyses reached. Contact us for unlimited access.',
-            isRateLimit: true
-          }),
-          { status: 429, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
-        )
-      }
-
-      // Update usage count
-      await supabaseClient
-        .from('ai_feedback_usage')
-        .upsert({
-          ip_address: clientIP,
-          date: today,
-          requests_count: currentCount + 1
-        })
-
-      remainingRequests = 3 - (currentCount + 1)
     } else {
       remainingRequests = 'unlimited'
     }
