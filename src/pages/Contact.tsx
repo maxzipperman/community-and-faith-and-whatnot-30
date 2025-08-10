@@ -1,3 +1,4 @@
+
 import Layout from '@/components/Layout';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -9,6 +10,7 @@ import { Badge } from '@/components/ui/badge';
 import { Mail, Phone, MapPin, Clock, CheckCircle } from 'lucide-react';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import CalendlyBooking from '@/components/booking/CalendlyBooking';
+
 const Contact = () => {
   const contactInfo = [{
     icon: <Mail className="h-5 w-5" />,
@@ -96,7 +98,7 @@ const Contact = () => {
               {/* Quick Stats */}
               <Card className="shadow-soft gradient-accent text-accent-foreground">
                 <CardHeader>
-                  <CardTitle className="text-accent-foreground">Why Choose Position Digital?</CardTitle>
+                  <CardTitle className="text-accent-foreground">Why Choose Mission Digital?</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="grid grid-cols-2 gap-4">
