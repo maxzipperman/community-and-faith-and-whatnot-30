@@ -8,7 +8,7 @@ export const faithReligiousData: IndustryData = {
     headline: "Websites that grow your ministry & connect your congregation",
     subheadline: "From service times to online giving, we design sites that welcome visitors and keep members engaged.",
     primaryCtaText: "Get Started",
-    secondaryCtaText: "See Examples"
+    secondaryCtaText: "Find optimizations for your site"
   },
   opening: "We understand faith communities—your site must be warm, informative, and easy to navigate, while making it simple to participate, give, and share.",
   problemsOutcomes: [
@@ -68,7 +68,7 @@ export const k12PTAsData: IndustryData = {
     headline: "Modern school websites that inform & inspire",
     subheadline: "Give parents, students, and staff a hub for everything—from events to forms.",
     primaryCtaText: "Get Started",
-    secondaryCtaText: "See Examples"
+    secondaryCtaText: "Find optimizations for your site"
   },
   opening: "School sites should be clear, fast, and friendly. We build platforms that keep your community informed, reduce admin load, and showcase student life.",
   problemsOutcomes: [
@@ -128,7 +128,7 @@ export const youthSportsData: IndustryData = {
     headline: "Game-changing websites for youth sports programs",
     subheadline: "From schedules to sign-ups, make it easy for families to get in the game.",
     primaryCtaText: "Get Started",
-    secondaryCtaText: "See Examples"
+    secondaryCtaText: "Find optimizations for your site"
   },
   opening: "Sports programs thrive when registration is simple, schedules are clear, and communication is smooth. We build sites that make that happen.",
   problemsOutcomes: [
@@ -187,7 +187,7 @@ export const communityNonprofitsData: IndustryData = {
     headline: "Websites that amplify your mission & community programs",
     subheadline: "Attract participants, share your impact, and grow support.",
     primaryCtaText: "Get Started",
-    secondaryCtaText: "See Examples"
+    secondaryCtaText: "Find optimizations for your site"
   },
   opening: "Your site should make it easy to join programs, attend events, and get involved—while clearly showing the difference you make.",
   problemsOutcomes: [
@@ -245,7 +245,7 @@ export const artsCultureData: IndustryData = {
     headline: "Showcase your work. Grow your audience.",
     subheadline: "From galleries to event bookings, your website should be a stage.",
     primaryCtaText: "Get Started",
-    secondaryCtaText: "See Examples"
+    secondaryCtaText: "Find optimizations for your site"
   },
   opening: "We help arts organizations display their work beautifully, sell tickets, and attract supporters.",
   problemsOutcomes: [
@@ -302,7 +302,7 @@ export const parksRecData: IndustryData = {
     headline: "Websites that get your community outside & engaged",
     subheadline: "Share programs, manage registrations, and promote events with ease.",
     primaryCtaText: "Get Started",
-    secondaryCtaText: "See Examples"
+    secondaryCtaText: "Find optimizations for your site"
   },
   opening: "Parks & Rec sites should inspire participation and make sign-ups effortless. We bring clarity, great design, and easy tools to your programs.",
   problemsOutcomes: [

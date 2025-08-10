@@ -43,7 +43,7 @@ const Hero = () => {
               size="lg" 
               className="border-accent text-accent hover:bg-accent/5"
             >
-              <Link to="/portfolio">See Our Work</Link>
+              <Link to="/ai-feedback">Find optimizations for your site</Link>
             </Button>
           </div>
 

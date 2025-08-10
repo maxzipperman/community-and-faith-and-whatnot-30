@@ -17,6 +17,7 @@ import { iconResolver } from '@/utils/iconResolver';
 import { ComparisonTable } from './ComparisonTable';
 import ROICalculator from './ROICalculator';
 import { GanttProcess } from './GanttProcess';
+import { ProblemOutcomeTable } from './ProblemOutcomeTable';
 interface IndustryPageProps {
   data: IndustryData;
 }
@@ -87,25 +88,7 @@ export const IndustryPage = ({ data }: IndustryPageProps) => {
             <div className="container mx-auto px-4">
               <div className="max-w-5xl mx-auto">
                 <h2 className="text-2xl font-semibold text-center mb-6">From Problems to Outcomes</h2>
-                <div className="grid sm:grid-cols-2 gap-4 md:gap-6">
-                  {data.problemsOutcomes.map((po, i) => (
-                    <Card key={i} className="border-0 shadow-sm">
-                      <CardContent className="p-4 md:p-5">
-                        <div className="flex items-center justify-between gap-3">
-                          <div className="text-sm">
-                            <div className="text-muted-foreground">From</div>
-                            <div className="font-medium">{po.problem}</div>
-                          </div>
-                          <ArrowRight className="h-4 w-4 text-muted-foreground hidden sm:block" />
-                          <div className="text-sm text-right">
-                            <div className="text-muted-foreground">To</div>
-                            <div className="font-medium text-primary">{po.outcome}</div>
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
+                <ProblemOutcomeTable items={data.problemsOutcomes} />
               </div>
             </div>
           </section>
