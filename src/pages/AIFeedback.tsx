@@ -21,7 +21,7 @@ const AIFeedback = () => {
           <div className="text-center space-y-3">
             <div className="flex justify-center items-center gap-2">
               <Sparkles className="h-7 w-7 text-primary" />
-              <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent">
+              <h1 className="text-3xl md:text-4xl font-bold text-foreground">
                 AI Website Analysis
               </h1>
             </div>
