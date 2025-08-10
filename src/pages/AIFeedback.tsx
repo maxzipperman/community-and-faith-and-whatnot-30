@@ -20,10 +20,13 @@ const DEFAULT_GOALS = `
 - Suggest Tailwind utility-level fixes (classes, structure).
 `;
 
-const supabase = createClient(
-  import.meta.env.VITE_SUPABASE_URL,
-  import.meta.env.VITE_SUPABASE_ANON_KEY
-);
+// Check if Supabase is properly configured
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+
+const supabase = supabaseUrl && supabaseAnonKey 
+  ? createClient(supabaseUrl, supabaseAnonKey)
+  : null;
 
 const AIFeedback = () => {
   const { toast } = useToast();
@@ -46,6 +49,15 @@ const AIFeedback = () => {
   };
 
   const runAnalysis = async () => {
+    if (!supabase) {
+      toast({
+        title: "Supabase not configured",
+        description: "Please ensure Supabase is properly connected to use AI feedback.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsAnalyzing(true);
     setAnalysisText(undefined);
     setIssues(undefined);
