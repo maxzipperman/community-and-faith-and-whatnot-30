@@ -9,7 +9,7 @@ export default function AboutMe() {
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-[280px,1fr] gap-8 items-center">
           <figure className="mx-auto">
             <img
-              src="/lovable-uploads/3f71b958-37de-4a8b-9ace-97d2cde57f49.png"
+              src="/lovable-uploads/399a3fcc-cdb9-4f9b-91da-1d395fe61893.png"
               alt="Founder in Los Angeles with golden retriever Chuck"
               className="w-64 h-64 md:w-72 md:h-72 rounded-xl object-cover shadow-soft mx-auto"
               loading="lazy"
