@@ -1,7 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-
+import founderPhoto from "@/assets/founder-photo.jpg";
 export default function AboutMe() {
   return (
     <section className="py-16 lg:py-24" aria-labelledby="about-me-heading">
@@ -13,6 +13,10 @@ export default function AboutMe() {
               alt="Founder in Los Angeles with golden retriever Chuck"
               className="w-64 h-64 md:w-72 md:h-72 rounded-xl object-cover shadow-soft mx-auto"
               loading="lazy"
+              onError={(e) => {
+                const img = e.currentTarget as HTMLImageElement;
+                if (img.src !== founderPhoto) img.src = founderPhoto;
+              }}
             />
             <figcaption className="mt-3 text-center text-sm text-muted-foreground">
               I live in Los Angeles with my golden retriever, Chuck.
