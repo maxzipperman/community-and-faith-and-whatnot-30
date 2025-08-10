@@ -33,6 +33,7 @@ import LocalBusinessesServe from "./pages/serve/LocalBusinesses";
 import IndependentCreativesServe from "./pages/serve/IndependentCreatives";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
+import ScrollToTop from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();
 
@@ -43,6 +44,7 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
+          <ScrollToTop />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/home" element={<Navigate to="/" replace />} />
@@ -56,8 +58,10 @@ const App = () => (
             <Route path="/ai-feedback" element={<AIFeedback />} />
             <Route path="/faq" element={<FAQ />} />
             
-            <Route path="/privacy" element={<Privacy />} />
-            <Route path="/terms" element={<Terms />} />
+            <Route path="/legal/privacy" element={<Privacy />} />
+            <Route path="/legal/terms" element={<Terms />} />
+            <Route path="/privacy" element={<Navigate to="/legal/privacy" replace />} />
+            <Route path="/terms" element={<Navigate to="/legal/terms" replace />} />
             {/* Industry Pages */}
             <Route path="/professional-services" element={<ProfessionalServices />} />
             <Route path="/local-businesses" element={<LocalBusinesses />} />

@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 
 const Terms = () => {
-  const canonical = typeof window !== 'undefined' ? `${window.location.origin}/terms` : undefined;
+  const canonical = typeof window !== 'undefined' ? `${window.location.origin}/legal/terms` : undefined;
   return (
     <Layout>
       <Helmet>

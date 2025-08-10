@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 
 const Privacy = () => {
-  const canonical = typeof window !== 'undefined' ? `${window.location.origin}/privacy` : undefined;
+  const canonical = typeof window !== 'undefined' ? `${window.location.origin}/legal/privacy` : undefined;
   return (
     <Layout>
       <Helmet>
