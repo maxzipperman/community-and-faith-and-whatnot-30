@@ -1,14 +1,12 @@
 
 import { useEffect, useRef } from "react";
-import { createClient } from "@/integrations/supabase/client";
+import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
 type CalendlyBookingProps = {
   calendlyUrl: string;
   height?: number;
 };
-
-const supabase = createClient();
 
 const CalendlyBooking = ({ calendlyUrl, height = 780 }: CalendlyBookingProps) => {
   const widgetRef = useRef<HTMLDivElement | null>(null);
@@ -35,7 +33,11 @@ const CalendlyBooking = ({ calendlyUrl, height = 780 }: CalendlyBookingProps) =>
 
   useEffect(() => {
     const handleMessage = async (e: MessageEvent) => {
-      const isCalendly = typeof e.data === "object" && e.data && (e.data as any).event && String(e.origin).includes("calendly.com");
+      const isCalendly =
+        typeof e.data === "object" &&
+        e.data &&
+        (e.data as any).event &&
+        String(e.origin).includes("calendly.com");
       if (!isCalendly) return;
 
       const data = e.data as { event?: string };
