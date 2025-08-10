@@ -1,4 +1,3 @@
-
 import Layout from '@/components/Layout';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -10,47 +9,26 @@ import { Badge } from '@/components/ui/badge';
 import { Mail, Phone, MapPin, Clock, CheckCircle } from 'lucide-react';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import CalendlyBooking from '@/components/booking/CalendlyBooking';
-
 const Contact = () => {
-  const contactInfo = [
-    {
-      icon: <Mail className="h-5 w-5" />,
-      title: "Email",
-      content: "hello@positiondigital.com",
-      description: "We respond within 24 hours"
-    },
-    {
-      icon: <Phone className="h-5 w-5" />,
-      title: "Phone", 
-      content: "(555) 123-4567",
-      description: "Mon-Fri, 9am-6pm EST"
-    },
-    {
-      icon: <Clock className="h-5 w-5" />,
-      title: "Response Time",
-      content: "24 hours",
-      description: "Free audit within 2 business days"
-    }
-  ];
-
-  const services = [
-    "Website Design & Development",
-    "Brand Messaging Strategy", 
-    "Website Optimization & Refresh",
-    "Free Website Audit",
-    "Other"
-  ];
-
-  const industries = [
-    "Professional Services (Law, Accounting, Consulting)",
-    "Local Business (Restaurant, Home Services, Retail)",
-    "Nonprofit & Religious Organizations", 
-    "Independent Creatives (Photography, Art, Coaching)",
-    "Other"
-  ];
-
-  return (
-    <Layout>
+  const contactInfo = [{
+    icon: <Mail className="h-5 w-5" />,
+    title: "Email",
+    content: "hello@positiondigital.com",
+    description: "We respond within 24 hours"
+  }, {
+    icon: <Phone className="h-5 w-5" />,
+    title: "Phone",
+    content: "(555) 123-4567",
+    description: "Mon-Fri, 9am-6pm EST"
+  }, {
+    icon: <Clock className="h-5 w-5" />,
+    title: "Response Time",
+    content: "24 hours",
+    description: "Free audit within 2 business days"
+  }];
+  const services = ["Website Design & Development", "Brand Messaging Strategy", "Website Optimization & Refresh", "Free Website Audit", "Other"];
+  const industries = ["Professional Services (Law, Accounting, Consulting)", "Local Business (Restaurant, Home Services, Retail)", "Nonprofit & Religious Organizations", "Independent Creatives (Photography, Art, Coaching)", "Other"];
+  return <Layout>
       {/* Hero Section */}
       <section className="pt-24 pb-16 gradient-subtle">
         <div className="container mx-auto px-4">
@@ -97,28 +75,7 @@ const Contact = () => {
             {/* Contact Info & What to Expect */}
             <div className="space-y-8">
               {/* Contact Information */}
-              <Card className="shadow-soft">
-                <CardHeader>
-                  <CardTitle>Get in Touch</CardTitle>
-                  <CardDescription>
-                    Ready to discuss your project? We're here to help.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-6">
-                  {contactInfo.map((info, index) => (
-                    <div key={index} className="flex items-start space-x-4">
-                      <div className="w-10 h-10 bg-accent/10 rounded-lg flex items-center justify-center text-accent">
-                        {info.icon}
-                      </div>
-                      <div>
-                        <h4 className="font-semibold">{info.title}</h4>
-                        <p className="text-accent font-medium">{info.content}</p>
-                        <p className="text-sm text-muted-foreground">{info.description}</p>
-                      </div>
-                    </div>
-                  ))}
-                </CardContent>
-              </Card>
+              
 
               {/* What to Expect */}
               <Card className="shadow-soft">
@@ -129,18 +86,10 @@ const Contact = () => {
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  {[
-                    "We'll review your current website (if you have one)",
-                    "Analyze your industry and competitors", 
-                    "Provide specific recommendations for improvement",
-                    "Discuss your goals and create a custom proposal",
-                    "No obligation — just valuable insights for your business"
-                  ].map((step, index) => (
-                    <div key={index} className="flex items-start space-x-3">
+                  {["We'll review your current website (if you have one)", "Analyze your industry and competitors", "Provide specific recommendations for improvement", "Discuss your goals and create a custom proposal", "No obligation — just valuable insights for your business"].map((step, index) => <div key={index} className="flex items-start space-x-3">
                       <CheckCircle className="h-5 w-5 text-success mt-0.5 flex-shrink-0" />
                       <span className="text-sm text-muted-foreground">{step}</span>
-                    </div>
-                  ))}
+                    </div>)}
                 </CardContent>
               </Card>
 
@@ -174,8 +123,6 @@ const Contact = () => {
           </div>
         </div>
       </section>
-    </Layout>
-  );
+    </Layout>;
 };
-
 export default Contact;
