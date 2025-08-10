@@ -1,5 +1,6 @@
 import Layout from '@/components/Layout';
 import { Helmet } from 'react-helmet-async';
+import { Link } from 'react-router-dom';
 
 const Terms = () => {
   const canonical = typeof window !== 'undefined' ? `${window.location.origin}/terms` : undefined;
@@ -80,7 +81,7 @@ const Terms = () => {
 
           <section>
             <h2>Contact</h2>
-            <p>Questions about these terms? Contact us via the <a href="/contact">Contact</a> page.</p>
+            <p>Questions about these terms? Contact us via the <Link to="/contact">Contact</Link> page.</p>
           </section>
 
           <p className="text-sm text-muted-foreground mt-8">Last updated: {new Date().toLocaleDateString()}</p>

@@ -66,6 +66,8 @@ export const BeforeAfterSlider = ({
           alt="After transformation"
           className="absolute inset-0 w-full h-full object-cover"
           draggable={false}
+          loading="lazy"
+          decoding="async"
         />
         
         {/* Before Image (Clipped) */}
@@ -78,6 +80,8 @@ export const BeforeAfterSlider = ({
             alt="Before transformation"
             className="w-full h-full object-cover"
             draggable={false}
+            loading="lazy"
+            decoding="async"
           />
         </div>
 

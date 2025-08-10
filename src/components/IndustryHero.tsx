@@ -37,6 +37,8 @@ export const IndustryHero = ({
             src={backgroundImage} 
             alt="Hero background"
             className="w-full h-full object-cover"
+            loading="lazy"
+            decoding="async"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-background/80 to-background/60" />
         </div>

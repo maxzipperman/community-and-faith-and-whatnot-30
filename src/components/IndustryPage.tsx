@@ -25,8 +25,9 @@ interface IndustryPageProps {
 export const IndustryPage = ({ data }: IndustryPageProps) => {
   const location = useLocation();
   const isServe = location.pathname.startsWith('/serve/');
-  // Convert proof points to animated stats format
-  const statsData = data.proof.map((point, index) => {
+  // Convert proof points to animated stats format (guard for missing proof)
+  const proofPoints = Array.isArray(data.proof) ? data.proof : [];
+  const statsData = proofPoints.map((point, index) => {
     const match = point.match(/(\d+%|\d+×|\d+s)/);
     const value = match ? match[1] : `${index + 1}x`;
     return {
