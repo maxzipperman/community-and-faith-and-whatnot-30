@@ -7,6 +7,7 @@ import { ArrowRight, CheckCircle, Search, CalendarDays, Users, HandCoins } from 
 import ROICalculator from '@/components/ROICalculator';
 import { Helmet } from 'react-helmet-async';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 const Services = () => {
   const packages = [
     {
@@ -172,25 +173,37 @@ const Services = () => {
 
           <div className="max-w-4xl mx-auto mb-12">
             <h3 className="text-xl font-semibold mb-3 text-center">Popular Add-ons</h3>
-            <div className="grid sm:grid-cols-2 gap-3">
-              {[
-                { name: 'Events Calendar module', price: '$300' },
-                { name: 'Sermons/News archive', price: '$400' },
-                { name: 'Online Giving setup (Stripe/Donorbox)', price: '$250' },
-                { name: 'Volunteer/Registration forms', price: '$200' },
-                { name: 'Newsletter integration', price: '$150' },
-                { name: 'Content migration beyond package', price: '$20/page' },
-                { name: 'Accessibility remediation pass (AA)', price: '$400' },
-                { name: 'Care Plan updates', price: '$79/mo or $690/yr' },
-              ].map((a, i) => (
-                <Card key={i} className="border-dashed">
-                  <CardContent className="p-4 flex items-center justify-between">
-                    <span className="text-sm">{a.name}</span>
-                    <span className="text-sm font-medium text-primary">{a.price}</span>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+            <TooltipProvider>
+              <div className="grid sm:grid-cols-2 gap-3">
+                {[
+                  { name: 'Events Calendar module', price: '$300', desc: 'Show upcoming events with categories, recurring options, and RSVP/registration links. Includes calendar and list views.' },
+                  { name: 'Sermons/News archive', price: '$400', desc: 'Filterable archive with tags and search. Supports audio, video, transcripts, and featured items.' },
+                  { name: 'Online Giving setup (Stripe/Donorbox)', price: '$250', desc: 'Set up secure giving with preset amounts, recurring donations, receipts, and thank-you flow best practices.' },
+                  { name: 'Volunteer/Registration forms', price: '$200', desc: 'Accessible, spam-protected forms with conditional fields and email notifications to your team.' },
+                  { name: 'Newsletter integration', price: '$150', desc: 'Connect Mailchimp, ConvertKit, or similar with single/double opt-in and success/error messaging.' },
+                  { name: 'Content migration beyond package', price: '$20/page', desc: 'We migrate additional pages from your current site with formatting cleanup and link checks.' },
+                  { name: 'Accessibility remediation pass (AA)', price: '$400', desc: 'Fixes for color contrast, alt text, headings, keyboard traps, labels, and ARIA to meet WCAG 2.1 AA.' },
+                  { name: 'Care Plan updates', price: '$79/mo or $690/yr', desc: 'Ongoing updates, monitoring, backups, uptime alerts, and a bucket of minor edits each month.' },
+                ].map((a, i) => (
+                  <Tooltip key={i}>
+                    <TooltipTrigger asChild>
+                      <Card className="border-dashed hover-scale">
+                        <CardContent className="p-4 flex items-center justify-between">
+                          <span className="text-sm">{a.name}</span>
+                          <span className="text-sm font-medium text-primary">{a.price}</span>
+                        </CardContent>
+                      </Card>
+                    </TooltipTrigger>
+                    <TooltipContent className="max-w-xs text-sm leading-relaxed" side="top" align="center">
+                      <div>
+                        <div className="font-medium mb-1">{a.name}</div>
+                        <p className="text-muted-foreground">{a.desc}</p>
+                      </div>
+                    </TooltipContent>
+                  </Tooltip>
+                ))}
+              </div>
+            </TooltipProvider>
           </div>
 
           {/* Media & File Storage: Bring Your Own */}
