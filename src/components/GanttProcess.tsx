@@ -71,7 +71,10 @@ export const GanttProcess: React.FC<GanttProcessProps> = ({ steps }) => {
   const indexByKey = Object.fromEntries(keys.map((k, i) => [k, i] as const));
 
   return (
-    <div className="w-full">
+    <figure className="w-full" aria-label="Project timeline as stacked Gantt bar">
+      <figcaption className="sr-only">
+        Project timeline showing steps: {steps.map((s) => `${s.step} (${s.duration || 'n/a'})`).join(', ')}
+      </figcaption>
       <ChartContainer config={config} className="w-full">
         <BarChart data={data} barCategoryGap={0} stackOffset="expand">
           <CartesianGrid strokeDasharray="3 3" vertical={false} />
@@ -100,10 +103,10 @@ export const GanttProcess: React.FC<GanttProcessProps> = ({ steps }) => {
                   const human = step.duration || `${days} days`;
                   return (
                     <div className="flex flex-col">
-                      <span className="font-medium text-foreground">{step.step}</span>
-                      <span className="text-xs text-muted-foreground">{human}</span>
+                      <span className="font-medium text-foreground leading-tight">{step.step}</span>
+                      <span className="text-xs text-muted-foreground leading-tight">{human}</span>
                       {step.details ? (
-                        <span className="text-xs text-muted-foreground mt-1">{step.details}</span>
+                        <span className="text-xs text-muted-foreground mt-1 leading-snug">{step.details}</span>
                       ) : null}
                     </div>
                   );
@@ -113,7 +116,19 @@ export const GanttProcess: React.FC<GanttProcessProps> = ({ steps }) => {
           />
         </BarChart>
       </ChartContainer>
-    </div>
+      <div className="mt-3 flex flex-wrap gap-3" role="list" aria-label="Timeline legend">
+        {keys.map((k, i) => (
+          <div key={k} className="flex items-center gap-2" role="listitem">
+            <span
+              aria-hidden
+              className="inline-block h-3 w-3 rounded"
+              style={{ background: `var(--color-${k})` }}
+            />
+            <span className="text-xs text-muted-foreground">{steps[i].step} ({steps[i].duration || `${parseDurationToDays(steps[i].duration)}d`})</span>
+          </div>
+        ))}
+      </div>
+    </figure>
   );
 };
 

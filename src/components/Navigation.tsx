@@ -67,6 +67,9 @@ const Navigation = () => {
             </Link>
             <Link to="/resources" className={`transition-smooth hover:text-accent ${isActive('/resources') ? 'text-accent font-medium' : 'text-foreground'}`}>Helpful Resources
           </Link>
+            <Link to="/ai-feedback" className={`transition-smooth hover:text-accent ${isActive('/ai-feedback') ? 'text-accent font-medium' : 'text-foreground'}`}>
+              AI Feedback
+            </Link>
           </div>
 
           {/* CTA Button */}
@@ -105,6 +108,9 @@ const Navigation = () => {
               </Link>
               <Link to="/resources" className="block px-3 py-2 text-foreground hover:text-accent transition-smooth" onClick={() => setIsOpen(false)}>
                 Helpful Resources
+              </Link>
+              <Link to="/ai-feedback" className="block px-3 py-2 text-foreground hover:text-accent transition-smooth" onClick={() => setIsOpen(false)}>
+                AI Feedback
               </Link>
               <div className="pt-2 space-y-2">
                 <Button asChild variant="outline" className="w-full" aria-label="Get Started">
