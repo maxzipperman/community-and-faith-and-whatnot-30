@@ -37,6 +37,8 @@ export const CATEGORIES = [
   "Arts & Culture",
   "Parks & Recreation",
   "Camps",
+  "Local Businesses",
+  "Independent Creatives",
 ];
 
 export const TAGS = [
@@ -297,6 +299,89 @@ export const resources: Resource[] = [
         "Incident reporting and parent notifications",
         "Photo permissions and privacy standards",
         "ADA accommodations process documented",
+      ],
+    },
+  },
+  // Local Businesses (selected A & D)
+  {
+    id: "local-seo-quick-wins",
+    title: "Local SEO Quick Wins (7‑step)",
+    excerpt: "Fast actions that improve local visibility and calls this week.",
+    category: "Local Businesses",
+    tags: ["SEO", "Marketing"],
+    type: "checklist",
+    payload: {
+      items: [
+        "Add city + service keywords to your homepage H1",
+        "Ensure NAP (name, address, phone) matches across the web",
+        "Embed Google Map with proper schema on Contact page",
+        "Create a Services page with 3–5 offerings",
+        "Compress images and set descriptive alt text",
+        "Add tap‑to‑call and tap‑for‑directions buttons",
+        "Collect 3 new Google reviews this week",
+      ],
+    },
+  },
+  {
+    id: "google-business-profile-optimization",
+    title: "Google Business Profile Optimization (12‑step)",
+    excerpt: "Optimize GBP for more calls, direction taps, and bookings.",
+    category: "Local Businesses",
+    tags: ["SEO", "Marketing"],
+    type: "checklist",
+    payload: {
+      items: [
+        "Choose correct primary and secondary categories",
+        "Add services and descriptions with target keywords",
+        "Upload 10 high‑quality photos (exterior, interior, team)",
+        "Set hours incl. holiday hours; enable messaging",
+        "Add booking or order links where relevant",
+        "Answer Q&A with helpful information",
+        "Post weekly updates or promotions",
+        "Ensure website URL uses HTTPS and loads fast",
+        "Request and respond to reviews",
+        "Enable product/menu items with photos",
+        "Set service area (if applicable)",
+        "Verify business info and attributes",
+      ],
+    },
+  },
+  // Independent Creatives
+  {
+    id: "portfolio-landing-essentials",
+    title: "Portfolio Landing Page Essentials",
+    excerpt: "What to include to convert visitors into inquiries.",
+    category: "Independent Creatives",
+    tags: ["Content", "Marketing", "SEO"],
+    type: "checklist",
+    payload: {
+      items: [
+        "Clear headline: niche + result (e.g., \"Brand photographer for DTC\")",
+        "Curated hero gallery with alt text and fast loading",
+        "Social proof: 3 client logos or testimonial quotes",
+        "Services overview with typical price range",
+        "Simple contact form with project type selector",
+        "About section with portrait and location",
+        "FAQ: timeline, deliverables, rights, revisions",
+      ],
+    },
+  },
+  {
+    id: "creative-client-onboarding-checklist",
+    title: "Client Onboarding Checklist (Creative)",
+    excerpt: "Steps and assets to start projects smoothly and professionally.",
+    category: "Independent Creatives",
+    tags: ["Onboarding", "Compliance", "Content"],
+    type: "checklist",
+    payload: {
+      items: [
+        "Signed agreement and deposit received",
+        "Creative brief: goals, audience, deliverables",
+        "Brand assets: logo, colors, typography, examples",
+        "Content plan: pages/sections, copy sources",
+        "Timeline with key milestones and approvals",
+        "Single point of contact and feedback process",
+        "File delivery method and rights clarified",
       ],
     },
   },

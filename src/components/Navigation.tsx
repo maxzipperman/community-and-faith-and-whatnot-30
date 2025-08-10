@@ -30,6 +30,12 @@ const Navigation = () => {
   }, {
     name: 'Parks & Recreation',
     href: '/serve/parks-rec'
+  }, {
+    name: 'Local Businesses',
+    href: '/serve/local-businesses'
+  }, {
+    name: 'Independent Creatives',
+    href: '/serve/independent-creatives'
   }];
   const isActive = (path: string) => location.pathname === path;
   return <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">

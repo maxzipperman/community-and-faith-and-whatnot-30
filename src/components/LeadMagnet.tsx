@@ -15,12 +15,29 @@ interface LeadMagnetProps {
 
 const LeadMagnet = ({ industry, title, description, benefits, fileName }: LeadMagnetProps) => {
   const [email, setEmail] = useState('');
+  const [site, setSite] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Here you would integrate with your email service
     setIsSubmitted(true);
+    // Operator notification (hidden from users)
+    try {
+      const { supabase } = await import('@/integrations/supabase/client');
+      await supabase.functions.invoke('operator-notify', {
+        body: {
+          event: 'download',
+          email,
+          site,
+          industry,
+          resourceTitle: title,
+          notes: `Lead magnet: ${fileName}`,
+        },
+      });
+    } catch (err) {
+      // swallow errors silently
+      console.warn('operator-notify failed', err);
+    }
   };
 
   const industryConfig = {
@@ -99,6 +116,15 @@ const LeadMagnet = ({ industry, title, description, benefits, fileName }: LeadMa
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
+              className="w-full"
+            />
+          </div>
+          <div>
+            <Input
+              type="text"
+              placeholder="Your website URL or business/site name (optional)"
+              value={site}
+              onChange={(e) => setSite(e.target.value)}
               className="w-full"
             />
           </div>

@@ -5,3 +5,7 @@ verify_jwt = false
 
 [functions.upload-signer]
 verify_jwt = false
+
+[functions.operator-notify]
+verify_jwt = false
+

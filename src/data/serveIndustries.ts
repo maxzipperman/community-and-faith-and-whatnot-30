@@ -1,4 +1,5 @@
 import { IndustryData } from '@/types/industry';
+export { localBusinessesServeData, independentCreativesServeData } from './serveIndustries.extra';
 
 export const faithReligiousData: IndustryData = {
   industry: "Faith & Religious",

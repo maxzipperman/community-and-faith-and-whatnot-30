@@ -19,7 +19,7 @@ export default function Checklist({ storageKey, title, items }: ChecklistProps) 
   return (
     <div className="space-y-4">
       {title && <h3 className="text-lg font-semibold">{title}</h3>}
-      <div className="text-sm text-muted-foreground">Progress: {completed}/{items.length} ({progress}%)</div>
+      <div className="text-sm text-muted-foreground" aria-live="polite">Progress: {completed}/{items.length} ({progress}%)</div>
       <ul className="space-y-3">
         {items.map((item, idx) => (
           <li key={`${id}-${idx}`} className="flex items-start gap-3">

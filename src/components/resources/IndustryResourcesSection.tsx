@@ -24,7 +24,7 @@ export default function IndustryResourcesSection({
             Helpful Resources for {label || category}
           </h2>
           <p className="text-muted-foreground mt-2">
-            Curated guides and tools to help you move faster this month.
+            Curated guides and tools to help you move faster this month. All items are practical and immediately actionable.
           </p>
         </header>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

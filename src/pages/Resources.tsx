@@ -48,7 +48,7 @@ export default function Resources() {
     <Layout>
       <Helmet>
         <title>Helpful Resources | Position Digital</title>
-        <meta name="description" content="Interactive checklists, quizzes, and tools to help community orgs launch and grow online." />
+        <meta name="description" content="Interactive checklists, quizzes, and tools to help community orgs and local businesses launch and grow online." />
         <link rel="canonical" href="/resources" />
       </Helmet>
 

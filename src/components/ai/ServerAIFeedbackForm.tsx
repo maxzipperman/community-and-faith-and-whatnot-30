@@ -34,6 +34,7 @@ export default function ServerAIFeedbackForm() {
   const location = useLocation();
 
   const [websiteUrl, setWebsiteUrl] = useState("");
+  const [email, setEmail] = useState("");
   const [focusArea, setFocusArea] = useState("");
   const [industry, setIndustry] = useState<string>("Professional Services");
   const [loading, setLoading] = useState(false);
@@ -84,6 +85,15 @@ export default function ServerAIFeedbackForm() {
         });
       } else {
         setResult(data);
+        // Operator notification (hidden from users)
+        try {
+          const { supabase } = await import("@/integrations/supabase/client");
+          await supabase.functions.invoke("operator-notify", {
+            body: { event: "ai-analysis", email: email || undefined, site: websiteUrl, industry },
+          });
+        } catch (e) {
+          console.warn("operator-notify failed", e);
+        }
         toast({
           title: "Analysis complete",
           description: "Your AI analysis is ready.",
@@ -136,6 +146,16 @@ export default function ServerAIFeedbackForm() {
                 value={focusArea}
                 onChange={(e) => setFocusArea(e.target.value)}
                 rows={4}
+              />
+            </div>
+
+            <div>
+              <label className="text-sm font-medium block mb-1">Your Email (optional)</label>
+              <Input
+                type="email"
+                placeholder="you@business.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
 
