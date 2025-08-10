@@ -141,7 +141,7 @@ export const youthSportsData: IndustryData = {
     { step: "Discovery", duration: "1w" },
     { step: "Build", duration: "2–3w" },
     { step: "Testing", duration: "1w" },
-    { step: "Launch" },
+    { step: "Launch", duration: "1w" },
     { step: "Optimization", duration: "60d" }
   ],
   pricingRange: "$3,000–$7,500",
@@ -315,7 +315,7 @@ export const parksRecData: IndustryData = {
     { step: "Discovery", duration: "1w" },
     { step: "Build", duration: "2–3w" },
     { step: "Testing", duration: "1w" },
-    { step: "Launch" }
+    { step: "Launch", duration: "1w" }
   ],
   pricingRange: "$3,500–$8,000",
   whyMatters: [],

@@ -53,7 +53,9 @@ export const GanttProcess: React.FC<GanttProcessProps> = ({ steps }) => {
   // Build single-row stacked data object
   const dataPoint: Record<string, number | string> = { name: 'Timeline' };
   keys.forEach((k, i) => {
-    dataPoint[k] = values[i] || 1;
+    const value = values[i];
+    // Ensure we have valid numeric values for the chart
+    dataPoint[k] = isNaN(value) || value === undefined || value === null ? 1 : Math.max(0.1, value);
   });
   const data = [dataPoint];
 
