@@ -1,6 +1,7 @@
 import founderPhoto from '@/assets/founder-photo.jpg';
 
-export const FOUNDER_PHOTO_ALT = 'Founder headshot, Mission Digital';
+export const DEFAULT_FOUNDER_PHOTO = '/lovable-uploads/88cef1c1-afe2-4335-aff0-96264d92eea2.png';
+export const FOUNDER_PHOTO_ALT = 'Founder headshot with golden retriever at the beach — Mission Digital';
 
 export function getFounderPhotoUrl(): string {
   try {
@@ -11,5 +12,5 @@ export function getFounderPhotoUrl(): string {
   } catch (_) {
     // ignore access errors
   }
-  return founderPhoto;
+  return DEFAULT_FOUNDER_PHOTO || founderPhoto;
 }
