@@ -66,6 +66,9 @@ const Payments = () => {
               Start with a $499 expert audit paid up front. Then choose the package and add‑ons that fit your goals—pay from there.
             </p>
           </header>
+          <p className="text-[10px] text-muted-foreground text-center" aria-hidden>
+            Build marker: v-payments-1
+          </p>
 
           <div className="grid lg:grid-cols-3 gap-6">
             <div className="lg:col-span-2 space-y-6">
