@@ -1,10 +1,8 @@
 name: Scheduled Vercel Deploy
-
 on:
   schedule:
-    - cron: "0 */2 * * *"  # Runs every 2 hours
+    - cron: "0 * * * *"  # Runs every hour
   workflow_dispatch:
-
 jobs:
   trigger:
     runs-on: ubuntu-latest
