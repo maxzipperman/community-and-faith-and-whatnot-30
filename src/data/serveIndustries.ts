@@ -351,3 +351,88 @@ export const parksRecData: IndustryData = {
     keywords: ["parks and recreation websites", "program registration sites", "recreation center web design", "parks department websites"]
   }
 };
+
+export const campsData: IndustryData = {
+  industry: "Camps",
+  icon: "users",
+  slug: "/serve/camps",
+  hero: {
+    headline: "Camp websites that boost enrollment and build trust",
+    subheadline: "From online registration to safety info and photo galleries—make camp easy for families.",
+    primaryCtaText: "Get Started",
+    secondaryCtaText: "Find optimizations for your site"
+  },
+  opening: "Whether you run day camps, overnight camps, or specialty programs, your website should make registration simple, schedules clear, and safety information obvious—while showcasing the magic of camp.",
+  problemsOutcomes: [
+    { problem: "Paper forms & manual payments", outcome: "Online registration with secure payments" },
+    { problem: "Unclear session schedules", outcome: "Mobile-friendly calendars & reminders" },
+    { problem: "Safety policies scattered", outcome: "Centralized safety & policies hub" },
+    { problem: "Manual roster management", outcome: "Simple rosters with groups/cabins" },
+    { problem: "Low sign-up conversion", outcome: "Focused landing pages per session" },
+    { problem: "Hard to update mid-season", outcome: "Easy CMS for real-time updates" }
+  ],
+  process: [
+    { step: "Discovery", duration: "1w", details: "Goals, enrollment flows, and safety requirements" },
+    { step: "UX/Flows", duration: "1w", details: "Registration, payments, and check-in/out" },
+    { step: "Build", duration: "2–3w", details: "Pages, integrations, admin tools" },
+    { step: "Launch", duration: "1w", details: "Training and go-live" },
+    { step: "Optimization", duration: "90d", details: "A/B tests and improvements" }
+  ],
+  pricingRange: "$3,500–$8,500",
+  whyMatters: [
+    "Be ready for peak enrollment season",
+    "Build parent trust with clear safety info",
+    "Reduce admin workload with automation"
+  ],
+  proof: [
+    "45% more sign-ups first season after launch",
+    "Registration time cut from hours to minutes"
+  ],
+  servicesFocus: [
+    "Online registration & secure payments",
+    "Session/cabin management & waitlists",
+    "Medical & consent forms",
+    "Photo galleries with permissions",
+    "Camp map, directions, and packing lists",
+    "Safety policies hub",
+    "Email/SMS announcements",
+    "Check-in/out workflows"
+  ],
+  valueProps: [
+    "Mobile-first, parent-friendly design",
+    "Clear session pages that convert",
+    "Simple tools staff can update"
+  ],
+  subProfessions: [
+    { name: "Day Camps", icon: "sun" },
+    { name: "Overnight Camps", icon: "moon" },
+    { name: "STEM Camps", icon: "cpu" },
+    { name: "Arts Camps", icon: "palette" },
+    { name: "Sports Camps", icon: "trophy" },
+    { name: "After-School Programs", icon: "school" }
+  ],
+  caseStudies: [],
+  beforeAfter: [],
+  testimonial: {
+    quote: "Families told us registration was the easiest it’s ever been—and we filled sessions faster than last year.",
+    author: "Lena P.",
+    role: "Camp Director"
+  },
+  faqs: [
+    { q: "Can we accept deposits and payment plans?", a: "Yes, we integrate processors that support deposits, installments, and refunds." },
+    { q: "How do you handle medical and consent forms?", a: "We build secure forms with exportable PDFs and admin dashboards for quick review." },
+    { q: "Do you support check-in and check-out?", a: "We implement simple workflows and rosters to track pickups and authorized guardians." },
+    { q: "Can we manage rosters and cabin groups?", a: "Yes, we include roster tools with grouping and quick editing for staff." },
+    { q: "How are photo permissions managed?", a: "We can add permission flags and galleries that respect privacy settings." }
+  ],
+  endCta: {
+    heading: "Ready to fill your sessions and delight families?",
+    subheading: "Let’s launch a camp website that increases sign-ups and reduces admin work.",
+    primaryCtaText: "Start Your Project"
+  },
+  seo: {
+    title: "Camp Websites & Registration | Mission Digital",
+    description: "Camp website design with online registration, schedules, and safety hubs. Increase sign-ups and parent trust with a modern, mobile-first site.",
+    keywords: ["camp websites", "camp registration website", "day camp website", "overnight camp web design", "summer camp enrollment"]
+  }
+};

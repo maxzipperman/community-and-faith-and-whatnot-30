@@ -19,6 +19,9 @@ const Navigation = () => {
     name: 'Youth Sports',
     href: '/serve/youth-sports'
   }, {
+    name: 'Camps',
+    href: '/serve/camps'
+  }, {
     name: 'Community Centers & Nonprofits',
     href: '/serve/community-nonprofits'
   }, {

@@ -99,6 +99,7 @@ const Index = () => {
               { name: 'Faith & Religious', href: '/serve/faith-religious' },
               { name: 'K-12 Schools & PTAs', href: '/serve/k12-ptas' },
               { name: 'Youth Sports', href: '/serve/youth-sports' },
+              { name: 'Camps', href: '/serve/camps' },
               { name: 'Community Centers & Nonprofits', href: '/serve/community-nonprofits' },
               { name: 'Arts & Culture', href: '/serve/arts-culture' },
               { name: 'Parks & Recreation', href: '/serve/parks-rec' },

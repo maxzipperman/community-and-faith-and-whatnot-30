@@ -26,6 +26,7 @@ import YouthSportsServe from "./pages/serve/YouthSports";
 import CommunityNonprofits from "./pages/serve/CommunityNonprofits";
 import ArtsCultureServe from "./pages/serve/ArtsCulture";
 import ParksRecServe from "./pages/serve/ParksRec";
+import CampsServe from "./pages/serve/Camps";
 
 const queryClient = new QueryClient();
 
@@ -59,6 +60,7 @@ const App = () => (
             <Route path="/serve/community-nonprofits" element={<CommunityNonprofits />} />
             <Route path="/serve/arts-culture" element={<ArtsCultureServe />} />
             <Route path="/serve/parks-rec" element={<ParksRecServe />} />
+            <Route path="/serve/camps" element={<CampsServe />} />
             
             {/* Niche Landing Pages */}
             <Route path="/lawyers" element={<Lawyers />} />
@@ -72,6 +74,7 @@ const App = () => (
             <Route path="/community" element={<Navigate to="/serve/community-nonprofits" replace />} />
             <Route path="/arts-culture" element={<Navigate to="/serve/arts-culture" replace />} />
             <Route path="/parks-rec" element={<Navigate to="/serve/parks-rec" replace />} />
+            <Route path="/camps" element={<Navigate to="/serve/camps" replace />} />
             
             {/* Vanity URL Redirects */}
             <Route path="/law-firms" element={<Navigate to="/lawyers" replace />} />
