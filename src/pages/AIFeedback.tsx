@@ -3,12 +3,14 @@ import { Helmet } from 'react-helmet-async';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
+import { Badge } from '@/components/ui/badge';
 import { useState } from 'react';
-import ApiKeys from '@/components/ai/ApiKeys';
 import { CrawlForm } from '@/components/ai/CrawlForm';
 import AIReport from '@/components/ai/AIReport';
-import { FirecrawlService } from '@/utils/FirecrawlService';
-import { PerplexityService } from '@/utils/PerplexityService';
+import { DatabaseSetup } from '@/components/ai/DatabaseSetup';
+import { createClient } from '@supabase/supabase-js';
+import { useToast } from '@/hooks/use-toast';
+import { Sparkles, Zap, Shield } from 'lucide-react';
 
 const DEFAULT_GOALS = `
 - Improve conversion clarity and reduce friction.
@@ -18,12 +20,19 @@ const DEFAULT_GOALS = `
 - Suggest Tailwind utility-level fixes (classes, structure).
 `;
 
+const supabase = createClient(
+  import.meta.env.VITE_SUPABASE_URL,
+  import.meta.env.VITE_SUPABASE_ANON_KEY
+);
+
 const AIFeedback = () => {
+  const { toast } = useToast();
   const [goals, setGoals] = useState(DEFAULT_GOALS.trim());
   const [analysisText, setAnalysisText] = useState<string | undefined>();
   const [issues, setIssues] = useState<any[] | undefined>();
   const [pages, setPages] = useState<any[]>([]);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
+  const [remainingRequests, setRemainingRequests] = useState<number | string>('unknown');
 
   const handleCrawlComplete = (data: any) => {
     // Normalize pages from Firecrawl response
@@ -42,13 +51,6 @@ const AIFeedback = () => {
     setIssues(undefined);
 
     try {
-      const perplexityKey = PerplexityService.getApiKey();
-      if (!perplexityKey) {
-        alert('Perplexity API key missing. Add it above or use Offline mode to copy prompt+content.');
-        setIsAnalyzing(false);
-        return;
-      }
-
       // Build pages payload
       const pagePayload = pages.length > 0
         ? pages.map((p: any) => ({
@@ -59,18 +61,47 @@ const AIFeedback = () => {
         : [];
 
       if (pagePayload.length === 0) {
-        alert('Please crawl a site or provide at least one page.');
+        toast({
+          title: "No pages to analyze",
+          description: "Please crawl a website first to get content for analysis.",
+          variant: "destructive",
+        });
         setIsAnalyzing(false);
         return;
       }
 
-      const res = await PerplexityService.analyzeContent(pagePayload, goals);
-      if (res.success) {
-        setAnalysisText(res.text);
-        setIssues(res.issues);
+      const { data, error } = await supabase.functions.invoke('ai-feedback', {
+        body: { pages: pagePayload, goals }
+      });
+
+      if (error) throw error;
+
+      if (data.success) {
+        setAnalysisText(data.text);
+        setIssues(data.issues);
+        setRemainingRequests(data.remainingRequests);
+        toast({
+          title: "Analysis complete!",
+          description: "Your AI-powered feedback is ready.",
+        });
       } else {
-        alert(res.error || 'Analysis failed');
+        if (data.isRateLimit) {
+          toast({
+            title: "Daily limit reached",
+            description: data.error,
+            variant: "destructive",
+          });
+        } else {
+          throw new Error(data.error);
+        }
       }
+    } catch (error: any) {
+      console.error('Analysis error:', error);
+      toast({
+        title: "Analysis failed",
+        description: error.message || "Please try again later.",
+        variant: "destructive",
+      });
     } finally {
       setIsAnalyzing(false);
     }
@@ -95,42 +126,113 @@ const AIFeedback = () => {
 
       <section className="pt-24 pb-8">
         <div className="container mx-auto px-4 max-w-5xl space-y-6">
-          <div className="text-center space-y-3">
-            <h1>AI Feedback</h1>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Crawl your site and get a prioritized report from an LLM. Store API keys locally; for production, we can move to Supabase Edge Functions.
+          <div className="text-center space-y-4">
+            <div className="flex justify-center items-center gap-2 mb-2">
+              <Sparkles className="h-8 w-8 text-primary" />
+              <h1 className="text-4xl font-bold bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent">
+                AI-Powered Website Analysis
+              </h1>
+            </div>
+            <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+              Get instant professional UX, accessibility, and performance feedback powered by AI. 
+              No technical setup required - just enter your URL and get actionable insights.
             </p>
+            <div className="flex justify-center gap-4 flex-wrap">
+              <Badge variant="secondary" className="flex items-center gap-1">
+                <Zap className="h-3 w-3" />
+                Instant Analysis
+              </Badge>
+              <Badge variant="secondary" className="flex items-center gap-1">
+                <Shield className="h-3 w-3" />
+                No API Keys Required
+              </Badge>
+              <Badge variant="outline">
+                {typeof remainingRequests === 'number' 
+                  ? `${remainingRequests} requests remaining today`
+                  : remainingRequests === 'unlimited' 
+                    ? 'Unlimited access'
+                    : '3 free requests per day'
+                }
+              </Badge>
+            </div>
           </div>
 
-          <ApiKeys />
+          <DatabaseSetup />
 
-          <Card>
+          <Card className="border-primary/20 bg-gradient-to-br from-background to-primary/5">
             <CardHeader>
-              <CardTitle>Goals & Context</CardTitle>
-              <CardDescription>Tell the AI what to focus on.</CardDescription>
+              <CardTitle className="flex items-center gap-2">
+                <Sparkles className="h-5 w-5 text-primary" />
+                Analysis Goals & Context
+              </CardTitle>
+              <CardDescription>
+                Customize what our AI expert should focus on during the analysis.
+              </CardDescription>
             </CardHeader>
             <CardContent className="space-y-3">
-              <Textarea value={goals} onChange={(e) => setGoals(e.target.value)} rows={6} />
+              <Textarea 
+                value={goals} 
+                onChange={(e) => setGoals(e.target.value)} 
+                rows={6}
+                className="border-primary/20 focus:border-primary"
+              />
               <div className="flex gap-2">
-                <Button variant="secondary" onClick={() => setGoals(DEFAULT_GOALS.trim())}>Reset</Button>
-                <Button variant="outline" onClick={copyOfflineBundle}>Offline: Copy Prompt + Content</Button>
+                <Button variant="secondary" onClick={() => setGoals(DEFAULT_GOALS.trim())}>
+                  Reset to Defaults
+                </Button>
+                <Button variant="outline" onClick={copyOfflineBundle}>
+                  Export Analysis Data
+                </Button>
               </div>
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="border-primary/20">
             <CardHeader>
-              <CardTitle>Pages to Analyze</CardTitle>
-              <CardDescription>Use Firecrawl to gather pages.</CardDescription>
+              <CardTitle className="flex items-center gap-2">
+                <Zap className="h-5 w-5 text-primary" />
+                Website Analysis
+              </CardTitle>
+              <CardDescription>
+                Enter your website URL to crawl and analyze all pages automatically.
+              </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <CrawlForm onCrawlComplete={handleCrawlComplete} />
               {pages.length > 0 && (
-                <div className="text-sm text-muted-foreground">Selected pages: {pages.length}</div>
+                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <Badge variant="outline">{pages.length} pages ready</Badge>
+                  <span>Ready for AI analysis</span>
+                </div>
               )}
-              <Button onClick={runAnalysis} disabled={isAnalyzing || pages.length === 0}>
-                {isAnalyzing ? 'Analyzing...' : 'Analyze with Perplexity'}
+              <Button 
+                onClick={runAnalysis} 
+                disabled={isAnalyzing || pages.length === 0}
+                className="w-full bg-primary hover:bg-primary-glow text-primary-foreground"
+                size="lg"
+              >
+                {isAnalyzing ? (
+                  <>
+                    <Sparkles className="h-4 w-4 mr-2 animate-spin" />
+                    AI is analyzing your website...
+                  </>
+                ) : (
+                  <>
+                    <Sparkles className="h-4 w-4 mr-2" />
+                    Get AI-Powered Feedback
+                  </>
+                )}
               </Button>
+              {typeof remainingRequests === 'number' && remainingRequests <= 1 && (
+                <div className="text-center p-4 bg-amber-50 dark:bg-amber-950 rounded-lg border border-amber-200 dark:border-amber-800">
+                  <p className="text-sm text-amber-800 dark:text-amber-200 mb-2">
+                    You have {remainingRequests} analysis{remainingRequests !== 1 ? 'es' : ''} remaining today.
+                  </p>
+                  <Button variant="outline" size="sm">
+                    Get Unlimited Access
+                  </Button>
+                </div>
+              )}
             </CardContent>
           </Card>
 
