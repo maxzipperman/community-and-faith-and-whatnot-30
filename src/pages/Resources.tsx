@@ -93,17 +93,6 @@ export default function Resources() {
                 </CardContent>
               </Card>
 
-              <Card className="shadow-soft">
-                <CardHeader>
-                  <CardTitle className="text-base">Upcoming Events</CardTitle>
-                </CardHeader>
-                <CardContent className="text-sm text-muted-foreground">
-                  See what's next in our community.
-                  <div className="mt-2">
-                    <a className="underline underline-offset-4" href="/events">Browse Events</a>
-                  </div>
-                </CardContent>
-              </Card>
             </aside>
           </div>
         </div>

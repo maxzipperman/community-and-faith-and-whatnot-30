@@ -1,17 +1,13 @@
 import Layout from '@/components/Layout';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import AboutMe from '@/components/AboutMe';
 
 import { Link } from 'react-router-dom';
-import { CalendarDays, HeartHandshake, Users, HandCoins, ArrowRight } from 'lucide-react';
+import { HeartHandshake, Users, HandCoins, ArrowRight } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 
 const Index = () => {
-  const events = [
-    { title: 'Community Food Drive', date: 'Sat, Sep 14', time: '10:00 AM', href: '/events' },
-    { title: 'Volunteer Orientation', date: 'Wed, Sep 18', time: '6:30 PM', href: '/events' },
-    { title: 'Harvest Festival', date: 'Sun, Oct 6', time: '12:00 PM', href: '/events' },
-  ];
 
   return (
     <Layout>
@@ -66,12 +62,12 @@ const Index = () => {
             <Card className="hover-lift shadow-soft">
               <CardHeader>
                 <div className="flex items-center space-x-3">
-                  <CalendarDays className="h-6 w-6 text-accent" />
+                  <Users className="h-6 w-6 text-accent" />
                   <CardTitle>Engage Your Community</CardTitle>
                 </div>
               </CardHeader>
               <CardContent>
-                Bring people together with integrated event calendars, volunteer sign-ups, and community news.
+                Bring people together with volunteer sign-ups and community news.
               </CardContent>
             </Card>
             <Card className="hover-lift shadow-soft">
@@ -88,6 +84,8 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      <AboutMe />
 
       {/* Industries We Serve */}
       <section className="py-8 lg:py-12">
@@ -138,36 +136,15 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Section 4: Upcoming Events */}
-      <section className="py-16 lg:py-24">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center mb-10">
-            <h2 className="mb-3">Join Us for an Upcoming Event</h2>
-            <p className="text-muted-foreground">Stay connected with what’s happening in the community.</p>
-          </div>
-          <div className="max-w-3xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-4">
-            {events.slice(0,3).map((e, i) => (
-              <Card key={i} className="hover-lift shadow-soft">
-                <CardHeader>
-                  <CardTitle className="text-lg">{e.title}</CardTitle>
-                </CardHeader>
-                <CardContent className="text-sm text-muted-foreground">
-                  <div>{e.date}</div>
-                  <div>{e.time}</div>
-                  <Link to={e.href} className="text-accent font-medium inline-block mt-2">Learn More →</Link>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Section 5: Testimonial */}
       <section className="py-16 lg:py-24 bg-secondary">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
-            <blockquote className="text-2xl font-semibold mb-4">“Working with Position Digital transformed how we connect with our supporters. Our old site was a source of frustration; our new one is a source of pride and has directly led to an increase in online donations and event attendance.”</blockquote>
-            <p className="text-muted-foreground">Sarah K., Volunteer Coordinator</p>
+            <div className="bg-foreground text-background p-6 rounded-lg shadow-soft">
+              <blockquote className="text-2xl font-semibold mb-2">“Working with Position Digital transformed how we connect with our supporters. Our old site was a source of frustration; our new one is a source of pride and has directly led to an increase in online donations.”</blockquote>
+              <p className="opacity-80">Sarah K., Volunteer Coordinator</p>
+            </div>
           </div>
         </div>
       </section>
