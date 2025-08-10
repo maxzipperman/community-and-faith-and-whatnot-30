@@ -87,7 +87,7 @@ const Services = () => {
       "Competitor comparison",
       "30-minute strategy consultation"
     ],
-    price: "$299",
+    price: "$499",
     note: "Credited if you proceed with any build"
   };
 
