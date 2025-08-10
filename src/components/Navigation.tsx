@@ -72,6 +72,9 @@ const Navigation = () => {
             </Link>
             <Link to="/resources" className={`transition-smooth hover:text-accent ${isActive('/resources') ? 'text-accent font-medium' : 'text-foreground'}`}>Helpful Resources
           </Link>
+            <Link to="/faq" className={`transition-smooth hover:text-accent ${isActive('/faq') ? 'text-accent font-medium' : 'text-foreground'}`}>
+              FAQ
+            </Link>
             <Link to="/ai-feedback" className={`transition-smooth hover:text-accent ${isActive('/ai-feedback') ? 'text-accent font-medium' : 'text-foreground'}`}>
               <span className="inline-flex items-center gap-2">
                 <Sparkles className="h-4 w-4 text-primary" />
@@ -117,6 +120,9 @@ const Navigation = () => {
               </Link>
               <Link to="/resources" className="block px-3 py-2 text-foreground hover:text-accent transition-smooth" onClick={() => setIsOpen(false)}>
                 Helpful Resources
+              </Link>
+              <Link to="/faq" className="block px-3 py-2 text-foreground hover:text-accent transition-smooth" onClick={() => setIsOpen(false)}>
+                FAQ
               </Link>
               <Link to="/ai-feedback" className="block px-3 py-2 text-foreground hover:text-accent transition-smooth" onClick={() => setIsOpen(false)}>
                 <span className="inline-flex items-center gap-2">

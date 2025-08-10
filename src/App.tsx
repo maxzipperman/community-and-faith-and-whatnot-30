@@ -20,6 +20,7 @@ import Donate from "./pages/Donate";
 import About from "./pages/About";
 import Resources from "./pages/Resources";
 import AIFeedback from "./pages/AIFeedback";
+import FAQ from "./pages/FAQ";
 import FaithReligious from "./pages/serve/FaithReligious";
 import K12PTAs from "./pages/serve/K12PTAs";
 import YouthSportsServe from "./pages/serve/YouthSports";
@@ -46,6 +47,7 @@ const App = () => (
             <Route path="/about" element={<About />} />
             <Route path="/resources" element={<Resources />} />
             <Route path="/ai-feedback" element={<AIFeedback />} />
+            <Route path="/faq" element={<FAQ />} />
             
             {/* Industry Pages */}
             <Route path="/professional-services" element={<ProfessionalServices />} />

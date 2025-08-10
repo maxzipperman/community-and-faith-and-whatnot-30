@@ -193,6 +193,19 @@ const Services = () => {
             </div>
           </div>
 
+          {/* Media & File Storage: Bring Your Own */}
+          <div className="max-w-3xl mx-auto mb-12">
+            <Card className="border-2 border-dashed">
+              <CardContent className="p-6">
+                <h3 className="text-xl font-semibold mb-2">Media & File Storage: Bring Your Own</h3>
+                <p className="text-muted-foreground mb-3">
+                  For uploads and media hosting, we connect your site directly to your own cloud storage or media platform (S3, Cloudflare R2, GCS, Cloudinary, etc.). You keep full ownership and pay your provider directly—no markups from us. We configure everything and ensure a smooth, secure upload experience.
+                </p>
+                <Link to="/faq" className="text-primary hover:underline text-sm">Learn more in our FAQ</Link>
+              </CardContent>
+            </Card>
+          </div>
+
           {/* Audit Product */}
           <div className="max-w-2xl mx-auto">
             <div className="text-center mb-6">
