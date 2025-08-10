@@ -77,15 +77,16 @@ const Services = () => {
 
   const auditProduct = {
     icon: <CheckCircle className="h-8 w-8 text-accent" />,
-    title: "Quick Audit",
-    description: "Performance, accessibility, messaging, and donation/registration teardown",
+    title: "2-Hour Consultation",
+    description:
+      "Focused working session covering performance, accessibility, messaging, and donation/registration UX with an actionable plan.",
     features: [
-      "Detailed performance analysis report",
-      "Mobile usability assessment",
-      "SEO & messaging opportunities",
-      "Donation/registration flow review",
-      "Competitor comparison",
-      "30-minute strategy consultation"
+      "Live 2-hour strategy and implementation session",
+      "Prioritized action plan you can execute",
+      "Performance and mobile UX review",
+      "SEO and messaging improvements",
+      "Donation/registration flow teardown",
+      "Q&A and clear next steps"
     ],
     price: "$499",
     note: "Credited if you proceed with any build"
@@ -95,7 +96,7 @@ const Services = () => {
     <Layout>
       <Helmet>
         <title>Community Website Packages | Position Digital</title>
-        <meta name="description" content="Standardized, lower-cost website packages for faith groups, schools, sports, and community orgs." />
+        <meta name="description" content="2-hour consultation and standardized, lower-cost website packages for faith groups, schools, sports, and community orgs." />
         <link rel="canonical" href="/services" />
       </Helmet>
       <section className="pt-24 pb-12 gradient-subtle">
@@ -118,6 +119,43 @@ const Services = () => {
               Clear scope. Lower cost. Built for donations, registrations, and engagement.
             </p>
           </div>
+          {/* Featured: 2-Hour Consultation */}
+          <div className="max-w-2xl mx-auto mb-12">
+            <Card className="shadow-large border-2 border-accent/20">
+              <CardHeader className="text-center pb-3">
+                <div className="w-14 h-14 bg-accent/10 rounded-lg flex items-center justify-center mx-auto mb-3">
+                  {auditProduct.icon}
+                </div>
+                <CardTitle className="text-xl mb-1">{auditProduct.title}</CardTitle>
+                <CardDescription className="text-base">
+                  {auditProduct.description}
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-5">
+                <ul className="space-y-2.5">
+                  {auditProduct.features.map((feature, featureIndex) => (
+                    <li key={featureIndex} className="flex items-start space-x-3">
+                      <CheckCircle className="h-5 w-5 text-success mt-0.5 flex-shrink-0" />
+                      <span className="text-sm text-muted-foreground">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+                <div className="pt-3 border-t border-border space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xl font-bold text-accent">{auditProduct.price}</span>
+                    <Badge variant="secondary">{auditProduct.note}</Badge>
+                  </div>
+                  <Button asChild className="w-full gradient-accent text-accent-foreground">
+                    <Link to="/contact" className="flex items-center space-x-2">
+                      <CalendarDays className="h-4 w-4" />
+                      <span>Book 2-Hour Consultation</span>
+                    </Link>
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
             {packages.map((pkg, index) => (
               <Card key={index} className={`hover-lift shadow-medium h-full ${pkg.popular ? 'border-2 border-accent/50 shadow-accent' : ''} relative`}>
