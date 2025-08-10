@@ -108,6 +108,7 @@ export default function ServerAIFeedbackForm() {
     if (whitelisted) return "Whitelisted: unlimited";
     return `Remaining: ${remaining ?? "—"} / ${limit ?? "—"}`;
   }, [result]);
+  const analysisContent = useMemo(() => (result as any)?.analysis || (result as any)?.text, [result]);
 
   return (
     <div className="grid gap-6 lg:grid-cols-3">
@@ -193,14 +194,14 @@ export default function ServerAIFeedbackForm() {
           </CardContent>
         </Card>
 
-        {result?.analysis && (
+        {analysisContent && (
           <Card>
             <CardHeader>
               <CardTitle>AI Analysis</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="whitespace-pre-wrap text-sm border rounded-md p-3 bg-muted">
-                {result.analysis}
+                {analysisContent}
               </div>
               <div className="mt-3 text-xs text-muted-foreground">
                 Content source: {result.meta?.contentSource || "unknown"}

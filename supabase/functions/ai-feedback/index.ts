@@ -92,22 +92,28 @@ serve(async (req) => {
     }
 
     // Analyze with Perplexity
-    const prompt = `You are a UX/UI expert analyzing websites. Based on these goals:
+    const prompt = `You are a senior UX/UI auditor. Treat the provided goals as industry best practices and audit the pages against them.
 ${goals}
 
-Analyze the following pages and provide a JSON response with this exact structure:
+Return a CHECKLIST in strict JSON using this exact structure (no extra keys, no prose):
 {
   "issues": [
     {
       "severity": "high|medium|low",
-      "area": "UX|Performance|Accessibility|Copy|Design",
-      "finding": "Description of the issue found",
-      "fixSuggestion": "Specific actionable recommendation",
-      "codeHints": "Optional: Tailwind classes or HTML structure suggestions",
-      "impactedRoutes": ["Optional: array of affected page URLs"]
+      "area": "UX|Performance|Accessibility|Copy|Design|Trust|Conversion",
+      "finding": "[PASS]|[FAIL] concise justification of the check result",
+      "fixSuggestion": "If FAIL: the specific action to take; If PASS: optional next step",
+      "codeHints": "Optional Tailwind/ARIA/HTML hints",
+      "impactedRoutes": ["Optional array of affected URLs"]
     }
   ]
 }
+
+Checklist rules:
+- Each array item is a single best-practice check.
+- Prefer short, scannable items. Keep to 8-18 total checks.
+- Only use high/medium/low for FAILED items; use "low" for PASS items.
+- Do not include markdown. Return ONLY valid JSON.
 
 Pages to analyze:
 ${pages.map((p: any, i: number) => `
@@ -115,8 +121,7 @@ ${pages.map((p: any, i: number) => `
 URL: ${p.url}
 Content: ${String(p.content || '').slice(0, 4000)}
 `).join('\n')}
-
-Focus on actionable, prioritized recommendations. Return ONLY valid JSON.`
+`
 
     const perplexityResponse = await fetch('https://api.perplexity.ai/chat/completions', {
       method: 'POST',
@@ -129,7 +134,7 @@ Focus on actionable, prioritized recommendations. Return ONLY valid JSON.`
         messages: [
           {
             role: 'system',
-            content: 'You are a UX expert. Analyze websites and return JSON only.'
+            content: 'You are a senior UX auditor. Return STRICT JSON only. Produce checklist-style items per the schema; no prose, no markdown.'
           },
           {
             role: 'user',

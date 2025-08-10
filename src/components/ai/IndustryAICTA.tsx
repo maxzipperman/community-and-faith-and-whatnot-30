@@ -13,10 +13,10 @@ export const IndustryAICTA = ({ industry, label }: Props) => {
   return (
     <div className="fixed bottom-5 right-5 z-40">
       <Button asChild size="lg" className="shadow-lg animate-pulse hover:animate-none">
-        <Link to={to} aria-label={`AI Feedback for ${label || industry}`}>
+        <Link to={to} aria-label={"Run an Instant Best Practices Audit"}>
           <span className="inline-flex items-center gap-2">
             <Sparkles className="h-4 w-4" />
-            <span>AI Feedback for {label || industry}</span>
+            <span>Run an Instant Best Practices Audit</span>
           </span>
         </Link>
       </Button>
