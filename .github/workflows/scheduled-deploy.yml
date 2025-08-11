@@ -1,7 +1,5 @@
 name: Scheduled Vercel Deploy
 on:
-  schedule:
-    - cron: "0 */8 * * *"  # Runs every 8 hours
   workflow_dispatch:
 jobs:
   trigger:
