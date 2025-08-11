@@ -57,7 +57,9 @@ const Navigation = () => {
             <Link to="/services" className={`transition-smooth hover:text-accent ${isActive('/services') ? 'text-accent font-medium' : 'text-foreground'}`}>
               Services
             </Link>
-            
+            <Link to="/pricing" className={`transition-smooth hover:text-accent ${isActive('/pricing') ? 'text-accent font-medium' : 'text-foreground'}`}>
+              Pricing
+            </Link>
             {/* Industries Dropdown */}
             <DropdownMenu>
               <DropdownMenuTrigger className="flex items-center space-x-1 transition-smooth hover:text-accent text-foreground">
@@ -129,6 +131,9 @@ const Navigation = () => {
               </Link>
               <Link to="/resources" className="block px-3 py-2 text-foreground hover:text-accent transition-smooth" onClick={() => setIsOpen(false)}>
                 Helpful Resources
+              </Link>
+              <Link to="/pricing" className="block px-3 py-2 text-foreground hover:text-accent transition-smooth" onClick={() => setIsOpen(false)}>
+                Pricing
               </Link>
               <Link to="/faq" className="block px-3 py-2 text-foreground hover:text-accent transition-smooth" onClick={() => setIsOpen(false)}>
                 FAQ

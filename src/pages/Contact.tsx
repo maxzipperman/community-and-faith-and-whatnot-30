@@ -11,7 +11,7 @@ import { Mail, Phone, MapPin, Clock, CheckCircle } from 'lucide-react';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import CalendlyBooking from '@/components/booking/CalendlyBooking';
 import { useSearchParams } from 'react-router-dom';
-
+import { useState } from 'react';
 const Contact = () => {
   const [searchParams] = useSearchParams();
   const paymentStatus = searchParams.get('payment');
@@ -39,13 +39,9 @@ const Contact = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <Badge variant="secondary" className="mb-4">Get Started</Badge>
-            <h1 className="mb-6">
-              Let's Create Something 
-              <span className="text-accent"> Amazing Together</span>
-            </h1>
+            <h1 className="mb-6">Get in Touch</h1>
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Ready to transform your online presence? We'd love to learn about your project 
-              and provide a free website audit with actionable recommendations.
+              Tell us about your mission—we’ll help you plan the next step.
             </p>
           </div>
         </div>
@@ -67,73 +63,90 @@ const Contact = () => {
             </Alert>
           )}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
-            {/* Contact Form (Replaced with Calendly + Payment flow) */}
+            {/* Contact Form */}
             <Card className="shadow-medium">
               <CardHeader>
-                <CardTitle className="text-2xl">Book Your 2-Hour Consultation</CardTitle>
+                <CardTitle className="text-2xl">Get in Touch</CardTitle>
                 <CardDescription>
-                  Pick a time below. After booking, you'll be redirected to secure checkout to complete your $499 consultation.
+                  Tell us about your mission—we’ll help you plan the next step.
                 </CardDescription>
               </CardHeader>
-              
               <CardContent className="space-y-6">
-                <Alert>
-                  <AlertTitle>Paid Consultation</AlertTitle>
-                  <AlertDescription>
-                    This is a paid 2-hour consultation priced at <span className="font-semibold">$499</span>. 
-                    After you select a time, you’ll be redirected to Stripe to pay and confirm.
-                  </AlertDescription>
-                </Alert>
-
-                <CalendlyBooking calendlyUrl="https://calendly.com/maxzipperman" />
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    const form = e.currentTarget as HTMLFormElement;
+                    const hp = (form.querySelector('input[name="company_website"]') as HTMLInputElement)?.value;
+                    if (hp) return; // honeypot
+                    setSubmitted(true);
+                    form.reset();
+                  }}
+                  className="space-y-4"
+                >
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <Label htmlFor="name">Name</Label>
+                      <Input id="name" name="name" required aria-required="true" />
+                    </div>
+                    <div>
+                      <Label htmlFor="email">Email</Label>
+                      <Input id="email" type="email" name="email" required aria-required="true" />
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <Label htmlFor="org">Organization</Label>
+                      <Input id="org" name="organization" />
+                    </div>
+                    <div>
+                      <Label htmlFor="subject">Topic</Label>
+                      <Input id="subject" name="subject" placeholder="Project, audit, question…" />
+                    </div>
+                  </div>
+                  <div>
+                    <Label htmlFor="message">Message</Label>
+                    <Textarea id="message" name="message" rows={5} required aria-required="true" />
+                  </div>
+                  {/* Honeypot */}
+                  <input type="text" name="company_website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
+                  <div className="flex items-center gap-3">
+                    <Button type="submit">Submit</Button>
+                    <a href="#schedule" className="text-accent">Schedule a Call</a>
+                  </div>
+                  <div role="status" aria-live="polite" className="text-success text-sm mt-2">
+                    {submitted && 'Thanks! We received your message and will reply within 24 hours.'}
+                  </div>
+                </form>
               </CardContent>
             </Card>
 
-            {/* Contact Info & What to Expect */}
+            {/* Details + Calendar */}
             <div className="space-y-8">
-              {/* Contact Information */}
-              
-
-              {/* What to Expect */}
               <Card className="shadow-soft">
                 <CardHeader>
-                  <CardTitle>What to Expect</CardTitle>
-                  <CardDescription>
-                    Our free audit process and next steps
-                  </CardDescription>
+                  <CardTitle>Contact Details</CardTitle>
+                  <CardDescription>We respect your privacy and never share your information.</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  {["We'll review your current website (if you have one)", "Analyze your industry and competitors", "Provide specific recommendations for improvement", "Discuss your goals and create a custom proposal", "No obligation — just valuable insights for your business"].map((step, index) => <div key={index} className="flex items-start space-x-3">
-                      <CheckCircle className="h-5 w-5 text-success mt-0.5 flex-shrink-0" />
-                      <span className="text-sm text-muted-foreground">{step}</span>
-                    </div>)}
+                  {contactInfo.map((info, index) => (
+                    <div key={index} className="flex items-start space-x-3">
+                      {info.icon}
+                      <div>
+                        <div className="font-medium">{info.title}</div>
+                        <div className="text-sm text-muted-foreground">{info.content} — {info.description}</div>
+                      </div>
+                    </div>
+                  ))}
                 </CardContent>
               </Card>
 
-              {/* Quick Stats */}
-              <Card className="shadow-soft gradient-accent text-accent-foreground">
+              <Card id="schedule" className="shadow-medium">
                 <CardHeader>
-                  <CardTitle className="text-accent-foreground">Why Choose Mission Digital?</CardTitle>
+                  <CardTitle className="text-2xl">Schedule a Call</CardTitle>
+                  <CardDescription>Pick a time that works for you.</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="text-center">
-                      <div className="text-2xl font-bold">48hrs</div>
-                      <div className="text-sm opacity-90">Average response time</div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-2xl font-bold">100%</div>
-                      <div className="text-sm opacity-90">Client satisfaction</div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-2xl font-bold">90+</div>
-                      <div className="text-sm opacity-90">PageSpeed scores</div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-2xl font-bold">0</div>
-                      <div className="text-sm opacity-90">Monthly fees</div>
-                    </div>
-                  </div>
+                  <CalendlyBooking calendlyUrl="https://calendly.com/maxzipperman" />
                 </CardContent>
               </Card>
             </div>

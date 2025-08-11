@@ -95,17 +95,17 @@ const Services = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Community Website Packages | Position Digital</title>
-        <meta name="description" content="2-hour consultation and standardized, lower-cost website packages for faith groups, schools, sports, and community orgs." />
+        <title>Services | Mission Digital</title>
+        <meta name="description" content="Web design, messaging, optimization, and audits for nonprofits and community organizations." />
         <link rel="canonical" href="/services" />
       </Helmet>
       <section className="pt-24 pb-12 gradient-subtle">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <Badge variant="secondary" className="mb-4">Our Services</Badge>
-            <h1 className="mb-6">Community Website Packages</h1>
+            <h1 className="mb-6">Services</h1>
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Standardized, lower-cost builds focused on donations, registrations, and community engagement.
+              From idea to impact—solutions for mission-driven organizations.
             </p>
           </div>
         </div>
