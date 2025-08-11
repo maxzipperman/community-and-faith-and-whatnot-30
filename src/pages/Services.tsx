@@ -8,6 +8,7 @@ import ROICalculator from '@/components/ROICalculator';
 import { Helmet } from 'react-helmet-async';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import ComparisonTable from '@/components/ComparisonTable';
 const Services = () => {
   const packages = [
     {
@@ -95,9 +96,14 @@ const Services = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Services | Mission Digital</title>
+        <title>Services – Mission Digital</title>
         <meta name="description" content="Web design, messaging, optimization, and audits for nonprofits and community organizations." />
         <link rel="canonical" href="/services" />
+        <meta property="og:title" content="Services – Mission Digital" />
+        <meta property="og:description" content="Web design, messaging, optimization, and audits for nonprofits and community organizations." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="/services" />
+        <meta name="twitter:card" content="summary" />
       </Helmet>
       <section className="pt-24 pb-12 gradient-subtle">
         <div className="container mx-auto px-4">
@@ -207,6 +213,25 @@ const Services = () => {
                 </CardContent>
               </Card>
             ))}
+          </div>
+
+          <div className="max-w-6xl mx-auto mb-12">
+            <ComparisonTable
+              data={{
+                title: 'Compare Your Options',
+                subtitle: 'Why teams choose Mission Digital over DIY and traditional agencies',
+                columns: ['Mission Digital', 'DIY Builders', 'Traditional Agencies'],
+                rows: [
+                  { label: 'Accessibility (WCAG 2.1 AA)', values: ['Yes', 'Partial', 'Sometimes'], emphasis: true },
+                  { label: 'Performance (Core Web Vitals)', values: ['Yes', 'Partial', 'Sometimes'] },
+                  { label: 'Donations/Registration UX', values: ['Yes', 'Partial', 'Sometimes'] },
+                  { label: 'Timeline Predictability', values: ['Yes', 'No', 'Sometimes'] },
+                  { label: 'Transparent Pricing', values: ['Yes', 'Yes', 'No'] },
+                  { label: 'Training + Launch Support', values: ['Yes', 'No', 'Sometimes'] }
+                ],
+                footnote: 'Feature availability varies by package. Ask us about your specific needs.'
+              }}
+            />
           </div>
 
           <div className="max-w-4xl mx-auto mb-12">

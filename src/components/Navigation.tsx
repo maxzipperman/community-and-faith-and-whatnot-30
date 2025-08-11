@@ -67,6 +67,11 @@ const Navigation = () => {
                 <ChevronDown className="h-4 w-4" />
               </DropdownMenuTrigger>
               <DropdownMenuContent align="start" className="w-56">
+                <DropdownMenuItem asChild>
+                  <Link to="/industries" className="w-full cursor-pointer font-medium">
+                    Industries Overview
+                  </Link>
+                </DropdownMenuItem>
                 {industries.map(industry => <DropdownMenuItem key={industry.href} asChild>
                     <Link to={industry.href} className="w-full cursor-pointer">
                       {industry.name}
@@ -122,6 +127,9 @@ const Navigation = () => {
               </Link>
               <div className="px-3 py-2">
                 <div className="text-sm font-medium text-muted-foreground mb-2">Who We Serve</div>
+                <Link to="/industries" className="block px-3 py-1 text-sm font-medium text-foreground hover:text-accent transition-smooth" onClick={() => setIsOpen(false)}>
+                  Industries Overview
+                </Link>
                 {industries.map(industry => <Link key={industry.href} to={industry.href} className="block px-3 py-1 text-sm text-foreground hover:text-accent transition-smooth" onClick={() => setIsOpen(false)}>
                     {industry.name}
                   </Link>)}

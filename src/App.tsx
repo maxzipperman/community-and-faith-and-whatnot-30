@@ -35,7 +35,7 @@ import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import ScrollToTop from "./components/ScrollToTop";
 import Pricing from "./pages/Pricing";
-
+import Industries from "./pages/Industries";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -51,8 +51,8 @@ const App = () => (
             <Route path="/home" element={<Navigate to="/" replace />} />
             <Route path="/index" element={<Navigate to="/" replace />} />
             <Route path="/services" element={<Services />} />
+            <Route path="/industries" element={<Industries />} />
             <Route path="/pricing" element={<Pricing />} />
-            <Route path="/contact" element={<Contact />} />
             <Route path="/portfolio" element={<Portfolio />} />
             <Route path="/donate" element={<Donate />} />
             <Route path="/about" element={<About />} />
