@@ -14,6 +14,7 @@ import { useSearchParams } from 'react-router-dom';
 import { useState } from 'react';
 const Contact = () => {
   const [searchParams] = useSearchParams();
+  const [submitted, setSubmitted] = useState(false);
   const paymentStatus = searchParams.get('payment');
   const contactInfo = [{
     icon: <Mail className="h-5 w-5" />,
