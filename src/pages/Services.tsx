@@ -117,6 +117,39 @@ const Services = () => {
         </div>
       </section>
 
+      <section className="py-10">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center mb-8">
+            <h2 className="mb-3">Explore Detailed Services</h2>
+            <p className="text-muted-foreground">Dive deeper into our Web Design & Brand Messaging offerings.</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+            <Card className="hover-lift">
+              <CardHeader>
+                <CardTitle>Web Design & Development</CardTitle>
+                <CardDescription>Accessible, mobile-first builds optimized for donations and registrations.</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Button asChild>
+                  <Link to="/services/web-design" aria-label="Go to Web Design & Development">Learn more</Link>
+                </Button>
+              </CardContent>
+            </Card>
+            <Card className="hover-lift">
+              <CardHeader>
+                <CardTitle>Brand Messaging & Storytelling</CardTitle>
+                <CardDescription>Workshops and copywriting that clarify and convert.</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Button asChild variant="outline">
+                  <Link to="/services/brand-messaging" aria-label="Go to Brand Messaging & Storytelling">Learn more</Link>
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
       <section className="py-12 lg:py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center mb-12">

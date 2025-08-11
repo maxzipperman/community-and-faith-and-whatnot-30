@@ -6,6 +6,8 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { HelmetProvider } from 'react-helmet-async';
 import Index from "./pages/Index";
 import Services from "./pages/Services";
+import WebDesign from "./pages/services/WebDesign";
+import BrandMessaging from "./pages/services/BrandMessaging";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import ProfessionalServices from "./pages/ProfessionalServices";
@@ -51,6 +53,8 @@ const App = () => (
             <Route path="/home" element={<Navigate to="/" replace />} />
             <Route path="/index" element={<Navigate to="/" replace />} />
             <Route path="/services" element={<Services />} />
+            <Route path="/services/web-design" element={<WebDesign />} />
+            <Route path="/services/brand-messaging" element={<BrandMessaging />} />
             <Route path="/industries" element={<Industries />} />
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/portfolio" element={<Portfolio />} />

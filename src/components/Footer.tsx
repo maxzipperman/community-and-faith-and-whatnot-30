@@ -45,7 +45,7 @@ const Footer = () => {
             <ul className="space-y-2">
               <li>
                 <Link 
-                  to="/services" 
+                  to="/services/web-design" 
                   className="text-primary-foreground/80 hover:text-primary-foreground transition-smooth text-sm"
                 >
                   Website Design & Development
@@ -53,7 +53,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link 
-                  to="/services" 
+                  to="/services/brand-messaging" 
                   className="text-primary-foreground/80 hover:text-primary-foreground transition-smooth text-sm"
                 >
                   Brand Messaging Strategy
