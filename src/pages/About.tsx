@@ -1,21 +1,43 @@
 import Layout from '@/components/Layout';
 import { Helmet } from 'react-helmet-async';
-import AboutMe from '@/components/AboutMe';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
 import { Link } from 'react-router-dom';
+import heroAbout from '@/assets/mission-about-hero.jpg';
+import founderPhoto from '@/assets/founder-photo.jpg';
+
 const About = () => {
+  const values = [
+    { title: 'Accessibility', desc: 'Inclusive by default. WCAG-minded design and development.' },
+    { title: 'Empathy', desc: 'We listen first and shape solutions that fit real constraints.' },
+    { title: 'Transparency', desc: 'Clear scope, pricing, and plain-language communication.' },
+    { title: 'Outcomes', desc: 'Work measured by donations, registrations, and engagement.' },
+  ];
+
+  const timeline = [
+    { step: 'Discovery', desc: 'Goals, audiences, content, and constraints.' },
+    { step: 'Storytelling', desc: 'Message hierarchy and information architecture.' },
+    { step: 'Design', desc: 'Accessible, mobile-first layouts with clear CTAs.' },
+    { step: 'Build', desc: 'Fast, maintainable code and performance best practices.' },
+    { step: 'Launch', desc: 'QA, analytics, and search fundamentals in place.' },
+    { step: 'Support', desc: 'Training and realistic post-launch help when you need it.' },
+  ];
+
   return (
     <Layout>
       <Helmet>
-        <title>About Mission Digital | Helping Communities Communicate</title>
-        <meta name="description" content="We help schools, nonprofits, and local groups communicate clearly and act quickly with accessible, fast websites." />
+        <title>About Us – Mission Digital</title>
+        <meta name="description" content="Our story, values, and approach to helping mission-driven organizations grow." />
         <link rel="canonical" href="/about" />
+        <meta property="og:title" content="About Mission Digital" />
+        <meta property="og:description" content="Get to know the team and what drives our work." />
+        <meta property="og:image" content={heroAbout} />
         <script type="application/ld+json">{`
           {
-            "@context": "https://schema.org",
-            "@type": "Organization",
-            "name": "Mission Digital",
-            "description": "We help schools, nonprofits, and local groups communicate clearly and act quickly with accessible, fast websites."
+            "@context":"https://schema.org",
+            "@type":"AboutPage",
+            "name":"About Mission Digital",
+            "url":"https://missiondigitalsolutions.com/about"
           }
         `}</script>
       </Helmet>
@@ -23,86 +45,79 @@ const About = () => {
       <section className="pt-24 pb-8">
         <div className="container mx-auto px-4">
           <header className="max-w-4xl mx-auto text-center">
-            <h1 className="mb-3">Helping communities communicate clearly and act quickly</h1>
-            <p className="text-muted-foreground">We build clear, accessible websites for schools, nonprofits, and local organizations—removing friction between your message and the actions that matter.</p>
+            <h1 className="mb-3">About Mission Digital</h1>
+            <p className="text-muted-foreground">We build websites that make it easier to do good.</p>
           </header>
+          <figure className="max-w-5xl mx-auto mt-8">
+            <img src={heroAbout} alt="Small, diverse team collaborating in a bright workspace" className="w-full h-auto rounded-xl shadow-soft" />
+          </figure>
         </div>
       </section>
 
-      {/* Bio */}
-      <AboutMe />
-
-      {/* Philosophy */}
-      <section className="py-10" aria-labelledby="philosophy-heading">
+      {/* Story */}
+      <section className="py-10" aria-labelledby="story-heading">
         <div className="container mx-auto px-4">
           <article className="max-w-4xl mx-auto text-center">
-            <h2 id="philosophy-heading" className="text-xl font-semibold mb-2">Our philosophy</h2>
+            <h2 id="story-heading" className="text-xl font-semibold mb-2">Our story</h2>
             <p className="text-muted-foreground">
-              Keep it clear, fast, and maintainable. We hand‑code using modern tooling so your site stays lightweight,
-              accessible, and easy to evolve.
+              Why we focus on community organizations and how we partner for impact.
             </p>
           </article>
         </div>
       </section>
 
-      {/* How we work */}
-      <section className="py-10" aria-labelledby="how-we-work-heading">
+      {/* Values */}
+      <section className="py-10" aria-labelledby="values-heading">
         <div className="container mx-auto px-4">
-          <h2 id="how-we-work-heading" className="sr-only">How we work</h2>
-          <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-4">
-            <article className="bg-background rounded-lg border border-border p-5 shadow-soft">
-              <h3 className="text-base font-semibold mb-2">1) Listen & Align</h3>
-              <p className="text-sm text-muted-foreground">Quick discovery to define goals, audiences, and success metrics. We map the smallest site that achieves impact.</p>
-            </article>
-            <article className="bg-background rounded-lg border border-border p-5 shadow-soft">
-              <h3 className="text-base font-semibold mb-2">2) Messaging & IA</h3>
-              <p className="text-sm text-muted-foreground">Clear structure and focused messaging so donors, parents, and volunteers find what they need fast.</p>
-            </article>
-            <article className="bg-background rounded-lg border border-border p-5 shadow-soft">
-              <h3 className="text-base font-semibold mb-2">3) Performance‑first Build</h3>
-              <p className="text-sm text-muted-foreground">Accessible, fast, and maintainable. We reduce friction to donate, register, or get involved.</p>
-            </article>
-            <article className="bg-background rounded-lg border border-border p-5 shadow-soft">
-              <h3 className="text-base font-semibold mb-2">4) Launch, Train, Support</h3>
-              <p className="text-sm text-muted-foreground">Launch with analytics and SEO. Hands‑on training and realistic support—no retainers required.</p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      {/* What to expect */}
-      <section className="py-10" aria-labelledby="expect-heading">
-        <div className="container mx-auto px-4">
-          <h2 id="expect-heading" className="text-xl font-semibold mb-4 text-center">What you can expect</h2>
+          <h2 id="values-heading" className="sr-only">Values</h2>
           <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-4">
-            <article className="bg-background rounded-lg border border-border p-5 shadow-soft">
-              <h3 className="text-base font-semibold mb-1">Clear roadmaps & pricing</h3>
-              <p className="text-sm text-muted-foreground">You’ll know exactly what we’re building, why, and how much it costs—before we begin.</p>
-            </article>
-            <article className="bg-background rounded-lg border border-border p-5 shadow-soft">
-              <h3 className="text-base font-semibold mb-1">Senior‑level attention</h3>
-              <p className="text-sm text-muted-foreground">Work directly with an experienced designer‑developer focused on outcomes, not deliverables.</p>
-            </article>
-            <article className="bg-background rounded-lg border border-border p-5 shadow-soft">
-              <h3 className="text-base font-semibold mb-1">Accessibility & SEO from day one</h3>
-              <p className="text-sm text-muted-foreground">WCAG‑minded design, semantic HTML, fast performance, and structured data built‑in.</p>
-            </article>
-            <article className="bg-background rounded-lg border border-border p-5 shadow-soft">
-              <h3 className="text-base font-semibold mb-1">Measurable results</h3>
-              <p className="text-sm text-muted-foreground">Analytics and clear KPIs so you can see what’s working and improve quickly.</p>
-            </article>
+            {values.map((v) => (
+              <Card key={v.title} className="shadow-soft border-border">
+                <CardContent className="p-6">
+                  <h3 className="text-base font-semibold mb-1">{v.title}</h3>
+                  <p className="text-sm text-muted-foreground">{v.desc}</p>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-12">
+      {/* Approach timeline */}
+      <section className="py-10" aria-labelledby="approach-heading">
         <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center bg-background rounded-lg border border-border p-8 shadow-soft">
-            <h2 className="text-xl font-semibold mb-2">Ready to align your community around action?</h2>
-            <p className="text-muted-foreground mb-6">Let’s map the smallest, fastest path to impact—then ship it.</p>
+          <h2 id="approach-heading" className="text-xl font-semibold mb-4 text-center">Our approach</h2>
+          <ol className="grid grid-cols-1 md:grid-cols-2 gap-6" aria-label="Project approach timeline">
+            {timeline.map((t, idx) => (
+              <li key={t.step} className="bg-background rounded-lg border border-border p-5 shadow-soft focus-within:ring-2 focus-within:ring-primary outline-none" tabIndex={0} aria-label={`${idx + 1}. ${t.step}: ${t.desc}`}>
+                <div className="text-sm text-muted-foreground">Step {idx + 1}</div>
+                <div className="text-base font-semibold">{t.step}</div>
+                <p className="text-sm text-muted-foreground mt-1">{t.desc}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      {/* Team */}
+      <section className="py-12" id="team" aria-labelledby="team-heading">
+        <div className="container mx-auto px-4">
+          <h2 id="team-heading" className="text-xl font-semibold text-center mb-6">Meet the team</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            <Card className="overflow-hidden">
+              <img src={founderPhoto} alt="Max – Founder" className="w-full h-56 object-cover" loading="lazy" />
+              <CardContent className="p-5">
+                <h3 className="font-semibold">Max</h3>
+                <p className="text-sm text-muted-foreground">Founder & designer‑developer focused on accessible, fast experiences that drive action.</p>
+              </CardContent>
+            </Card>
+          </div>
+          <div className="mt-8 flex gap-3 justify-center">
             <Button asChild>
-              <Link to="/contact">Book your strategy call</Link>
+              <a href="#team">Meet the Team</a>
+            </Button>
+            <Button asChild variant="outline">
+              <Link to="/contact">Work With Us</Link>
             </Button>
           </div>
         </div>

@@ -23,6 +23,7 @@ import About from "./pages/About";
 import Resources from "./pages/Resources";
 import AIFeedback from "./pages/AIFeedback";
 import FAQ from "./pages/FAQ";
+import CaseStudy from "./pages/CaseStudy";
 import FaithReligious from "./pages/serve/FaithReligious";
 import K12PTAs from "./pages/serve/K12PTAs";
 import YouthSportsServe from "./pages/serve/YouthSports";
@@ -58,6 +59,7 @@ const App = () => (
             <Route path="/industries" element={<Industries />} />
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/portfolio" element={<Portfolio />} />
+            <Route path="/case/:slug" element={<CaseStudy />} />
             <Route path="/donate" element={<Donate />} />
             <Route path="/about" element={<About />} />
             <Route path="/resources" element={<Resources />} />

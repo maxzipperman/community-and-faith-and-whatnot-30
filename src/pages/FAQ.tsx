@@ -1,143 +1,100 @@
 import Layout from '@/components/Layout';
 import { Helmet } from 'react-helmet-async';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
+import { useMemo, useState } from 'react';
+import heroFaq from '@/assets/mission-faq-hero.jpg';
 
 const FAQ = () => {
+  const faqs = [
+    { q: 'How long does a typical project take?', a: 'Most websites launch in 4–8 weeks depending on scope, content readiness, approvals, and integrations.' },
+    { q: 'What platforms or CMS options do you support?', a: 'We build lightweight front‑ends and can integrate with popular CMS options like WordPress (headless), Sanity, or a simple Git‑based workflow—choosing the simplest option that fits your team.' },
+    { q: 'How do you approach accessibility and SEO?', a: 'Accessibility and SEO are built in from day one: semantic HTML, color contrast, keyboard navigation, alt text, structured data, sitemaps, and performance budgets.' },
+    { q: 'What’s included after launch?', a: 'We include handoff docs, a training session, and 30‑day support. Ongoing help is available as needed—no retainers required.' },
+    { q: 'How do you handle donations and registrations?', a: 'Clear flows and trusted providers. We implement streamlined donation and registration paths with clear CTAs, error handling, and analytics.' },
+    { q: 'Do you migrate content?', a: 'Yes. We can audit, map, and migrate content. For large sites, we prioritize critical pages and create a plan for the rest.' },
+    { q: 'What about hosting and performance?', a: 'We use modern hosting and edge delivery. Sites are optimized for Core Web Vitals—fast, resilient, and cache‑friendly.' },
+    { q: 'What budgets do you work with?', a: 'We offer scoped packages and custom quotes. We aim for the smallest solution that achieves your goals.' },
+    { q: 'Can you work with our internal team or volunteers?', a: 'Absolutely. We partner closely, provide templates, and keep the tech approachable.' },
+    { q: 'How do we get started?', a: 'Book a short call. We’ll align on goals, scope, and next steps.' },
+  ];
+
+  const [query, setQuery] = useState('');
+  const filtered = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    if (!q) return faqs;
+    return faqs.filter(item => item.q.toLowerCase().includes(q) || item.a.toLowerCase().includes(q));
+  }, [query, faqs]);
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  };
+
   return (
     <Layout>
       <Helmet>
-        <title>Uploads & Media FAQ | Mission Digital</title>
-        <meta name="description" content="How we handle uploads and media: BYO storage (S3/R2/GCS/Cloudinary), secure signed uploads, limits, and ownership." />
+        <title>FAQ – Mission Digital</title>
+        <meta name="description" content="Answers to common questions about timelines, accessibility, SEO, donations, and support." />
         <link rel="canonical" href="/faq" />
-        <script type="application/ld+json">{JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          "mainEntity": [
-            {
-              "@type": "Question",
-              "name": "Do you host our images and files?",
-              "acceptedAnswer": { "@type": "Answer", "text": "By default, no. We set up direct uploads to your own storage or media platform. You keep ownership, control, and billing. If you prefer, we can host temporarily with strict quotas and auto-deletion policies." }
-            },
-            {
-              "@type": "Question",
-              "name": "What storage providers do you support?",
-              "acceptedAnswer": { "@type": "Answer", "text": "Amazon S3, Cloudflare R2, Google Cloud Storage, Azure Blob, Supabase Storage (on your project), Cloudinary, ImageKit, and Uploadcare." }
-            },
-            {
-              "@type": "Question",
-              "name": "Is the upload secure?",
-              "acceptedAnswer": { "@type": "Answer", "text": "Yes. We use short-lived, pre-signed upload URLs or signed parameters so your secret keys are never exposed. Files go directly from the browser to your storage (no large files through our servers)." }
-            },
-            {
-              "@type": "Question",
-              "name": "Can you add limits (file size, types, quotas)?",
-              "acceptedAnswer": { "@type": "Answer", "text": "Yes. We enforce limits in both the UI and backend. We also recommend lifecycle rules (e.g., auto-delete old temp files) to keep costs low." }
-            },
-            {
-              "@type": "Question",
-              "name": "Who pays for bandwidth and storage?",
-              "acceptedAnswer": { "@type": "Answer", "text": "You do—directly to your provider. We don’t add any markup." }
-            }
-          ]
-        })}</script>
+        <meta property="og:title" content="Mission Digital FAQ" />
+        <meta property="og:description" content="Everything you need to know before we start." />
+        <meta property="og:image" content={heroFaq} />
+        <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
       </Helmet>
 
-      <section className="pt-24 pb-10 gradient-subtle">
+      <section className="pt-24 pb-6">
         <div className="container mx-auto px-4 text-center max-w-3xl">
-          <h1 className="mb-4">Uploads & Media — Frequently Asked Questions</h1>
-          <p className="text-muted-foreground">
-            Bring your own storage or media platform (S3, Cloudflare R2, GCS, Cloudinary, ImageKit, etc.). Secure, fast, and you keep ownership.
-          </p>
+          <h1 className="mb-3">Frequently Asked Questions</h1>
+          <p className="text-muted-foreground">Short answers to help you move forward with confidence.</p>
+          <figure className="max-w-5xl mx-auto mt-8">
+            <img src={heroFaq} alt="Abstract Q&A motif with soft teal gradients" className="w-full h-auto rounded-xl shadow-soft" loading="lazy" />
+          </figure>
         </div>
       </section>
 
       <main className="py-8">
         <div className="container mx-auto px-4 max-w-3xl">
+          {/* Search */}
+          <div className="mt-2 mb-4">
+            <label htmlFor="faq-search" className="sr-only">Search questions</label>
+            <input
+              id="faq-search"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search questions…"
+              className="w-full px-4 py-3 rounded-md bg-background border border-input focus:outline-none focus:ring-2 focus:ring-primary"
+              aria-describedby="faq-search-help"
+            />
+            <p id="faq-search-help" className="sr-only">Type to filter the list of questions below.</p>
+          </div>
+
+          {/* Accordion */}
           <section aria-labelledby="faq-heading" className="mb-10">
             <h2 id="faq-heading" className="sr-only">FAQ</h2>
-            <Accordion type="single" collapsible className="w-full">
-              <AccordionItem value="q1">
-                <AccordionTrigger>Do you host our images and files?</AccordionTrigger>
-                <AccordionContent>
-                  By default, no. We set up direct uploads to your own storage or media platform. You keep ownership, control, and billing. If you prefer, we can host temporarily with strict quotas and auto-deletion policies.
-                </AccordionContent>
-              </AccordionItem>
-              <AccordionItem value="q2">
-                <AccordionTrigger>What storage providers do you support?</AccordionTrigger>
-                <AccordionContent>
-                  Amazon S3, Cloudflare R2, Google Cloud Storage, Azure Blob, Supabase Storage (on your project), Cloudinary, ImageKit, and Uploadcare.
-                </AccordionContent>
-              </AccordionItem>
-              <AccordionItem value="q3">
-                <AccordionTrigger>Is the upload secure?</AccordionTrigger>
-                <AccordionContent>
-                  Yes. We use short-lived, pre-signed upload URLs or signed parameters so your secret keys are never exposed. Files go directly from the browser to your storage (no large files through our servers).
-                </AccordionContent>
-              </AccordionItem>
-              <AccordionItem value="q4">
-                <AccordionTrigger>Can you add limits (file size, types, quotas)?</AccordionTrigger>
-                <AccordionContent>
-                  Yes. We enforce limits in both the UI and backend. We also recommend lifecycle rules (e.g., auto-delete old temp files) to keep costs low.
-                </AccordionContent>
-              </AccordionItem>
-              <AccordionItem value="q5">
-                <AccordionTrigger>Who pays for bandwidth and storage?</AccordionTrigger>
-                <AccordionContent>
-                  You do—directly to your provider. We don’t add any markup.
-                </AccordionContent>
-              </AccordionItem>
+            <Accordion type="single" collapsible className="w-full border border-border rounded-xl divide-y">
+              {filtered.map((item, i) => (
+                <AccordionItem key={item.q} value={`q${i}`}>
+                  <AccordionTrigger>{item.q}</AccordionTrigger>
+                  <AccordionContent>{item.a}</AccordionContent>
+                </AccordionItem>
+              ))}
             </Accordion>
           </section>
 
-          <section aria-labelledby="trust-legal" className="mb-10 grid sm:grid-cols-2 gap-4">
-            <h2 id="trust-legal" className="sr-only">Trust & Legal</h2>
-            <Card>
-              <CardContent className="p-5">
-                <h3 className="font-semibold mb-2">Data Ownership & Portability</h3>
-                <p className="text-sm text-muted-foreground">
-                  You own your media and files. We never lock you in; we simply connect your site to your chosen storage. You can export or switch providers anytime.
-                </p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="p-5">
-                <h3 className="font-semibold mb-2">Privacy & Compliance</h3>
-                <p className="text-sm text-muted-foreground">
-                  We minimize data we store (typically file URLs and basic metadata). For sensitive uploads, we can enable extra safeguards (virus scanning, encryption, data residency, or provider-level compliance).
-                </p>
-              </CardContent>
-            </Card>
-          </section>
-
-          <section aria-labelledby="onboarding" className="mb-12">
-            <h2 id="onboarding" className="text-lg font-semibold mb-3">Customer onboarding</h2>
-            <div className="space-y-4 text-sm text-muted-foreground">
-              <div>
-                <p className="font-medium text-foreground mb-1">We’ll set up your preferred storage:</p>
-                <ul className="list-disc pl-5 space-y-1">
-                  <li>
-                    <span className="font-medium text-foreground">S3/R2/GCS:</span> we’ll need a bucket, region, and programmatic access keys with restricted permissions (upload only). We’ll apply size/type limits and enable CDN caching.
-                  </li>
-                  <li>
-                    <span className="font-medium text-foreground">Cloudinary/ImageKit:</span> share your cloud name/public key. We’ll configure signed uploads for security.
-                  </li>
-                  <li>
-                    Not sure? We’ll recommend the best option based on volume, budget, and regions.
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </section>
-
+          {/* CTAs */}
           <section className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Button asChild className="gradient-accent text-accent-foreground">
-              <Link to="/contact">Get Started</Link>
+            <Button asChild>
+              <Link to="/contact">Contact Us</Link>
             </Button>
             <Button asChild variant="outline">
-              <Link to="/services">See Pricing</Link>
+              <Link to="/pricing">See Pricing</Link>
             </Button>
           </section>
         </div>
@@ -147,3 +104,4 @@ const FAQ = () => {
 };
 
 export default FAQ;
+
