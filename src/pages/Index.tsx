@@ -35,11 +35,11 @@ const Index = () => {
           <div className="max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center space-x-2 bg-accent/10 text-accent px-4 py-2 rounded-full text-sm font-medium mb-6">
               <HeartHandshake className="h-4 w-4" />
-              <span>Built for nonprofits and faith communities</span>
+              <span>AI-Enhanced websites for mission-driven organizations</span>
             </div>
             <h1 className="mb-4 text-primary leading-tight">Your Mission, Amplified. Your Community, Engaged.</h1>
             <p className="text-xl lg:text-lg text-muted-foreground mb-8 lg:mb-6 max-w-2xl mx-auto leading-relaxed">
-              Beautiful, accessible websites that help nonprofits, faith communities, and schools share impact, grow community, and increase donations.
+              Beautiful, accessible websites with AI-powered automation that save 8-15 hours per week while growing donations, volunteers, and engagement.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button asChild size="lg" className="gradient-accent text-accent-foreground font-semibold">
@@ -61,9 +61,9 @@ const Index = () => {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {[
-              { stat: '156%', label: 'More online donations' },
-              { stat: '89%', label: 'Higher volunteer signups' },
-              { stat: '134%', label: 'More event registrations' },
+              { stat: '8-15', label: 'Hours saved per week with AI automation' },
+              { stat: '3-5x', label: 'ROI from time savings and efficiency' },
+              { stat: '89%', label: 'Higher engagement with smart workflows' },
             ].map((item, i) => (
               <Card key={i} className="bg-primary text-primary-foreground border-primary-foreground/20">
                 <CardContent className="p-6 text-center">
@@ -73,7 +73,7 @@ const Index = () => {
               </Card>
             ))}
           </div>
-          <p className="text-xs opacity-80 text-center mt-4">Based on partner outcomes after optimizing friction and clarifying stories.</p>
+          <p className="text-xs opacity-80 text-center mt-4">Based on client outcomes after implementing AI-powered member FAQ automation and communication workflows.</p>
         </div>
       </section>
 
@@ -89,7 +89,7 @@ const Index = () => {
                 </div>
               </CardHeader>
               <CardContent className="lg:p-5">
-                Clearly communicate your story and purpose with a professional website that inspires trust and action.
+                AI-powered FAQ automation answers member questions 24/7, saving staff 8-12 hours per week on routine inquiries.
               </CardContent>
             </Card>
             <Card className="hover-lift shadow-soft">
@@ -100,7 +100,7 @@ const Index = () => {
                 </div>
               </CardHeader>
               <CardContent className="lg:p-5">
-                Bring people together with volunteer sign-ups and community news.
+                Smart volunteer matching and automated communications drafting save 5-8 hours weekly on coordination tasks.
               </CardContent>
             </Card>
             <Card className="hover-lift shadow-soft">
@@ -111,7 +111,7 @@ const Index = () => {
                 </div>
               </CardHeader>
               <CardContent className="lg:p-5">
-                Make giving easy and secure with a frictionless, mobile-friendly donation process built to increase support.
+                AI-enhanced donor communications and smart segmentation boost giving with personalized messaging that converts.
               </CardContent>
             </Card>
           </div>

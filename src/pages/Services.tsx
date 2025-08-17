@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Link } from 'react-router-dom';
-import { ArrowRight, CheckCircle, Search, CalendarDays, Users, HandCoins } from 'lucide-react';
+import { ArrowRight, CheckCircle, Search, CalendarDays, Users, HandCoins, Bot } from 'lucide-react';
 import ROICalculator from '@/components/ROICalculator';
 import { Helmet } from 'react-helmet-async';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
@@ -121,9 +121,29 @@ const Services = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center mb-8">
             <h2 className="mb-3">Explore Detailed Services</h2>
-            <p className="text-muted-foreground">Dive deeper into our Web Design & Brand Messaging offerings.</p>
+            <p className="text-muted-foreground">Dive deeper into our AI-Enhanced Web Design & Brand Messaging offerings.</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            <Card className="hover-lift border-2 border-accent/20">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Bot className="h-5 w-5 text-accent" />
+                  AI-Enhanced Websites
+                </CardTitle>
+                <CardDescription>Traditional web design PLUS intelligent automation that saves 8-20 hours per week.</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ul className="text-sm text-muted-foreground mb-4 space-y-1">
+                  <li>• Member/Service FAQ automation</li>
+                  <li>• Smart communications drafting</li>
+                  <li>• Volunteer coordination systems</li>
+                  <li>• 3-5x ROI from time savings</li>
+                </ul>
+                <Button asChild className="gradient-accent text-accent-foreground">
+                  <Link to="/services/web-design" aria-label="Go to AI-Enhanced Web Design">Learn more</Link>
+                </Button>
+              </CardContent>
+            </Card>
             <Card className="hover-lift">
               <CardHeader>
                 <CardTitle>Web Design & Development</CardTitle>

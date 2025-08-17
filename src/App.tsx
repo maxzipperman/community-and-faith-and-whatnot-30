@@ -39,6 +39,8 @@ import Terms from "./pages/Terms";
 import ScrollToTop from "./components/ScrollToTop";
 import Pricing from "./pages/Pricing";
 import Industries from "./pages/Industries";
+import Churches from "./pages/serve/Churches";
+import NonprofitsAI from "./pages/serve/NonprofitsAI";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -86,6 +88,8 @@ const App = () => (
             <Route path="/serve/camps" element={<CampsServe />} />
             <Route path="/serve/local-businesses" element={<LocalBusinessesServe />} />
             <Route path="/serve/independent-creatives" element={<IndependentCreativesServe />} />
+            <Route path="/serve/churches" element={<Churches />} />
+            <Route path="/serve/nonprofits-ai" element={<NonprofitsAI />} />
             <Route path="/payments" element={<Payments />} />
             
             {/* Niche Landing Pages */}
