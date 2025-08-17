@@ -42,6 +42,7 @@ import Industries from "./pages/Industries";
 import Churches from "./pages/serve/Churches";
 import NonprofitsAI from "./pages/serve/NonprofitsAI";
 import Synagogues from "./pages/serve/Synagogues";
+import Mosques from "./pages/serve/Mosques";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -92,6 +93,7 @@ const App = () => (
             <Route path="/serve/churches" element={<Churches />} />
             <Route path="/serve/nonprofits-ai" element={<NonprofitsAI />} />
             <Route path="/serve/synagogues" element={<Synagogues />} />
+            <Route path="/serve/mosques" element={<Mosques />} />
             <Route path="/payments" element={<Payments />} />
             
             {/* Niche Landing Pages */}
