@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Clock, Bot, MessageSquare, Users, ChevronRight } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 import IndustryAICTA from '@/components/ai/IndustryAICTA';
+import ResearchHeader from '@/components/ResearchHeader';
 
 const Churches = () => {
   return (
@@ -32,6 +33,8 @@ const Churches = () => {
           }
         })}</script>
       </Helmet>
+
+      <ResearchHeader industry="churches" className="mx-4 mt-20 mb-4" />
 
       {/* Hero Section */}
       <section className="pt-24 pb-16 gradient-subtle">
