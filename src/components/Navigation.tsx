@@ -11,7 +11,12 @@ const Navigation = () => {
   const location = useLocation();
   const industries = [{
     name: 'Faith & Religious',
-    href: '/serve/faith-religious'
+    href: '/serve/faith-religious',
+    subItems: [
+      { name: 'Churches', href: '/serve/churches' },
+      { name: 'Synagogues', href: '/serve/synagogues' },
+      { name: 'Mosques', href: '/serve/mosques' }
+    ]
   }, {
     name: 'K-12 Schools & PTAs',
     href: '/serve/k12-ptas'
@@ -72,11 +77,22 @@ const Navigation = () => {
                     Industries Overview
                   </Link>
                 </DropdownMenuItem>
-                {industries.map(industry => <DropdownMenuItem key={industry.href} asChild>
-                    <Link to={industry.href} className="w-full cursor-pointer">
-                      {industry.name}
-                    </Link>
-                  </DropdownMenuItem>)}
+                {industries.map(industry => (
+                  <div key={industry.href}>
+                    <DropdownMenuItem asChild>
+                      <Link to={industry.href} className="w-full cursor-pointer">
+                        {industry.name}
+                      </Link>
+                    </DropdownMenuItem>
+                    {industry.subItems && industry.subItems.map(subItem => (
+                      <DropdownMenuItem key={subItem.href} asChild>
+                        <Link to={subItem.href} className="w-full cursor-pointer pl-4 text-sm text-muted-foreground">
+                          {subItem.name}
+                        </Link>
+                      </DropdownMenuItem>
+                    ))}
+                  </div>
+                ))}
               </DropdownMenuContent>
             </DropdownMenu>
 
@@ -130,9 +146,18 @@ const Navigation = () => {
                 <Link to="/industries" className="block px-3 py-1 text-sm font-medium text-foreground hover:text-accent transition-smooth" onClick={() => setIsOpen(false)}>
                   Industries Overview
                 </Link>
-                {industries.map(industry => <Link key={industry.href} to={industry.href} className="block px-3 py-1 text-sm text-foreground hover:text-accent transition-smooth" onClick={() => setIsOpen(false)}>
-                    {industry.name}
-                  </Link>)}
+                {industries.map(industry => (
+                  <div key={industry.href}>
+                    <Link to={industry.href} className="block px-3 py-1 text-sm text-foreground hover:text-accent transition-smooth" onClick={() => setIsOpen(false)}>
+                      {industry.name}
+                    </Link>
+                    {industry.subItems && industry.subItems.map(subItem => (
+                      <Link key={subItem.href} to={subItem.href} className="block px-6 py-1 text-xs text-muted-foreground hover:text-accent transition-smooth" onClick={() => setIsOpen(false)}>
+                        {subItem.name}
+                      </Link>
+                    ))}
+                  </div>
+                ))}
               </div>
               <Link to="/portfolio" className="block px-3 py-2 text-foreground hover:text-accent transition-smooth" onClick={() => setIsOpen(false)}>
                 Portfolio
