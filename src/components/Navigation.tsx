@@ -6,10 +6,16 @@ import { Menu, X, ChevronDown, Sparkles } from 'lucide-react';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import missionLogo from '@/assets/mission-digital-logo.png';
 import { Badge } from '@/components/ui/badge';
+interface IndustryItem {
+  name: string;
+  href: string;
+  subItems?: { name: string; href: string }[];
+}
+
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
-  const industries = [{
+  const industries: IndustryItem[] = [{
     name: 'Faith & Religious',
     href: '/serve/faith-religious',
     subItems: [
